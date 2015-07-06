@@ -9,7 +9,7 @@
 <?php
  
     $itemScript=<<<EOS
-      $('#Detailsalesreplace_itemname').focus(function(){
+      $('#Detailsalesreplace_itemname').click(function(){
 		if ($('#Detailsalesreplace_itemname').prop('readOnly') != true) 
          	$('#ItemDialog').dialog('open');
       });

@@ -8,7 +8,7 @@
 <?php
 
    $myscript=<<<EOS
-      $('#Detailinputinventorytakings_itemname').focus(function(){
+      $('#Detailinputinventorytakings_itemname').clickfunction(){
          $('#ItemDialog').dialog('open');
       });
       $('#dialog-item-name').change(
