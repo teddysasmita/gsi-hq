@@ -22,7 +22,7 @@ class MYPDF extends TCPDF {
 		$this->data = $data;
 		$this->detaildata = $detaildata;
 		$this->headernames = array('No', 'Nama Barang', 'Jumlah', 'Keterangan');
-		$this->headerwidths = array(10, 125, 20, 30);
+		$this->headerwidths = array(10, 126, 20, 30);
 	}
 
 	// Colored table
@@ -85,9 +85,9 @@ class MYPDF extends TCPDF {
 		$this->Cell(41, 15, 'Pemeriksa', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
 		$this->Cell(41, 15, 'Penerima', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
 		$this->Cell(21, 5, 'Halaman', 'LTR', 1, 'C', false,'', 0, false, 'T', 'T');
-		$this->setX(173);
+		$this->setX(163);
 		$this->Cell(21, 5, $this->PageNo().' dari ', 'LR', 1, 'C', false,'', 0, false, 'T', 'T');
-		$this->setX(173);
+		$this->setX(163);
 		$this->Cell(21, 5, 'total '.trim($this->getAliasNbPages()), 'LRB', 1, 'C', false,'', 0, false, 'T', 'T');
 	}
 	
@@ -114,17 +114,17 @@ class MYPDF extends TCPDF {
 		
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(35, 5, 'Nama Penerima', 'LTR', 0,'C');
-		$this->Cell(70, 5, $this->data->receivername, 'LTR');
+		$this->Cell(71, 5, $this->data->receivername, 'LTR');
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(30, 5, 'Telp Penerima', 'LTR', 0,'C');
 		$this->Cell(50, 5, $this->data->receiverphone, 'LTR', 1);
 		
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(35, 5, 'Alamat Penerima', 'LTR', 0,'C');
-		$this->Cell(150, 5, $this->data->receiveraddress, 'LTR', 1);
+		$this->Cell(151, 5, $this->data->receiveraddress, 'LTR', 1);
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(35, 5, 'Info Kendaraan', 'LTRB', 0,'C');
-		$this->Cell(150, 5, $this->data->vehicleinfo, 'LTRB', 1);
+		$this->Cell(151, 5, $this->data->vehicleinfo, 'LTRB', 1);
 		
 		$this->ln(5);
 		$this->setFontSize(12);
