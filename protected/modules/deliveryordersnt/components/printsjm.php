@@ -79,7 +79,7 @@ class MYPDF extends TCPDF {
 		$this->SetLineWidth(0.3);
 		$this->SetFont('Helvetica', 'B');
 		$this->SetFontSize(10);
-		$this->setXY(1, 115);
+		$this->setY(115);
 		$this->Cell(41, 15, 'Supir', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
 		$this->Cell(41, 15, 'CS', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
 		$this->Cell(41, 15, 'Pemeriksa', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
