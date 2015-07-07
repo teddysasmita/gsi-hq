@@ -22,7 +22,7 @@ class MYPDF extends TCPDF {
 		$this->data = $data;
 		$this->detaildata = $detaildata;
 		$this->headernames = array('No', 'Nama Barang', 'Jumlah', 'Keterangan');
-		$this->headerwidths = array(10, 135, 20, 30);
+		$this->headerwidths = array(10, 125, 20, 30);
 	}
 
 	// Colored table
@@ -39,7 +39,7 @@ class MYPDF extends TCPDF {
 		$fill = 0;
 		$counter=0;
 		$iditem='';
-		$this->SetXY(1, 56);
+		$this->SetY(56);
 		if (count($this->detaildata) <= 9)
 			$maxrows = 9;
 		else
@@ -80,15 +80,15 @@ class MYPDF extends TCPDF {
 		$this->SetFont('Helvetica', 'B');
 		$this->SetFontSize(10);
 		$this->setXY(1, 115);
-		$this->Cell(43, 15, 'Supir', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
-		$this->Cell(43, 15, 'CS', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
-		$this->Cell(43, 15, 'Pemeriksa', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
-		$this->Cell(43, 15, 'Penerima', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
-		$this->Cell(23, 5, 'Halaman', 'LTR', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(41, 15, 'Supir', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(41, 15, 'CS', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(41, 15, 'Pemeriksa', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(41, 15, 'Penerima', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(21, 5, 'Halaman', 'LTR', 1, 'C', false,'', 0, false, 'T', 'T');
 		$this->setX(173);
-		$this->Cell(23, 5, $this->PageNo().' dari ', 'LR', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(21, 5, $this->PageNo().' dari ', 'LR', 1, 'C', false,'', 0, false, 'T', 'T');
 		$this->setX(173);
-		$this->Cell(23, 5, 'total '.trim($this->getAliasNbPages()), 'LRB', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(21, 5, 'total '.trim($this->getAliasNbPages()), 'LRB', 1, 'C', false,'', 0, false, 'T', 'T');
 	}
 	
 	public function master()
@@ -114,17 +114,17 @@ class MYPDF extends TCPDF {
 		
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(35, 5, 'Nama Penerima', 'LTR', 0,'C');
-		$this->Cell(80, 5, $this->data->receivername, 'LTR');
+		$this->Cell(70, 5, $this->data->receivername, 'LTR');
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(30, 5, 'Telp Penerima', 'LTR', 0,'C');
 		$this->Cell(50, 5, $this->data->receiverphone, 'LTR', 1);
 		
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(35, 5, 'Alamat Penerima', 'LTR', 0,'C');
-		$this->Cell(160, 5, $this->data->receiveraddress, 'LTR', 1);
+		$this->Cell(150, 5, $this->data->receiveraddress, 'LTR', 1);
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(35, 5, 'Info Kendaraan', 'LTRB', 0,'C');
-		$this->Cell(160, 5, $this->data->vehicleinfo, 'LTRB', 1);
+		$this->Cell(150, 5, $this->data->vehicleinfo, 'LTRB', 1);
 		
 		$this->ln(5);
 		$this->setFontSize(12);
@@ -167,7 +167,7 @@ function execute($model, $detailmodel) {
 	$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 	
 	//set margins
-	$pdf->SetMargins(1, 56, PDF_MARGIN_RIGHT);
+	$pdf->SetMargins(10, 56, PDF_MARGIN_RIGHT);
 	$pdf->SetHeaderMargin(0);
 	$pdf->SetFooterMargin(0);
 	
