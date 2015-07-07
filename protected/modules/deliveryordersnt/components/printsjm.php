@@ -84,11 +84,11 @@ class MYPDF extends TCPDF {
 		$this->Cell(41, 15, 'CS', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
 		$this->Cell(41, 15, 'Pemeriksa', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
 		$this->Cell(41, 15, 'Penerima', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
-		$this->Cell(21, 5, 'Halaman', 'LTR', 1, 'C', false,'', 0, false, 'T', 'T');
-		$this->setX(163);
-		$this->Cell(21, 5, $this->PageNo().' dari ', 'LR', 1, 'C', false,'', 0, false, 'T', 'T');
-		$this->setX(163);
-		$this->Cell(21, 5, 'total '.trim($this->getAliasNbPages()), 'LRB', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(22, 5, 'Halaman', 'LTR', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->setX(173);
+		$this->Cell(22, 5, $this->PageNo().' dari ', 'LR', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->setX(173);
+		$this->Cell(22, 5, 'total '.trim($this->getAliasNbPages()), 'LRB', 1, 'C', false,'', 0, false, 'T', 'T');
 	}
 	
 	public function master()
