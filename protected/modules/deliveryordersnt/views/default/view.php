@@ -33,7 +33,7 @@ $this->menu=array(
 		'vehicleinfo', 
 		array(
 			'name'=>'userlog',
-			'value'=>lookup::UserNameFromUserID($data->userlog)
+			'value'=>lookup::UserNameFromUserID($model->userlog)
 		),
 		'datetimelog'        
 	),
