@@ -170,9 +170,9 @@ function execute($model, $detailmodel, $receivable) {
 	// set document information
 	$pdf->SetCreator(PDF_CREATOR);
 	$pdf->SetAuthor(lookup::UserNameFromUserID(Yii::app()->user->id));
-	$pdf->SetTitle('Surat Jalan Manual');
-	$pdf->SetSubject('SJM');
-	$pdf->SetKeywords('SJM');
+	$pdf->SetTitle('Surat Jalan');
+	$pdf->SetSubject('SJ');
+	$pdf->SetKeywords('SJ');
 	
 	//$pdf->setPrintHeader(false);
 	//$pdf->setPrintFooter(false);
