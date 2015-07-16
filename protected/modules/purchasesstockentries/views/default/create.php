@@ -11,9 +11,10 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	//array('label'=>'Daftar', 'url'=>array('index')),
 	//array('label'=>'Pengaturan', 'url'=>array('admin')),
-      array('label'=>'Tambah Detil', 'url'=>array('detailpurchasesstockentries/create', 
+     /* array('label'=>'Tambah Detil', 'url'=>array('detailpurchasesstockentries/create', 
          'id'=>$model->id),
           'linkOptions'=>array('id'=>'adddetail')), 
+     */
 );
 
 $jq=<<<EOH
@@ -26,7 +27,7 @@ $jq=<<<EOH
      event.preventDefault();
    });
 EOH;
-Yii::app()->clientScript->registerScript('myscript', $jq, CClientScript::POS_READY);
+//Yii::app()->clientScript->registerScript('myscript', $jq, CClientScript::POS_READY);
 ?>
 
 <h1>Penerimaan Barang</h1>

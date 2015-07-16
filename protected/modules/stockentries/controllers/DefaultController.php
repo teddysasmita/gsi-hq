@@ -970,7 +970,16 @@ EOS;
 			->where('a.regnum = :p_regnum and b.idwhsource = :p_idwarehouse',
 					array(':p_regnum'=>$nolpb, ':p_idwarehouse'=>$idwh) )
 			->queryAll();
-		} else {
+		} else if ($prefix == 'PO') {
+			$dataLPB=Yii::app()->db->createCommand()
+			->select('a.id, b.iditem, sum(b.qty) as qty')
+			->from('purchasesorders a')
+			->join('detailpurchasesorders b', 'b.id=a.id')
+			->where('a.regnum = :p_regnum', array(':p_regnum'=>$nolpb) )
+			->group('b.iditem')
+			->queryAll();
+		} 
+		/*else {
 			$dataLPB=Yii::app()->db->createCommand()
 			->select('a.id, b.iditem, sum(b.qty) as qty')
 			->from('purchasesstockentries a')
@@ -978,7 +987,7 @@ EOS;
 			->where('a.regnum = :p_regnum', array(':p_regnum'=>$nolpb) )
 			->group('b.iditem')
 			->queryAll();
-		} 
+		}*/ 
 		 
 		Yii::app()->session->remove('Detailstockentries');
 		if ($dataLPB !== FALSE) {

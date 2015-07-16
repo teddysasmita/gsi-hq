@@ -596,19 +596,21 @@ class DefaultController extends Controller
         $details=array();
 
         $sql=<<<EOS
-        select a.qty from detailpurchasesorders a
+        select b.iditem, b.price, b.cost1, b.cost2, b.discount from detailpurchasesorders a
         join purchasesorders b on b.id = a.id
-        where b.regnum = :p_regnum and a.iditem = :p_iditem
+        where b.regnum = :p_regnum
 EOS;
         $mycommand=Yii::app()->db->createCommand($sql);
-        
+        $mycommand->bindParam(':p_regnum', $donum, PDO::PARAM_STR);
+        $orderinfo = $mycommand->queryScalar();
+        	
         $dataPO=Yii::app()->db->createCommand()
            ->select('count(*) as totalqty, b.iditem, a.idwarehouse, a.transid')
            ->from('detailstockentries b')
            ->join('stockentries a', 'a.id=b.id')
            ->where('a.donum = :donum and b.serialnum <> :serialnum', 
            		array(':donum'=>$donum, 'serialnum'=>'Belum Diterima') )
-           ->group('b.iditem, a.idwarehouse')
+           ->group('b.iditem')
            ->queryAll();
         Yii::app()->session->remove('Detailpurchasesstockentries');
          foreach($dataPO as $row) {
@@ -616,12 +618,20 @@ EOS;
 			$detail['id']=$id;
 			$detail['iditem']=$row['iditem'];
 			$detail['qty']=$row['totalqty'];
-			$detail['idwarehouse']=$row['idwarehouse'];
+			/*$detail['idwarehouse']=$row['idwarehouse'];
 			$detail['idpurchaseorder']=$row['transid'];
 			$mycommand->bindParam(':p_regnum', $row['transid'], PDO::PARAM_STR);
 			$mycommand->bindParam(':p_iditem', $row['iditem'], PDO::PARAM_STR);
 			$orderqty=$mycommand->queryScalar();	
-			$detail['leftqty']=$orderqty-$row['totalqty'];
+			$detail['leftqty']=$orderqty-$row['totalqty'];*/
+			
+			foreach($orderinfo as $oi) {
+				if ($oi == $detail['iditem']) {
+					$detail['buyprice'] = $oi['price'] + $oi['cost1'] + $oi['cost2'] - $oi['discount'];
+					break;
+				}	
+			}
+			$detail['sellprice'] = lookup::getSellPrice($detail['iditem']);
 			$detail['userlog']=Yii::app()->user->id;
 			$detail['datetimelog']=idmaker::getDateTime();
 			

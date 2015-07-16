@@ -518,7 +518,19 @@ class lookup extends CComponent {
 		return $data;
 	}
 	
-   
+  	public static function getSellPrice($iditem)
+  	{
+  		$data = Yii::app()->db->createCommand()
+  			->select('normalprice')->from('sellingprices')
+  			->where('iditem = :p_iditem', array(':p_iditem' => $iditem))
+  			->order('idatetime desc')
+  			->queryScalar();
+  		
+  		if ($data == false)
+  			return -1;
+  		else
+  			return $data;
+  	} 
 }
 
 

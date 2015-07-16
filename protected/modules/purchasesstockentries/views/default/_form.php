@@ -26,6 +26,11 @@
          $('#Purchasesstockentries_idsupplier').val(
             supplierids[suppliernames.indexOf(activename)]);
       });
+		
+		$('#Purchasesstockentries_ponum').change(function() {
+			$('#command').val('setDO');
+			$('#purchaesstockentries-form').submit();
+		});
 EOS;
 	Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CClientscript::POS_READY);
 	
