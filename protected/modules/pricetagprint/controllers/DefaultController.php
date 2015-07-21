@@ -591,7 +591,7 @@ class DefaultController extends Controller
 			$mypdf->LoadData($master->attributes,  
 					$detail);
 			$mypdf->display();
-			$mypdf->output('Cetak Pricetag'.'-'.date('Ymd').'.pdf', 'I');
+			$mypdf->output('Cetak Pricetag'.'-'.date('Ymd').'.pdf', 'D');
 		} else {
 			throw new CHttpException(404,'You have no authorization for this operation.');
 		}	
