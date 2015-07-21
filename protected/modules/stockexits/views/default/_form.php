@@ -95,9 +95,11 @@ EOS;
 				$data = CHtml::listData($warehouses, 'id', 'code');
          		echo $form->dropDownList($model, 'idwarehouse', $data, 
 					array('empty'=>'Harap Pilih'));
-         	} else {
+         	} else if (count($warehouses) == 1) {
 				echo CHtml::hiddenField('Stockexits[idwarehouse]', $warehouses[0]['id']);
 				echo CHtml::label($warehouses[0]['code'],'false', array('class'=>'money')); 
+			} else {
+				echo CHtml::tag('span', array('class'=>'error'), 'Tidak Terdaftar');
 			}
          ?>
 	</div>
