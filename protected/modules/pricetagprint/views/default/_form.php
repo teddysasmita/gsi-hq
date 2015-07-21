@@ -44,7 +44,7 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
         
       <?php 
         echo CHtml::hiddenField('command', '', array('id'=>'command'));
-        echo CHtml::hiddenField('MAX_FILE_SIZE', '300000', array('id'=>'MAX_FILE_SIZE'));
+        echo CHtml::hiddenField('MAX_FILE_SIZE', '307200', array('id'=>'MAX_FILE_SIZE'));
         echo $form->hiddenField($model, 'id');
         echo $form->hiddenField($model, 'userlog');
         echo $form->hiddenField($model, 'datetimelog');
