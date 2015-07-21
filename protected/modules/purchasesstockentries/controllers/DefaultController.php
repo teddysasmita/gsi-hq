@@ -445,18 +445,20 @@ class DefaultController extends Controller
 
      protected function saveNewDetails(array $details)
      {                  
-     	Yii::import('application.modules.sellingprice.models.*');
-     	require_once('Sellingprices.php');
+     	//Yii::import('application.modules.sellingprice.models.*');
+     	//require_once('Sellingprices.php');
      	
          foreach ($details as $row) {
              $detailmodel=new Detailpurchasesstockentries;
              $detailmodel->attributes=$row;
              $respond=$detailmodel->insert();
+             /*
              $num = idmaker::getRegNum('AC11');
              $this->setSellingPrice($row['iddetail'], idmaker::getDateTime(), 
              		$num, $row['iditem'], $row['sellprice'], 
              		'Bp Welly T', Yii::app()->user->id);	
              idmaker::saveRegNum('AC11', $num);
+             */
              if (!$respond) {
                 break;
              }
