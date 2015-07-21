@@ -564,7 +564,19 @@ EOS;
 				$command=Yii::app()->db->createCommand($sql);
 				$command->bindParam(':p_regnum', $id, PDO::PARAM_STR);
 				$data=$command->queryAll();
-			} else {
+			} if ($prefix == 'PO') {
+				$sql=<<<EOS
+				select a.id, a.regnum, '-' as invnum,
+				concat( 'Pemesanan Barang ke Pemasokb- ',a.regnum,' - ', a.idatetime) as transinfo,
+				'AC2' as transname
+				from purchasesorders a
+				where a.regnum=:p_regnum
+EOS;
+				$command=Yii::app()->db->createCommand($sql);
+				$command->bindParam(':p_regnum', $id, PDO::PARAM_STR);
+				$data=$command->queryAll();
+			}
+			else {
 				$sql=<<<EOS
 				select a.id, a.regnum,
 				concat( 'Penerimaan Barang - ', b.firstname, ' ', b.lastname, ' - ', a.idatetime) as transinfo,
