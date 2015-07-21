@@ -306,6 +306,36 @@ class Action extends CComponent {
       return Yii::app()->createUrl('/barcodeprint/detailbarcodeprints/view', array('iddetail'=>$data['iddetail']));
    }
    
+   public static function decodeDeleteDetailPricetagPrintUrl($data)
+   {
+   	//return print_r($data);
+   	return Yii::app()->createUrl('/pricetagprint/detailpricetagprints/delete', array('iddetail'=>$data['iddetail']));
+   }
+    
+   public static function decodeUpdateDetailPricetagPrintUrl($data)
+   {
+   	//return print_r($data);
+   	return Yii::app()->createUrl('/pricetagprint/detailpricetagprints/update', array('iddetail'=>$data['iddetail']))  ;
+   }
+    
+   public static function decodeViewDetailPricetagPrintUrl($data)
+   {
+   	//return print_r($data);
+   	return Yii::app()->createUrl('/pricetagprint/detailpricetagprints/view', array('iddetail'=>$data['iddetail']));
+   }
+   
+   public static function decodeRestoreHistoryPricetagPrintUrl($data)
+   {
+   	//return print_r($data);
+   	return Yii::app()->createUrl('pricetagprint/default/restore', array('idtrack'=>$data['idtrack']));
+   }
+   
+   public static function decodeRestoreDeletedPricetagPrintUrl($data)
+   {
+   	//return print_r($data);
+   	return Yii::app()->createUrl('pricetagprint/default/restoreDeleted', array('idtrack'=>$data['idtrack']));
+   }
+   
    public static function decodeDeleteDetailItemcodePrintUrl($data)
    {
    	//return print_r($data);
