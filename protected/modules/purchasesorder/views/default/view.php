@@ -108,7 +108,7 @@ $this->menu=array(
                      'visible'=>'false'
                   )
                ),
-               'viewButtonUrl'=>"Action::decodeViewDetailPurchasesOrderUrl(\$data, $model->regnum)",
+               'viewButtonUrl'=>"Action::decodeViewDetailPurchasesOrderUrl(\$data, '$model->regnum')",
             )
          ),
    ));
