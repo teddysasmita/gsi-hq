@@ -177,7 +177,7 @@ EOS;
                      'visible'=>'false'
                   )
                ),
-               'updateButtonUrl'=>"Action::decodeUpdateDetailPurchasesOrderUrl(\$data, $model->regnum)",
+               'updateButtonUrl'=>"Action::decodeUpdateDetailPurchasesOrderUrl(\$data, '$model->regnum')",
             )
           ),
     ));
