@@ -69,7 +69,7 @@ class Stockentries extends CActiveRecord
 			'id' => 'ID',
 			'regnum' => 'Nomor Urut',
 			'idatetime' => 'Tanggal',
-			'transid' => 'Nomor LPB',
+			'transid' => 'Nomor PO',
 			'transname' => 'Jenis Transaksi',
 			'idwarehouse' => 'Gudang',
 			'donum' => 'Nomor SJ',

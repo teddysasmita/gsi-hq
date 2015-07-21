@@ -117,7 +117,7 @@ class DefaultController extends Controller
                       } else if ($_POST['command']=='setDO') {
                          $model->attributes=$_POST['Purchasesstockentries'];
                          Yii::app()->session['Purchasesstockentries']=$_POST['Purchasesstockentries'];
-                         $this->loadDO($model->ponum, $model->id);
+                         $this->loadDO($model);
                       }
                    }
                 }
@@ -590,31 +590,34 @@ class DefaultController extends Controller
          $this->tracker->logActivity($this->formid, $action);
      }
      
-      private function loadDO($ponum, $id)
+      private function loadDO(& $model)
       {
         $details=array();
-
+		$ponum = '';
+		$iditem = '';
+        
         $sql=<<<EOS
         select b.iditem, b.price, b.cost1, b.cost2, b.discount from detailpurchasesorders a
         join purchasesorders b on b.id = a.id
-        where b.regnum = :p_regnum
+        where b.regnum = :p_regnum and a.iditem = :p_iditem
 EOS;
         $mycommand=Yii::app()->db->createCommand($sql);
-        $mycommand->bindParam(':p_regnum', $donum, PDO::PARAM_STR);
-        $orderinfo = $mycommand->queryScalar();
+        $mycommand->bindParam(':p_regnum', $ponum, PDO::PARAM_STR);
+        $mycommand->bindParam(':p_iditem', $iditem, PDO::PARAM_STR);
         	
         $dataPO=Yii::app()->db->createCommand()
            ->select('count(*) as totalqty, b.iditem, a.idwarehouse, a.transid')
            ->from('detailstockentries b')
            ->join('stockentries a', 'a.id=b.id')
-           ->where('a.donum = :ponum and b.serialnum <> :serialnum', 
-           		array(':ponum'=>$ponum, 'serialnum'=>'Belum Diterima') )
+           ->where('a.donum = :sjnum and b.serialnum <> :serialnum', 
+           		array(':sjnum'=>$model->sjnum, 'serialnum'=>'Belum Diterima') )
            ->group('b.iditem')
            ->queryAll();
+        $model->ponum = $dataPO[0]['transid'];
         Yii::app()->session->remove('Detailpurchasesstockentries');
          foreach($dataPO as $row) {
 			$detail['iddetail']=idmaker::getCurrentID2();
-			$detail['id']=$id;
+			$detail['id']=$model->id;
 			$detail['iditem']=$row['iditem'];
 			$detail['qty']=$row['totalqty'];
 			/*$detail['idwarehouse']=$row['idwarehouse'];
@@ -624,6 +627,9 @@ EOS;
 			$orderqty=$mycommand->queryScalar();	
 			$detail['leftqty']=$orderqty-$row['totalqty'];*/
 			
+			$iditem = $row['iditem'];
+			$ponum = $row['transid'];
+			$orderinfo = $mycommand->queryRow();
 			foreach($orderinfo as $oi) {
 				if ($oi == $detail['iditem']) {
 					$detail['buyprice'] = $oi['price'] + $oi['cost1'] + $oi['cost2'] - $oi['discount'];

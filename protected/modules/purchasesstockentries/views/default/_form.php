@@ -27,7 +27,7 @@
             supplierids[suppliernames.indexOf(activename)]);
       });
 		
-		$('#Purchasesstockentries_ponum').change(function() {
+		$('#Purchasesstockentries_sjnum').change(function() {
 			$('#command').val('setDO');
 			$('#purchaesstockentries-form').submit();
 		});
@@ -110,14 +110,6 @@ EOS;
       ?>
 		<?php echo $form->error($model,'idsupplier'); ?>
 	</div>
-
-      <div class="row">
-		<?php echo $form->labelEx($model,'ponum'); ?>
-		<?php 
-         	echo $form->textField($model,'ponum'); 
-      	?>
-		<?php echo $form->error($model,'ponum'); ?>
-	</div>
       
 	<div class="row">
 		<?php echo $form->labelEx($model,'sjnum'); ?>
@@ -125,6 +117,14 @@ EOS;
            echo $form->textField($model, 'sjnum'); 
         ?>
         <?php echo $form->error($model,'sjnum');?> 
+	</div>
+	
+	 <div class="row">
+		<?php echo $form->labelEx($model,'ponum'); ?>
+		<?php 
+         	echo CHtml::tag('span', array('id'=>'ponum', 'class' => 'money'), $model->ponum); 
+      	?>
+		<?php echo $form->error($model,'ponum'); ?>
 	</div>
 	
 	<div class="row">
