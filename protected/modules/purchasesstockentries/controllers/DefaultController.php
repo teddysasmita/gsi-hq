@@ -115,10 +115,9 @@ class DefaultController extends Controller
                          $this->redirect(array('detailpurchasesstockentries/create',
                             'id'=>$model->id));
                       } else if ($_POST['command']=='setDO') {
-                      	
                          $model->attributes=$_POST['Purchasesstockentries'];
                          Yii::app()->session['Purchasesstockentries']=$_POST['Purchasesstockentries'];
-                         $this->loadDO($model->donum, $model->id);
+                         $this->loadDO($model->ponum, $model->id);
                       }
                    }
                 }
@@ -591,7 +590,7 @@ class DefaultController extends Controller
          $this->tracker->logActivity($this->formid, $action);
      }
      
-      private function loadDO($donum, $id)
+      private function loadDO($ponum, $id)
       {
         $details=array();
 
@@ -608,8 +607,8 @@ EOS;
            ->select('count(*) as totalqty, b.iditem, a.idwarehouse, a.transid')
            ->from('detailstockentries b')
            ->join('stockentries a', 'a.id=b.id')
-           ->where('a.donum = :donum and b.serialnum <> :serialnum', 
-           		array(':donum'=>$donum, 'serialnum'=>'Belum Diterima') )
+           ->where('a.donum = :ponum and b.serialnum <> :serialnum', 
+           		array(':ponum'=>$ponum, 'serialnum'=>'Belum Diterima') )
            ->group('b.iditem')
            ->queryAll();
         Yii::app()->session->remove('Detailpurchasesstockentries');
