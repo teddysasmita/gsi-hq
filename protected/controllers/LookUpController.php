@@ -564,7 +564,7 @@ EOS;
 				$command=Yii::app()->db->createCommand($sql);
 				$command->bindParam(':p_regnum', $id, PDO::PARAM_STR);
 				$data=$command->queryAll();
-			} if ($prefix == 'PO') {
+			} else if ($prefix == 'PO') {
 				$sql=<<<EOS
 				select a.id, a.regnum, '-' as invnum,
 				concat( 'Pemesanan Barang ke Pemasokb- ',a.regnum,' - ', a.idatetime) as transinfo,
