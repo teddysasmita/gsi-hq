@@ -113,48 +113,106 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
 	</div>
 	
     <div class="row">
-		<?php echo $form->LabelEx($model,'infoposx'); ?>
+		<?php echo $form->LabelEx($model,'itemnamex'); ?>
         <?php 
-           echo $form->textField($model, 'infoposx'); 
+           echo $form->textField($model, 'itemnamex'); 
         ?>
-        <?php echo $form->error($model,'infoposx');?> 
+        <?php echo $form->error($model,'itemnamex');?> 
 	</div>
 	
 	<div class="row">
-		<?php echo $form->LabelEx($model,'infoposy'); ?>
+		<?php echo $form->LabelEx($model,'itemnamey'); ?>
         <?php 
-           echo $form->textField($model, 'infoposy'); 
+           echo $form->textField($model, 'itemnamey'); 
         ?>
-        <?php echo $form->error($model,'infoposy');?> 
+        <?php echo $form->error($model,'itemnamey');?> 
+	</div>
+	
+	 <div class="row">
+		<?php echo $form->LabelEx($model,'itemnamew'); ?>
+        <?php 
+           echo $form->textField($model, 'itemnamew'); 
+        ?>
+        <?php echo $form->error($model,'itemnamew');?> 
 	</div>
 	
 	<div class="row">
-		<?php echo $form->LabelEx($model,'infofontsize'); ?>
+		<?php echo $form->LabelEx($model,'itemnameh'); ?>
         <?php 
-           echo $form->textField($model, 'infofontsize'); 
+           echo $form->textField($model, 'itemnameh'); 
         ?>
-        <?php echo $form->error($model,'infofontsize');?> 
+        <?php echo $form->error($model,'itemnameh');?> 
 	</div>
 	
 	<div class="row">
-		<?php echo $form->LabelEx($model,'infofonttype'); ?>
+		<?php echo $form->LabelEx($model,'itemnamefz'); ?>
         <?php 
-           echo $form->dropDownList($model, 'infofonttype', 
+           echo $form->textField($model, 'itemnamefz'); 
+        ?>
+        <?php echo $form->error($model,'itemnamefz');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'itemnameft'); ?>
+        <?php 
+           echo $form->dropDownList($model, 'itemnameft', 
            		array('courier'=>'courier', 'helvetica'=>'helvetica', 
            			'times'=>'times'
            )); 
         ?>
-        <?php echo $form->error($model,'infofonttype');?> 
+        <?php echo $form->error($model,'itemnameft');?> 
 	</div>
 	
 	<div class="row">
-		<?php echo $form->LabelEx($model,'bkjpg'); ?>
+		<?php echo $form->LabelEx($model,'pricex'); ?>
         <?php 
-           echo $form->fileField($model, 'bkjpg'); 
+           echo $form->textField($model, 'pricex'); 
         ?>
-        <?php echo $form->error($model,'bkjpg');?> 
+        <?php echo $form->error($model,'pricex');?> 
 	</div>
 	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'pricey'); ?>
+        <?php 
+           echo $form->textField($model, 'pricey'); 
+        ?>
+        <?php echo $form->error($model,'pricey');?> 
+	</div>
+	
+	 <div class="row">
+		<?php echo $form->LabelEx($model,'pricew'); ?>
+        <?php 
+           echo $form->textField($model, 'pricew'); 
+        ?>
+        <?php echo $form->error($model,'pricew');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'priceh'); ?>
+        <?php 
+           echo $form->textField($model, 'priceh'); 
+        ?>
+        <?php echo $form->error($model,'priceh');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'pricefz'); ?>
+        <?php 
+           echo $form->textField($model, 'pricefz'); 
+        ?>
+        <?php echo $form->error($model,'pricefz');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'priceft'); ?>
+        <?php 
+           echo $form->dropDownList($model, 'priceft', 
+           		array('courier'=>'courier', 'helvetica'=>'helvetica', 
+           			'times'=>'times'
+           )); 
+        ?>
+        <?php echo $form->error($model,'priceft');?> 
+	</div>
 	
 <?php 
     if (isset(Yii::app()->session['Detailpricetagprints'])) {
@@ -197,6 +255,14 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
     
 ?>
 
+	<div class="row">
+		<?php echo $form->LabelEx($model,'bkjpg'); ?>
+        <?php 
+           echo $form->fileField($model, 'bkjpg'); 
+        ?>
+        <?php echo $form->error($model,'bkjpg');?> 
+	</div>
+	
    <div class="row buttons">
       <?php echo CHtml::submitButton(ucfirst($command)); ?>
    </div>
