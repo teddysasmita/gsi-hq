@@ -45,14 +45,28 @@ class Pricetagprintpdf extends TCPDF {
  					$this->masterdata['labelwidth'] * 10, 
 					$this->masterdata['labelheight'] * 10, '', '', '', true, 300,
  						'', false, false, 'LTRB', true);
- 				$this->setXY($curx + $this->masterdata['infoposx'], $cury + $this->masterdata['infoposy']);
- 				$this->SetFontSize($this->masterdata['infofontsize']);
- 				$this->SetFont($this->masterdata['infofonttype']);
+ 				//Nama Barang - Begin ----------------
+ 				$this->setXY($curx + $this->masterdata['itemnamex'], 
+ 						$cury + $this->masterdata['itemnamey']);
+ 				$this->SetFontSize($this->masterdata['itemnamefz']);
+ 				$this->SetFont($this->masterdata['itemnameft']);
  				$this->MultiCell(
- 					($this->masterdata['labelwidth'] * 10) - $this->masterdata['infoposx'], 
- 					($this->masterdata['labelheight'] * 10) - $this->masterdata['infoposy'],
+ 					$this->masterdata['itemnamew'], $this->masterdata['itemnameh'],
  					lookup::ItemNameFromItemID($d['iditem'])	
  				);
+ 				//Nama Barang - End ------------------
+ 				
+ 				//Harga - Begin ----------------
+ 				$this->setXY($curx + $this->masterdata['pricex'],
+ 						$cury + $this->masterdata['pricey']);
+ 				$this->SetFontSize($this->masterdata['pricefz']);
+ 				$this->SetFont($this->masterdata['priceft']);
+ 				$this->Cell(
+ 						$this->masterdata['pricew'], $this->masterdata['priceh'],
+ 						'Rp '.number_format(lookup::getSellPrice($d['iditem']))
+ 				);
+ 				// - End ------------------
+ 				 		
  				$curx += $this->masterdata['labelwidth'] * 10;
 				if ($curx + ($this->masterdata['labelwidth'] * 10) > 215 ) {
 					$curx = $this->leftmargin;
