@@ -71,6 +71,7 @@ $supplierScript=<<<EOS
 			}
 		}
 	});
+   		
 	$('#detailprocessbtn').click(function() {
 		$('#detailstockentries-form').submit();
 	});
@@ -142,7 +143,7 @@ EOS;
 	</div>
 	
 	<div class="row buttons">
-		<?php echo CHtml::button($mode, array('id'=>'detailprocessbtn')); ?>
+		<?php echo CHtml::htmlButton($mode, array('id'=>'detailprocessbtn')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
