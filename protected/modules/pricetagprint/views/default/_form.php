@@ -156,11 +156,29 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
 		<?php echo $form->LabelEx($model,'itemnameft'); ?>
         <?php 
            echo $form->dropDownList($model, 'itemnameft', 
-           		array('courier'=>'courier', 'helvetica'=>'helvetica', 
-           			'times'=>'times'
+           		array('courier'=>'Courier', 
+           			'courierb'=>'Courier Bold', 
+           			'courieri'=>'Courier Italic', 
+           			'courierbi'=>'Courier Bold Italic', 
+           			'helvetica'=>'Helvetica', 
+           			'helveticab'=>'Helvetica Bold', 
+           			'helveticai'=>'Helvetica Italic', 
+           			'helveticabi'=>'Helvetica Bold Italic',	 
+           			'times'=>'Times',
+           			'timesb'=>'Times Bold',
+           			'timesi'=>'Times Italic',
+           			'timesbi'=>'Times Bold Italic',
            )); 
         ?>
         <?php echo $form->error($model,'itemnameft');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'itemnamec'); ?>
+        <?php 
+           echo $form->textField($model, 'itemnamec'); 
+        ?>
+        <?php echo $form->error($model,'itemnamec');?> 
 	</div>
 	
 	<div class="row">
@@ -207,11 +225,109 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
 		<?php echo $form->LabelEx($model,'priceft'); ?>
         <?php 
            echo $form->dropDownList($model, 'priceft', 
-           		array('courier'=>'courier', 'helvetica'=>'helvetica', 
-           			'times'=>'times'
+           		array(
+           			'courier'=>'Courier', 
+           			'courierb'=>'Courier Bold', 
+           			'courieri'=>'Courier Italic', 
+           			'courierbi'=>'Courier Bold Italic', 
+           			'helvetica'=>'Helvetica', 
+           			'helveticab'=>'Helvetica Bold', 
+           			'helveticai'=>'Helvetica Italic', 
+           			'helveticabi'=>'Helvetica Bold Italic',	 
+           			'times'=>'Times',
+           			'timesb'=>'Times Bold',
+           			'timesi'=>'Times Italic',
+           			'timesbi'=>'Times Bold Italic',
            )); 
         ?>
         <?php echo $form->error($model,'priceft');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'pricec'); ?>
+        <?php 
+           echo $form->textField($model, 'pricec'); 
+        ?>
+        <?php echo $form->error($model,'pricec');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'withextra'); ?>
+        <?php 
+           echo $form->dropDownList($model, 'withextra', 
+           		array('1'=>'Ya', '0'=>'Tidak'
+           )); 
+        ?>
+        <?php echo $form->error($model,'withextra');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'extrax'); ?>
+        <?php 
+           echo $form->textField($model, 'extrax'); 
+        ?>
+        <?php echo $form->error($model,'extrax');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'extray'); ?>
+        <?php 
+           echo $form->textField($model, 'extray'); 
+        ?>
+        <?php echo $form->error($model,'extray');?> 
+	</div>
+	
+	 <div class="row">
+		<?php echo $form->LabelEx($model,'extraw'); ?>
+        <?php 
+           echo $form->textField($model, 'extraw'); 
+        ?>
+        <?php echo $form->error($model,'extraw');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'extrah'); ?>
+        <?php 
+           echo $form->textField($model, 'extrah'); 
+        ?>
+        <?php echo $form->error($model,'extrah');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'extrafz'); ?>
+        <?php 
+           echo $form->textField($model, 'extrafz'); 
+        ?>
+        <?php echo $form->error($model,'extrafz');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'extraft'); ?>
+        <?php 
+           echo $form->dropDownList($model, 'extraft', 
+           		array('courier'=>'Courier', 
+           			'courierb'=>'Courier Bold', 
+           			'courieri'=>'Courier Italic', 
+           			'courierbi'=>'Courier Bold Italic', 
+           			'helvetica'=>'Helvetica', 
+           			'helveticab'=>'Helvetica Bold', 
+           			'helveticai'=>'Helvetica Italic', 
+           			'helveticabi'=>'Helvetica Bold Italic',	 
+           			'times'=>'Times',
+           			'timesb'=>'Times Bold',
+           			'timesi'=>'Times Italic',
+           			'timesbi'=>'Times Bold Italic',
+           )); 
+        ?>
+        <?php echo $form->error($model,'extraft');?> 
+	</div>
+	
+	<div class="row">
+		<?php echo $form->LabelEx($model,'extrac'); ?>
+        <?php 
+           echo $form->textField($model, 'extrac'); 
+        ?>
+        <?php echo $form->error($model,'extrac');?> 
 	</div>
 	
 <?php 

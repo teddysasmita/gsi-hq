@@ -50,9 +50,11 @@ class Pricetagprintpdf extends TCPDF {
  						$cury + $this->masterdata['itemnamey']);
  				$this->SetFontSize($this->masterdata['itemnamefz']);
  				$this->SetFont($this->masterdata['itemnameft']);
+ 				$tempc = str_split($this->masterdata['itemnamec'], 2);
+ 				$this->SetTextColorArray($tempc);
  				$this->MultiCell(
  					$this->masterdata['itemnamew'], $this->masterdata['itemnameh'],
- 					lookup::ItemNameFromItemID($d['iditem'])	
+ 					lookup::ItemNameFromItemID($d['iditem']), 0, 'C'	
  				);
  				//Nama Barang - End ------------------
  				
@@ -61,10 +63,27 @@ class Pricetagprintpdf extends TCPDF {
  						$cury + $this->masterdata['pricey']);
  				$this->SetFontSize($this->masterdata['pricefz']);
  				$this->SetFont($this->masterdata['priceft']);
+ 				$tempc = str_split($this->masterdata['pricec'], 2);
+ 				$this->SetTextColorArray($tempc);
  				$this->Cell(
  						$this->masterdata['pricew'], $this->masterdata['priceh'],
  						'Rp '.number_format(lookup::getSellPrice($d['iditem']))
  				);
+ 				// - End ------------------
+
+ 				//Info - Begin ----------------
+ 				if ($this->masterdata['withextra'] == '1') {
+	 				$this->setXY($curx + $this->masterdata['extrax'],
+	 						$cury + $this->masterdata['extray']);
+	 				$this->SetFontSize($this->masterdata['extrafz']);
+	 				$this->SetFont($this->masterdata['extraft']);
+	 				$tempc = str_split($this->masterdata['extrac'], 2);
+	 				$this->SetTextColorArray($tempc);
+	  				$this->MultiCell(
+	 						$this->masterdata['extraw'], $this->masterdata['extrah'],
+	 						lookup::getProtectionText($d['iditem']), 0, 'L'
+	 				);
+ 				};
  				// - End ------------------
  				 		
  				$curx += $this->masterdata['labelwidth'] * 10;
