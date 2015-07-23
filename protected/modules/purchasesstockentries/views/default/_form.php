@@ -29,7 +29,7 @@
 		
 		$('#Purchasesstockentries_sjnum').change(function() {
 			$('#command').val('setDO');
-			$('#purchaesstockentries-form').submit();
+			$('#purchasesstockentries-form').submit();
 		});
 EOS;
 	Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CClientscript::POS_READY);
