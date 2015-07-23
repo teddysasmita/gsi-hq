@@ -116,6 +116,7 @@ EOS;
              'source'=>$suppliername,
            'value'=>lookup::SupplierNameFromSupplierID($model->idsupplier)
          ));*/
+		print_r($model);
 		CHtml::tag('span', array('id'=>'suppliername', 'class'=>'money'), 
 			lookup::SupplierNameFromSupplierID($model->idsupplier));
       ?>
