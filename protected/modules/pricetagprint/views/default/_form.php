@@ -14,6 +14,16 @@ $supplierScript=<<<EOS
 		$('#command').val('batchcode');
     	$('#pricetagprints-form').submit();  
 	});
+
+	$('#Pricetagprints_papersize').change(function() {
+		if ( $('#Pricetagprints_papersize').val() == 'F4' ) {
+			$('#Pricetagprints_paperwidth').val(21);
+			$('#Pricetagprints_paperheight').val(33);
+		} else if ( $('#Pricetagprints_papersize').val() == 'A4' ) {
+			$('#Pricetagprints_paperwidth').val(21);
+			$('#Pricetagprints_paperheight').val(29.7);
+		} 
+	});
 EOS;
 Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CClientscript::POS_READY);
 	
@@ -75,7 +85,7 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
 	<div class="row">
 		<?php echo $form->labelEx($model,'papersize'); ?>
         <?php 
-           echo $form->dropDownList($model, 'papersize', array('A4'=>'A4', 'A5'=>'A5'), 
+           echo $form->dropDownList($model, 'papersize', array('A4'=>'A4', 'F4' => 'F4'), 
 			array('empty'=>'Harap Pilih')); 
         ?>
         <?php echo $form->error($model,'papersize');?> 

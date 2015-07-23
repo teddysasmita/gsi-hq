@@ -594,7 +594,7 @@ class DefaultController extends Controller
 			
 			Yii::import('application.vendors.tcpdf.*');
 			require_once ('tcpdf.php');
-			$mypdf=new Pricetagprintpdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+			$mypdf=new Pricetagprintpdf(PDF_PAGE_ORIENTATION, PDF_UNIT, array($master->paperwidth*10, $master->paperheight*10), true, 'UTF-8', false);
 			$mypdf->init();
 			$mypdf->LoadData($master->attributes,  
 					$detail);
