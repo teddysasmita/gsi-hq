@@ -148,7 +148,7 @@ class DefaultController extends Controller
              $this->performAjaxValidation($model);
 
              if(isset($_POST)) {
-                 if(isset($_POST['yt1'])) {
+                 if(isset($_POST['yt0'])) {
                      $model->attributes=$_POST['Pricetagprints'];
                      $this->beforePost($model);
                      $this->tracker->modify('pricetagprints', $id);
