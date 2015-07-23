@@ -632,6 +632,7 @@ EOS;
 			$iditem = $row['iditem'];
 			$ponum = $row['transid'];
 			$orderinfo = $mycommand->queryRow();
+			print_r($orderinfo);
 			foreach($orderinfo as $oi) {
 				if ($oi == $detail['iditem']) {
 					$detail['buyprice'] = $oi['price'] + $oi['cost1'] + $oi['cost2'] - $oi['discount'];
