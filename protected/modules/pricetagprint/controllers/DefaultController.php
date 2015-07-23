@@ -507,17 +507,21 @@ class DefaultController extends Controller
 
      protected function afterPost(& $model)
      {
-         $idmaker=new idmaker();
-         $idmaker->saveRegNum($this->formid, $model->regnum);
+        if ($this->state == 'c') { 
+     		$idmaker=new idmaker();
+         	$idmaker->saveRegNum($this->formid, $model->regnum);
+        }
      }
 
      protected function beforePost(& $model)
      {
          $idmaker=new idmaker();
 
-         $model->userlog=Yii::app()->user->id;
-         $model->datetimelog=$idmaker->getDateTime();
-         $model->regnum=$idmaker->getRegNum($this->formid);
+         if ($this->state == 'c') {
+         	$model->userlog=Yii::app()->user->id;
+         	$model->datetimelog=$idmaker->getDateTime();
+         	$model->regnum=$idmaker->getRegNum($this->formid);
+         }
      }
 
      protected function beforeDelete(& $model)
