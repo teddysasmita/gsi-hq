@@ -116,9 +116,8 @@ EOS;
              'source'=>$suppliername,
            'value'=>lookup::SupplierNameFromSupplierID($model->idsupplier)
          ));*/
-		print_r($model);
 		CHtml::tag('span', array('id'=>'suppliername', 'class'=>'money'), 
-			lookup::SupplierNameFromSupplierID($model->idsupplier));
+			lookup::SupplierNameFromSupplierID(trim($model->idsupplier)));
       ?>
 		<?php echo $form->error($model,'idsupplier'); ?>
 	</div>
