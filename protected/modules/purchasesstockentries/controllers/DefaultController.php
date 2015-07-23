@@ -599,7 +599,7 @@ class DefaultController extends Controller
 		$iditem = '';
         
         $sql=<<<EOS
-        select a.iditem, a.price, a.cost1, a.cost2, a.discount from detailpurchasesorders a
+        select a.iditem, a.price, a.cost1, a.cost2, a.discount, b.idsupplier from detailpurchasesorders a
         join purchasesorders b on b.id = a.id
         where b.regnum = :p_regnum and a.iditem = :p_iditem
 EOS;
@@ -615,7 +615,7 @@ EOS;
            		array(':sjnum'=>$model->sjnum, 'serialnum'=>'Belum Diterima') )
            ->group('b.iditem')
            ->queryAll();
-        $model->ponum = $dataPO[0]['transid'];
+        $model->ponum = $dataPO[0]['transid']; 
         Yii::app()->session->remove('Detailpurchasesstockentries');
          foreach($dataPO as $row) {
 			$detail['iddetail']=idmaker::getCurrentID2();
@@ -632,6 +632,7 @@ EOS;
 			$iditem = $row['iditem'];
 			$ponum = $row['transid'];
 			$oi = $mycommand->queryRow();
+			$model->idsupplier =$oi['idsupplier'];
 			$detail['buyprice'] = $oi['price'] + $oi['cost1'] + $oi['cost2'] - $oi['discount'];
 			$detail['sellprice'] = lookup::getSellPrice($detail['iditem']);
 			$detail['userlog']=Yii::app()->user->id;
