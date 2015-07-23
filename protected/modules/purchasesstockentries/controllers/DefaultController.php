@@ -117,6 +117,7 @@ class DefaultController extends Controller
                       } else if ($_POST['command']=='setDO') {
                          $model->attributes=$_POST['Purchasesstockentries'];
                          Yii::app()->session['Purchasesstockentries']=$_POST['Purchasesstockentries'];
+                         die("here");
                          $this->loadDO($model);
                       }
                    }
