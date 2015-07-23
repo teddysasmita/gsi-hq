@@ -118,7 +118,7 @@ EOS;
          ));*/
 		print_r($model->attributes);
 		CHtml::tag('span', array('id'=>'suppliername2', 'class'=>'money'), 
-			lookup::SupplierNameFromSupplierID($model->idsupplier).$model->idsupplier);
+			'Yes, '.$model->idsupplier);
       ?>
 		<?php echo $form->error($model,'idsupplier'); ?>
 	</div>
