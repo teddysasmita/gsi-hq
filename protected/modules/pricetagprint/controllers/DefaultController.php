@@ -150,6 +150,10 @@ class DefaultController extends Controller
              if(isset($_POST)) {
                  if(isset($_POST['yt0'])) {
                      $model->attributes=$_POST['Pricetagprints'];
+                     $data = $this->getImage();
+                     if ($data !== FALSE) {
+                     	$model->bkjpg = $data;
+                     }
                      $this->beforePost($model);
                      $this->tracker->modify('pricetagprints', $id);
                      $respond=$model->save();
