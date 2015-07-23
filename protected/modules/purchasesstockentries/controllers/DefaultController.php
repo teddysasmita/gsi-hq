@@ -601,11 +601,10 @@ class DefaultController extends Controller
         $sql=<<<EOS
         select a.iditem, a.price, a.cost1, a.cost2, a.discount, b.idsupplier from detailpurchasesorders a
         join purchasesorders b on b.id = a.id
-        where b.regnum = :p_regnum and a.iditem = :p_iditem
+        where b.regnum = :p_regnum
 EOS;
         $mycommand=Yii::app()->db->createCommand($sql);
         $mycommand->bindParam(':p_regnum', $ponum, PDO::PARAM_STR);
-        $mycommand->bindParam(':p_iditem', $iditem, PDO::PARAM_STR);
         	
         $dataPO=Yii::app()->db->createCommand()
            ->select('count(*) as totalqty, b.iditem, a.idwarehouse, a.transid')
@@ -616,6 +615,9 @@ EOS;
            ->group('b.iditem')
            ->queryAll();
         $model->ponum = $dataPO[0]['transid']; 
+        $ponum = $model->ponum;
+        $orderinfo = $mycommand->queryAll();
+        $model->idsupplier = $orderinfo[0]['idsupplier'];
         Yii::app()->session->remove('Detailpurchasesstockentries');
          foreach($dataPO as $row) {
 			$detail['iddetail']=idmaker::getCurrentID2();
@@ -630,10 +632,12 @@ EOS;
 			$detail['leftqty']=$orderqty-$row['totalqty'];*/
 			
 			$iditem = $row['iditem'];
-			$ponum = $row['transid'];
-			$oi = $mycommand->queryRow();
-			$model->idsupplier =$oi['idsupplier'];
-			$detail['buyprice'] = $oi['price'] + $oi['cost1'] + $oi['cost2'] - $oi['discount'];
+			foreach($orderinfo as $oi) {
+				if ($oi['iditem'] == $detail['iditem']) {
+					$detail['buyprice'] = $oi['price'] + $oi['cost1'] + $oi['cost2'] - $oi['discount'];
+					break;
+				}
+			}
 			$detail['sellprice'] = lookup::getSellPrice($detail['iditem']);
 			$detail['userlog']=Yii::app()->user->id;
 			$detail['datetimelog']=idmaker::getDateTime();
