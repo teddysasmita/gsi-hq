@@ -49,6 +49,7 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
         echo $form->hiddenField($model, 'userlog');
         echo $form->hiddenField($model, 'datetimelog');
         echo $form->hiddenField($model, 'regnum');
+        echo $form->hiddenField($model, 'bkjpg');
       ?>
         
 	<div class="row">
