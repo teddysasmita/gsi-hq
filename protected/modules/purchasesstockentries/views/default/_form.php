@@ -173,10 +173,10 @@ EOS;
 					'name'=>'sellprice',
 					'type'=>'number'
 				),
-				array(
+				/*array(
 						'header'=>'Catatan',
 						'name'=>'remark',
-				),
+				),*/
               array(
                   'class'=>'CButtonColumn',
                   'buttons'=> array(
