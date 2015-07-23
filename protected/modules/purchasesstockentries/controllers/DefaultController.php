@@ -599,7 +599,7 @@ class DefaultController extends Controller
 		$iditem = '';
         
         $sql=<<<EOS
-        select b.iditem, b.price, b.cost1, b.cost2, b.discount from detailpurchasesorders a
+        select a.iditem, a.price, a.cost1, a.cost2, a.discount from detailpurchasesorders a
         join purchasesorders b on b.id = a.id
         where b.regnum = :p_regnum and a.iditem = :p_iditem
 EOS;

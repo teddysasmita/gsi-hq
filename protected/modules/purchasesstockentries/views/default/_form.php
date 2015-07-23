@@ -91,10 +91,19 @@ EOS;
 		?>
 	</div>
 
+	  
+	<div class="row">
+		<?php echo $form->labelEx($model,'sjnum'); ?>
+        <?php 
+           echo $form->textField($model, 'sjnum'); 
+        ?>
+        <?php echo $form->error($model,'sjnum');?> 
+	</div>
+	
 	<div class="row">
 		<?php echo $form->labelEx($model,'idsupplier'); ?>
 		<?php 
-         $suppliers=Yii::app()->db->createCommand()
+         /*$suppliers=Yii::app()->db->createCommand()
             ->select("id,firstname,lastname")
             ->from("suppliers")
             ->order("firstname, lastname")   
@@ -106,19 +115,13 @@ EOS;
              'name'=>'Purchasesstockentries_suppliername',
              'source'=>$suppliername,
            'value'=>lookup::SupplierNameFromSupplierID($model->idsupplier)
-         ));
+         ));*/
+		CHtml::tag('span', array('id'=>'suppliername', 'class'=>'money'), 
+			lookup::SupplierNameFromSupplierID($model->idsupplier));
       ?>
 		<?php echo $form->error($model,'idsupplier'); ?>
 	</div>
-      
-	<div class="row">
-		<?php echo $form->labelEx($model,'sjnum'); ?>
-        <?php 
-           echo $form->textField($model, 'sjnum'); 
-        ?>
-        <?php echo $form->error($model,'sjnum');?> 
-	</div>
-	
+    
 	 <div class="row">
 		<?php echo $form->labelEx($model,'ponum'); ?>
 		<?php 
