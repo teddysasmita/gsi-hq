@@ -71,10 +71,6 @@ $supplierScript=<<<EOS
 			}
 		}
 	});
-   		
-	$('#detailprocessbtn').click(function() {
-		$('#detailstockentries-form').submit();
-	});
 EOS;
    Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CClientscript::POS_READY);
    
@@ -143,7 +139,7 @@ EOS;
 	</div>
 	
 	<div class="row buttons">
-		<?php echo CHtml::htmlButton($mode, array('id'=>'detailprocessbtn')); ?>
+		<?php echo CHtml::submitButton($mode); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
