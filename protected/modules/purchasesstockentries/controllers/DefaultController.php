@@ -631,14 +631,8 @@ EOS;
 			
 			$iditem = $row['iditem'];
 			$ponum = $row['transid'];
-			$orderinfo = $mycommand->queryRow();
-			print_r($orderinfo);
-			foreach($orderinfo as $oi) {
-				if ($oi == $detail['iditem']) {
-					$detail['buyprice'] = $oi['price'] + $oi['cost1'] + $oi['cost2'] - $oi['discount'];
-					break;
-				}	
-			}
+			$oi = $mycommand->queryRow();
+			$detail['buyprice'] = $oi['price'] + $oi['cost1'] + $oi['cost2'] - $oi['discount'];
 			$detail['sellprice'] = lookup::getSellPrice($detail['iditem']);
 			$detail['userlog']=Yii::app()->user->id;
 			$detail['datetimelog']=idmaker::getDateTime();
