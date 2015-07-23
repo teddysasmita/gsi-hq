@@ -156,18 +156,19 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
 		<?php echo $form->LabelEx($model,'itemnameft'); ?>
         <?php 
            echo $form->dropDownList($model, 'itemnameft', 
-           		array('courier'=>'Courier', 
-           			'courierb'=>'Courier Bold', 
-           			'courieri'=>'Courier Italic', 
-           			'courierbi'=>'Courier Bold Italic', 
+           		array(
+           			'courier'=>'Courier', 
+           			'courierB'=>'Courier Bold', 
+           			'courierI'=>'Courier Italic', 
+           			'courierBI'=>'Courier Bold Italic', 
            			'helvetica'=>'Helvetica', 
-           			'helveticab'=>'Helvetica Bold', 
-           			'helveticai'=>'Helvetica Italic', 
-           			'helveticabi'=>'Helvetica Bold Italic',	 
+           			'helveticaB'=>'Helvetica Bold', 
+           			'helveticaI'=>'Helvetica Italic', 
+           			'helveticaBI'=>'Helvetica Bold Italic',	 
            			'times'=>'Times',
-           			'timesb'=>'Times Bold',
-           			'timesi'=>'Times Italic',
-           			'timesbi'=>'Times Bold Italic',
+           			'timesB'=>'Times Bold',
+           			'timesI'=>'Times Italic',
+           			'timesBI'=>'Times Bold Italic',
            )); 
         ?>
         <?php echo $form->error($model,'itemnameft');?> 
@@ -227,17 +228,17 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
            echo $form->dropDownList($model, 'priceft', 
            		array(
            			'courier'=>'Courier', 
-           			'courierb'=>'Courier Bold', 
-           			'courieri'=>'Courier Italic', 
-           			'courierbi'=>'Courier Bold Italic', 
+           			'courierB'=>'Courier Bold', 
+           			'courierI'=>'Courier Italic', 
+           			'courierBI'=>'Courier Bold Italic', 
            			'helvetica'=>'Helvetica', 
-           			'helveticab'=>'Helvetica Bold', 
-           			'helveticai'=>'Helvetica Italic', 
-           			'helveticabi'=>'Helvetica Bold Italic',	 
+           			'helveticaB'=>'Helvetica Bold', 
+           			'helveticaI'=>'Helvetica Italic', 
+           			'helveticaBI'=>'Helvetica Bold Italic',	 
            			'times'=>'Times',
-           			'timesb'=>'Times Bold',
-           			'timesi'=>'Times Italic',
-           			'timesbi'=>'Times Bold Italic',
+           			'timesB'=>'Times Bold',
+           			'timesI'=>'Times Italic',
+           			'timesBI'=>'Times Bold Italic',
            )); 
         ?>
         <?php echo $form->error($model,'priceft');?> 
@@ -305,18 +306,19 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
 		<?php echo $form->LabelEx($model,'extraft'); ?>
         <?php 
            echo $form->dropDownList($model, 'extraft', 
-           		array('courier'=>'Courier', 
-           			'courierb'=>'Courier Bold', 
-           			'courieri'=>'Courier Italic', 
-           			'courierbi'=>'Courier Bold Italic', 
+           		array(
+           			'courier'=>'Courier', 
+           			'courierB'=>'Courier Bold', 
+           			'courierI'=>'Courier Italic', 
+           			'courierBI'=>'Courier Bold Italic', 
            			'helvetica'=>'Helvetica', 
-           			'helveticab'=>'Helvetica Bold', 
-           			'helveticai'=>'Helvetica Italic', 
-           			'helveticabi'=>'Helvetica Bold Italic',	 
+           			'helveticaB'=>'Helvetica Bold', 
+           			'helveticaI'=>'Helvetica Italic', 
+           			'helveticaBI'=>'Helvetica Bold Italic',	 
            			'times'=>'Times',
-           			'timesb'=>'Times Bold',
-           			'timesi'=>'Times Italic',
-           			'timesbi'=>'Times Bold Italic',
+           			'timesB'=>'Times Bold',
+           			'timesI'=>'Times Italic',
+           			'timesBI'=>'Times Bold Italic',
            )); 
         ?>
         <?php echo $form->error($model,'extraft');?> 

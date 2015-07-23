@@ -157,9 +157,10 @@ return array(
 				),
 				// uncomment the following to show log messages on web page
 				
-				/*array(
+				array(
 					'class'=>'CWebLogRoute',
-				),*/
+					'levels'=>'error',
+				),
 			
 			),
 		),
