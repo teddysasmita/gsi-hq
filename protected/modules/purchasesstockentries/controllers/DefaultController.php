@@ -614,7 +614,7 @@ EOS;
            		array(':sjnum'=>$model->sjnum, 'serialnum'=>'Belum Diterima') )
            ->group('b.iditem')
            ->queryAll();
-        if ($dataPO !== false) {
+        if (($dataPO !== false) && is_array($dataPO)) {
 	        $model->ponum = $dataPO[0]['transid']; 
 	        $ponum = $model->ponum;
 	        $orderinfo = $mycommand->queryAll();
