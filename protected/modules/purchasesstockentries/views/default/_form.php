@@ -56,6 +56,7 @@ EOS;
         echo CHtml::hiddenField('command', '', array('id'=>'command'));
         echo $form->hiddenField($model, 'id');
         echo $form->hiddenField($model, 'idsupplier');
+        echo $form->hiddenField($model, 'ponum');
         echo $form->hiddenField($model, 'userlog');
         echo $form->hiddenField($model, 'datetimelog');
         echo $form->hiddenField($model, 'regnum');
