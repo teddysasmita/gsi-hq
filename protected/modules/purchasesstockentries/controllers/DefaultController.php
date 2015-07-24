@@ -614,6 +614,7 @@ EOS;
            		array(':sjnum'=>$model->sjnum, 'serialnum'=>'Belum Diterima') )
            ->group('b.iditem')
            ->queryAll();
+        print_r($dataPO);
         if (($dataPO !== false) && is_array($dataPO)) {
 	        $model->ponum = $dataPO[0]['transid']; 
 	        $ponum = $model->ponum;
