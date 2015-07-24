@@ -614,35 +614,37 @@ EOS;
            		array(':sjnum'=>$model->sjnum, 'serialnum'=>'Belum Diterima') )
            ->group('b.iditem')
            ->queryAll();
-        $model->ponum = $dataPO[0]['transid']; 
-        $ponum = $model->ponum;
-        $orderinfo = $mycommand->queryAll();
-        $model->idsupplier = $orderinfo[0]['idsupplier'];
-        Yii::app()->session->remove('Detailpurchasesstockentries');
-         foreach($dataPO as $row) {
-			$detail['iddetail']=idmaker::getCurrentID2();
-			$detail['id']=$model->id;
-			$detail['iditem']=$row['iditem'];
-			$detail['qty']=$row['totalqty'];
-			/*$detail['idwarehouse']=$row['idwarehouse'];
-			$detail['idpurchaseorder']=$row['transid'];
-			$mycommand->bindParam(':p_regnum', $row['transid'], PDO::PARAM_STR);
-			$mycommand->bindParam(':p_iditem', $row['iditem'], PDO::PARAM_STR);
-			$orderqty=$mycommand->queryScalar();	
-			$detail['leftqty']=$orderqty-$row['totalqty'];*/
-			
-			$iditem = $row['iditem'];
-			foreach($orderinfo as $oi) {
-				if ($oi['iditem'] == $detail['iditem']) {
-					$detail['buyprice'] = $oi['price'] + $oi['cost1'] + $oi['cost2'] - $oi['discount'];
-					break;
+        if ($dataPO !== false) {
+	        $model->ponum = $dataPO[0]['transid']; 
+	        $ponum = $model->ponum;
+	        $orderinfo = $mycommand->queryAll();
+	        $model->idsupplier = $orderinfo[0]['idsupplier'];
+	        Yii::app()->session->remove('Detailpurchasesstockentries');
+	         foreach($dataPO as $row) {
+				$detail['iddetail']=idmaker::getCurrentID2();
+				$detail['id']=$model->id;
+				$detail['iditem']=$row['iditem'];
+				$detail['qty']=$row['totalqty'];
+				/*$detail['idwarehouse']=$row['idwarehouse'];
+				$detail['idpurchaseorder']=$row['transid'];
+				$mycommand->bindParam(':p_regnum', $row['transid'], PDO::PARAM_STR);
+				$mycommand->bindParam(':p_iditem', $row['iditem'], PDO::PARAM_STR);
+				$orderqty=$mycommand->queryScalar();	
+				$detail['leftqty']=$orderqty-$row['totalqty'];*/
+				
+				$iditem = $row['iditem'];
+				foreach($orderinfo as $oi) {
+					if ($oi['iditem'] == $detail['iditem']) {
+						$detail['buyprice'] = $oi['price'] + $oi['cost1'] + $oi['cost2'] - $oi['discount'];
+						break;
+					}
 				}
-			}
-			$detail['sellprice'] = lookup::getSellPrice($detail['iditem']);
-			$detail['userlog']=Yii::app()->user->id;
-			$detail['datetimelog']=idmaker::getDateTime();
-			
-			$details[]=$detail; 
+				$detail['sellprice'] = lookup::getSellPrice($detail['iditem']);
+				$detail['userlog']=Yii::app()->user->id;
+				$detail['datetimelog']=idmaker::getDateTime();
+				
+				$details[]=$detail;
+			}			
         }
         Yii::app()->session['Detailpurchasesstockentries']=$details;
       }
