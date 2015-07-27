@@ -180,16 +180,16 @@ class DefaultController extends Controller
                          }
                      };
 
-                     if(isset(Yii::app()->session['DeleteDetailpurchasesorders'])) {
-                         $deletedetails=Yii::app()->session['DeleteDetailpurchasesorders'];
+                     if(isset(Yii::app()->session['Deletedetailpurchasesorders'])) {
+                         $deletedetails=Yii::app()->session['Deletedetailpurchasesorders'];
                          $respond=$respond&&$this->deleteDetails($deletedetails);
                          if(!$respond) {
                            throw new CHttpException(404,'There is an error in detail deletion');
                          }
                      };
                      
-                     if(isset(Yii::app()->session['DeleteDetailpurchasesorders2'])) {
-                         $deletedetails=Yii::app()->session['DeleteDetailpurchasesorders2'];
+                     if(isset(Yii::app()->session['Deletedetailpurchasesorders2'])) {
+                         $deletedetails=Yii::app()->session['Deletedetailpurchasesorders2'];
                          $respond=$respond&&$this->deleteDetails2($deletedetails);
                          if(!$respond) {
                            throw new CHttpException(404,'There is an error in detail2 deletion');
@@ -199,7 +199,8 @@ class DefaultController extends Controller
                      if($respond) {
                          Yii::app()->session->remove('Purchasesorders');
                          Yii::app()->session->remove('Detailpurchasesorders');
-                         Yii::app()->session->remove('DeleteDetailpurchasesorders');
+                         Yii::app()->session->remove('Deletedetailpurchasesorders');
+                         Yii::app()->session->remove('Deletedetailpurchasesorders2');
                          $this->redirect(array('view','id'=>$model->id));
                      }
                  }
