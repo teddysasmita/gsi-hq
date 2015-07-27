@@ -8,6 +8,8 @@ class DefaultController extends Controller
 	 */
 	public $layout='//layouts/column2';
 	public $formid='AC2';
+	private $detailformid='AC2a';
+	private $detailformid2='AC2b';
 	public $tracker;
 	public $state;
 
@@ -265,8 +267,8 @@ class DefaultController extends Controller
                Yii::app()->session->remove('Purchasesorders');
                Yii::app()->session->remove('Detailpurchasesorders');
                Yii::app()->session->remove('Detailpurchasesorders2');
-               Yii::app()->session->remove('DeleteDetailpurchasesorders');
-               Yii::app()->session->remove('DeleteDetailpurchasesorders2');
+               Yii::app()->session->remove('Deletedetailpurchasesorders');
+               Yii::app()->session->remove('Deletedetailpurchasesorders2');
                $dataProvider=new CActiveDataProvider('Purchasesorders',
                   array(
                      'criteria'=>array(
@@ -497,7 +499,7 @@ class DefaultController extends Controller
              $model->attributes=Yii::app()->session['Purchasesorders'];
 
              $details=Yii::app()->session['Detailpurchasesorders2'];
-             $this->afterDeleteDetail($model, $details);
+             $this->afterDeleteDetail2($model, $details);
 
              $this->render('update',array(
                  'model'=>$model,
@@ -593,7 +595,7 @@ class DefaultController extends Controller
                 $detailmodel=Detailpurchasesorders::model()->findByPk($row['iddetail']);
                 if($detailmodel) {
                     $this->tracker->init();
-                    $this->trackActivity('d', $this->__DETAILFORMID);
+                    $this->trackActivity('d', $this->detailformid);
                     $this->tracker->delete('detailpurchasesorders', $detailmodel->id);
                     $respond=$detailmodel->delete();
                     if (!$respond) {
@@ -611,7 +613,7 @@ class DefaultController extends Controller
                 $detailmodel=Detailpurchasesorders::model()->findByPk($row['iddetail']);
                 if($detailmodel) {
                     $this->tracker->init();
-                    $this->trackActivity('d', $this->__DETAILFORMID);
+                    $this->trackActivity('d', $this->detailform2);
                     $this->tracker->delete('detailpurchasesorders2', $detailmodel->id);
                     $respond=$detailmodel->delete();
                     if (!$respond) {
