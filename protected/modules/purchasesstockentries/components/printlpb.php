@@ -100,7 +100,7 @@ class MYPDF extends TCPDF {
 		$this->SetTextColor(0);
 		$this->SetDrawColor(0, 0, 0);
 		$this->SetLineWidth(0.3);
-		$this->SetFont('Courier', 'B');
+		$this->SetFont('helvetica', 'B');
 		$this->SetFontSize(10);
 		$this->setXY(1, 115);
 		$this->Cell(43, 15, 'Admin', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
@@ -132,22 +132,22 @@ class MYPDF extends TCPDF {
 		
 		
 		$this->setFontSize(20);
-		$this->SetFont('Courier', 'B');
+		$this->SetFont('helvetica', 'B');
 		$this->setXY(100, 10);
 		$this->Cell(96, 10, 'Penerimaan Barang', 'LTR', 1, 'C');
 		$this->SetFontSize(10);
 		$this->setXY(100, 20);
 		$this->Cell(10, 5, 'Tgl', 'LT', 0, 'C');
 		$this->Cell(43, 5, $this->data->idatetime, 'LTR', 0, 'C');
-		$this->SetFont('Courier', 'B');
+		$this->SetFont('helvetica', 'B');
 		//$this->setXY(100, 27);
 		$this->Cell(16, 5, 'No LPB', 'LTR', 0, 'C');
 		$this->Cell(27, 5, $this->data->regnum, 'LTR', 1, 'C');
 		
-		$this->SetFont('Courier', 'B');
+		$this->SetFont('helvetica', 'B');
 		$this->Cell(19, 5, 'Pengirim', 'LTR', 0,'C');
 		$this->Cell(80, 5, lookup::SupplierNameFromSupplierID($this->data->idsupplier), 'LTR');
-		$this->SetFont('Courier', 'B');
+		$this->SetFont('helvetica', 'B');
 		$this->Cell(10, 5, 'NoSJ ', 'LTR', 0,'C');
 		$this->Cell(43, 5, $this->data->sjnum, 'LTR', 0, 'C');
 		$this->Cell(16, 5, 'No PO ', 'LTR', 0,'C');
@@ -156,7 +156,7 @@ class MYPDF extends TCPDF {
 		
 		//$this->ln();
 		$this->setFontSize(12);
-		$this->SetFont('Courier', 'B');
+		$this->SetFont('helvetica', 'B');
 		
 		for($i = 0; $i < count($this->headernames); ++$i) {
 			$this->Cell($this->headerwidths[$i], 7, $this->headernames[$i], 1, 0, 'C');
@@ -211,7 +211,7 @@ function execute($model, $detailmodel) {
 	// ---------------------------------------------------------
 	
 	// set font
-	$pdf->SetFont('Courier', '', 12);
+	$pdf->SetFont('helvetica', '', 12);
 	
 	// add a page
 	$pdf->LoadData($model, $detailmodel);
