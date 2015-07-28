@@ -106,7 +106,7 @@ EOS;
 	<div class="row">
 		<?php echo $form->labelEx($model,'buyprice'); ?>
 		<?php //echo $form->textField($model,'buyprice'); 
-            CHtml::tag('span', array('class'=>'money'), number_format($model->buyprice));
+            echo CHtml::tag('span', array('class'=>'money'), number_format($model->buyprice));
         ?>
 		<?php echo $form->error($model,'buyprice'); ?>
 	</div>
