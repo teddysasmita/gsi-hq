@@ -170,7 +170,7 @@ EOS;
             array(
                'class'=>'CButtonColumn',
                'buttons'=> array(
-                  'view'=>array(
+                  'delete'=>array(
                      'visible'=>'false'
                   )
                ),
