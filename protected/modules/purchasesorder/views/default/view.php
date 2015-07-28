@@ -106,9 +106,11 @@ $this->menu=array(
                    ),
                   'update'=>array(
                      'visible'=>'false'
-                  )
+                  ),
+               	'view'=>array(
+               		'visible'=>'false'
+               	)
                ),
-               'viewButtonUrl'=>"Action::decodeViewDetailPurchasesOrderUrl(\$data, '$model->regnum')",
             )
          ),
    ));

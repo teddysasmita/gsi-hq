@@ -18,6 +18,7 @@ $this->menu=array(
 	array('label'=>'Manage Detailpurchasesorders', 'url'=>array('admin')),
    array('label'=>'Ubah Detil', 'url'=>array('/purchasesorder/detailpurchasesorders/update',
       'iddetail'=>$model->iddetail)),*/
+	array('label'=>'Hapus Data', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete', 'iddetail'=>$model->iddetail))),
    array('label'=>'Sejarah', 'url'=>array('history', 'iddetail'=>$model->iddetail)),
 );
 ?>

@@ -174,7 +174,7 @@ EOS;
                      'visible'=>'false'
                   )
                ),
-            'deleteButtonUrl'=>"Action::decodeDeleteDetailPurchasesOrderUrl(\$data, '$model->regnum')",
+            'viewButtonUrl'=>"Action::decodeViewDetailPurchasesOrderUrl(\$data, '$model->regnum')",
                'updateButtonUrl'=>"Action::decodeUpdateDetailPurchasesOrderUrl(\$data, '$model->regnum')",
             )
           ),

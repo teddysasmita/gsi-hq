@@ -112,8 +112,7 @@ class DetailpurchasesordersController extends Controller
                 // Uncomment the following line if AJAX validation is needed
                 $this->performAjaxValidation($model);
                 
-                if(isset($_POST['Detailpurchasesorders']))
-		{
+                if(isset($_POST['Detailpurchasesorders'])) {
                     $temp=Yii::app()->session['Detailpurchasesorders'];
                     $model->attributes=$_POST['Detailpurchasesorders'];
                     foreach ($temp as $tk=>$tv) {
@@ -123,14 +122,14 @@ class DetailpurchasesordersController extends Controller
                         }
                     }
                     //posting into session
-		    if($model->validate()) {
+		    		if($model->validate()) {
                     	Yii::app()->session['Detailpurchasesorders']=$temp;
 			
                     	if ($master=='create')
                         	$this->redirect(array('default/createdetail'));
                     	else if($master=='update')
                         	$this->redirect(array('default/updatedetail'));
-		    }	
+		    		}	
                 }
                
                 $this->render('update',array(
@@ -148,33 +147,31 @@ class DetailpurchasesordersController extends Controller
 	 */
 	public function actionDelete($iddetail)
 	{
-            if(Yii::app()->authManager->checkAccess($this->formid.'-Delete', 
-                    Yii::app()->user->id))  {
+		if(Yii::app()->authManager->checkAccess($this->formid.'-Delete', 
+			Yii::app()->user->id))  {
                 
-                $this->trackActivity('d');
+			$this->trackActivity('d');
                 
-                $details=Yii::app()->session['Detailpurchasesorders'];
-                foreach ($details as $ik => $iv) {
-                   if($iv['iddetail']==$iddetail) {
-                      if(isset(Yii::app()->session['Deletedetailpurchasesorders']))
-                         $deletelist=Yii::app()->session['Deletedetailpurchasesorders'];
-                      $deletelist[]=$iv;
-                      Yii::app()->session['Deletedetailpurchasesorders']=$deletelist;
-                      unset($details[$ik]);
-                      break;
-                   }
-                }
-                
-                            
-                Yii::app()->session['Detailpurchasesorders']=$details;
-
+			$details=Yii::app()->session['Detailpurchasesorders'];
+			foreach ($details as $ik => $iv) {
+				if($iv['iddetail']==$iddetail) {
+					if(isset(Yii::app()->session['Deletedetailpurchasesorders']))
+						$deletelist=Yii::app()->session['Deletedetailpurchasesorders'];
+					$deletelist[]=$iv;
+					Yii::app()->session['Deletedetailpurchasesorders']=$deletelist;
+					unset($details[$ik]);
+					break;
+				}
+			}
+            Yii::app()->session['Detailpurchasesorders']=$details;
+            $this->redirect(array('default/deletedetail'));
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-            } else {
-                throw new CHttpException(404,'You have no authorization for this operation.');
-            }
-        }
+			/*if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));*/
+		} else {
+			throw new CHttpException(404,'You have no authorization for this operation.');
+		}
+	}
 
 	public function actionHistory($iddetail)
         {
