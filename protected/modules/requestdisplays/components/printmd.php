@@ -97,7 +97,7 @@ class MYPDF extends TCPDF {
 		$this->Cell(15, 5, 'total '.trim($this->getAliasNbPages()), 'LRB', 1, 'C', false,'', 0, false, 'T', 'T');
 		$this->setX(1);
 		$this->setFontSize(10);
-		$this->Cell(195, 5, 'TANDA TANGAN, NAMA TERANG, TANGGAL dan JAM MOHON DITULISKAN', 'LTRB', 0, 'C');
+		$this->Cell(195, 4, 'TANDA TANGAN, NAMA TERANG, TANGGAL dan JAM MOHON DITULISKAN', 'LTRB', 0, 'C');
 	}
 	
 	public function master()
