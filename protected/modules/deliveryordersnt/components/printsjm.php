@@ -77,18 +77,24 @@ class MYPDF extends TCPDF {
 		$this->SetTextColor(0);
 		$this->SetDrawColor(0, 0, 0);
 		$this->SetLineWidth(0.3);
-		$this->SetFont('Helvetica', 'B');
+		$this->SetFont('helvetica');
 		$this->SetFontSize(10);
-		$this->setY(115);
-		$this->Cell(41, 15, 'Supir', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
-		$this->Cell(41, 15, 'CS', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
-		$this->Cell(41, 15, 'Pemeriksa', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
-		$this->Cell(41, 15, 'Penerima', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
-		$this->Cell(22, 5, 'Halaman', 'LTR', 1, 'C', false,'', 0, false, 'T', 'T');
-		$this->setX(174);
-		$this->Cell(22, 5, $this->PageNo().' dari ', 'LR', 1, 'C', false,'', 0, false, 'T', 'T');
-		$this->setX(174);
-		$this->Cell(22, 5, 'total '.trim($this->getAliasNbPages()), 'LRB', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->setXY(1, 110);
+		$this->Cell(30, 17, 'Mengetahui', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(30, 17, 'Dibuat Oleh', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(30, 17, 'Yg Menyerahkan', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(30, 17, 'Yg Menerima', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->setFontSize(8);
+		$this->MultiCell(30, 17, '(Gudang) Yg Menyerahkan', 'LTRB', 'C', false, 0);
+		$this->MultiCell(30, 17, '(Gudang) Yg Menerima', 'LTRB', 'C', false, 0);
+		$this->Cell(15, 5, 'Halaman', 'LTR', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->setX(181);
+		$this->Cell(15, 5, $this->PageNo().' dari ', 'LR', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->setX(181);
+		$this->Cell(15, 7, 'total '.trim($this->getAliasNbPages()), 'LRB', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->setX(1);
+		$this->setFontSize(10);
+		$this->Cell(195, 5, 'TANDA TANGAN, NAMA TERANG, TANGGAL dan JAM MOHON DITULISKAN', 'LTRB', 0, 'C');
 	}
 	
 	public function master()
