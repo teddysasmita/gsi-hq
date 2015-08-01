@@ -234,7 +234,7 @@ class DefaultController extends Controller
             if(Yii::app()->authManager->checkAccess($this->formid.'-Update', 
                Yii::app()->user->id)) {
                 $this->trackActivity('n');
-                $this->tracker->restoreDeleted('items', $idtrack);
+                $this->tracker->restoreDeleted('items', 'idtrack', $idtrack);
                 
                 $dataProvider=new CActiveDataProvider('Items');
                 $this->render('index',array(
