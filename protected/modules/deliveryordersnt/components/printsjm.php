@@ -22,7 +22,7 @@ class MYPDF extends TCPDF {
 		$this->data = $data;
 		$this->detaildata = $detaildata;
 		$this->headernames = array('No', 'Nama Barang', 'Jumlah', 'Keterangan');
-		$this->headerwidths = array(10, 126, 20, 30);
+		$this->headerwidths = array(10, 120, 20, 45);
 	}
 
 	// Colored table
@@ -120,17 +120,17 @@ class MYPDF extends TCPDF {
 		
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(35, 5, 'Nama Penerima', 'LTR', 0,'C');
-		$this->Cell(71, 5, $this->data->receivername, 'LTR');
+		$this->Cell(80, 5, $this->data->receivername, 'LTR');
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(30, 5, 'Telp Penerima', 'LTR', 0,'C');
 		$this->Cell(50, 5, $this->data->receiverphone, 'LTR', 1);
 		
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(35, 5, 'Alamat Penerima', 'LTR', 0,'C');
-		$this->Cell(151, 5, $this->data->receiveraddress, 'LTR', 1);
+		$this->Cell(160, 5, $this->data->receiveraddress, 'LTR', 1);
 		$this->SetFont('Helvetica', 'B');
 		$this->Cell(35, 5, 'Info Kendaraan', 'LTRB', 0,'C');
-		$this->Cell(151, 5, $this->data->vehicleinfo, 'LTRB', 1);
+		$this->Cell(160, 5, $this->data->vehicleinfo, 'LTRB', 1);
 		
 		$this->ln(5);
 		$this->setFontSize(12);
@@ -173,7 +173,7 @@ function execute($model, $detailmodel) {
 	$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 	
 	//set margins
-	$pdf->SetMargins(10, 56, PDF_MARGIN_RIGHT);
+	$pdf->SetMargins(1, 56, PDF_MARGIN_RIGHT);
 	$pdf->SetHeaderMargin(0);
 	$pdf->SetFooterMargin(0);
 	
@@ -204,7 +204,7 @@ function execute($model, $detailmodel) {
 	// ---------------------------------------------------------
 	
 	//Close and output PDF document
-	$pdf->Output('SJM'.idmaker::getDateTime().'.pdf', 'I');
+	$pdf->Output('SJM'.idmaker::getDateTime().'.pdf', 'D');
 }
 //============================================================+
 // END OF FILE                                                
