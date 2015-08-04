@@ -121,10 +121,10 @@ class MYPDF extends TCPDF {
 		$this->SetTextColor(0);
 		$this->SetDrawColor(0, 0, 0);
 		$this->SetLineWidth(0.3);
-		$this->SetFont('', 'B');
+		$this->SetFont('helvetica', 'B');
 		$this->SetCellPadding(0.8);
 	
-		$this->SetFont('', 'IB');
+		$this->SetFont('helvetica', 'IB');
 		$this->setFontSize(20);
 		
 		$this->setXY(10, 5);

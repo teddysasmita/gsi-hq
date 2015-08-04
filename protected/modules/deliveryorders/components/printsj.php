@@ -34,7 +34,7 @@ class MYPDF extends TCPDF {
 		$this->SetTextColor(0);
 		$this->SetDrawColor(0, 0, 0);
 		$this->SetLineWidth(0.3);
-		$this->SetFont('Courier', 'B');
+		$this->SetFont('helvetica', 'B');
 		$this->SetFontSize(10);
 		
 		// Data
@@ -151,7 +151,7 @@ class MYPDF extends TCPDF {
 		
 		$this->ln(5);
 		$this->setFontSize(12);
-		$this->SetFont('Courier', 'B');
+		$this->SetFont('helvetica', 'B');
 		
 		for($i = 0; $i < count($this->headernames); ++$i) {
 			$this->Cell($this->headerwidths[$i], 7, $this->headernames[$i], 1, 0, 'C');
