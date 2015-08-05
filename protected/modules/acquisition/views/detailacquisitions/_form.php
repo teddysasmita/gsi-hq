@@ -27,7 +27,7 @@ $supplierScript=<<<EOS
    		if (myserialnum !== 'Belum Diterima') {
    			$('#isAccepted').prop('checked', false);
    			$.getJSON('index.php?r=LookUp/checkSerial', { serialnum: $('#Detailacquisitions_serialnum').val(), 
-   				idwh:$('#idwh').val() },
+   				idwh: $('#idwh').val() },
    				function(data) {
    				if (data == false) {
    					$('#avail').removeClass('money');
@@ -86,6 +86,8 @@ EOS;
          echo $form->hiddenField($model,'id');
          echo $form->hiddenField($model,'userlog');
          echo $form->hiddenField($model,'datetimelog');
+         $model = Yii::app()->session['Acquisitions'];
+         echo CHtml::hiddenField('idwh', $model['idwarehouse']);
         ?>
 
 	<div class="row">
