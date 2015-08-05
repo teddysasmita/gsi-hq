@@ -48,6 +48,12 @@ class Action extends CComponent {
       return Yii::app()->createUrl('salesorder/detailsalesorders/view', array('iddetail'=>$data['iddetail']));
    }
    
+   public static function decodeRestoreDeletedAcquistionsUrl($data)
+   {
+   	//return print_r($data);
+   	return Yii::app()->createUrl('acquisitions/default/restoreDeleted', array('idtrack'=>$data['idtrack']));
+   }
+   
    public static function decodeDeleteDetailAcquisitionsUrl($data)
    {
    	//return print_r($data);
@@ -65,6 +71,7 @@ class Action extends CComponent {
    	//return print_r($data);
    	return Yii::app()->createUrl('acquisition/detailacquisitions/view', array('iddetail'=>$data['iddetail']));
    }
+   
    
    public static function decodeDeleteDetailAcquisitionsnsnUrl($data)
    {
