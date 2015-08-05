@@ -51,7 +51,7 @@ class Action extends CComponent {
    public static function decodeRestoreDeletedAcquisitionsUrl($data)
    {
    	//return print_r($data);
-   	return Yii::app()->createUrl('acquisitions/default/restoreDeleted', array('idtrack'=>$data['idtrack']));
+   	return Yii::app()->createUrl('acquisition/default/restoreDeleted', array('idtrack'=>$data['idtrack']));
    }
    
    public static function decodeDeleteDetailAcquisitionsUrl($data)
