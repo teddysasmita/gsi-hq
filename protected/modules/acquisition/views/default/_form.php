@@ -74,7 +74,6 @@ EOS;
         echo $form->hiddenField($model, 'datetimelog');
         echo $form->hiddenField($model, 'regnum');
         echo $form->hiddenField($model, 'iditem');
-        print_r($model);
       ?>
         
 	<div class="row">
@@ -130,7 +129,7 @@ EOS;
                       'buttons'=>array(
                           array('text'=>'Ok', 'click'=>'js:function(){
                              $(\'#Acquisitions_itemname\').val($(\'#dialog-item-name\').val());
-                             $.get(\'index.php?r=LookUp/getItemID2\',{ name: encodeURI($(\'#dialog-item-name\').val()) },
+                             $.get(\'index.php?r=LookUp/getItemID2\',{ namecode: encodeURI($(\'#dialog-item-name\').val()) },
                                  function(data) {
                                     $(\'#Acquisitions_iditem\').val(data);
                                  })
