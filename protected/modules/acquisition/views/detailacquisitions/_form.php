@@ -49,16 +49,11 @@ $supplierScript=<<<EOS
 	   			$.getJSON('index.php?r=LookUp/checkSerial', { serialnum: $('#Detailacquisitions_serialnum').val(), 
    				idwh: $('#idwh').val() },
    				function(data) {
-   				if (data) {
-   					$('#avail').removeClass('money');
-   					$('#avail').addClass('error');
-   					$('#avail').html('Nomor seri sdh pernah terdaftar');
-   				} else {
-   					$('#avail').removeClass('error');
-   					$('#avail').addClass('money');
-   					$('#avail').html('Nomor seri bisa diakuisisi');
-   					$('#detailacquisitions-form').submit();	
-   				}
+   					if (data) {
+   						$('#avail').removeClass('money');
+   						$('#avail').addClass('error');
+   						$('#avail').html('Nomor seri sdh pernah terdaftar');
+   					}
    				});
    			} else {
    				$('#Detailacquisitions_serialnum_em_').html('');
@@ -90,7 +85,7 @@ EOS;
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'serialnum'); ?>
-		<?php echo $form->textField($model,'serialnum'); ?>
+		<?php echo $form->textField($model,'serialnum');?>
 		<?php echo $form->error($model,'serialnum'); ?>
 	</div>
 	
@@ -99,6 +94,7 @@ EOS;
 		echo $form->labelEx($model, 'avail');
 		echo $form->dropDownList($model, 'avail', array('Semua'=>'Semua', '1'=>'Tersedia', '2'=>'Rusak'),
 			array('empty'=>'Harap Pilih'));
+		echo CHtml::tag('span', array('id'=>'avail', 'class'=>'money'), '');
 		?>
 	</div>
 	
