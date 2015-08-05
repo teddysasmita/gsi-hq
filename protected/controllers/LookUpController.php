@@ -683,7 +683,7 @@ EOS;
 	
 	public function actionCheckSerial($serialnum, $idwh)
 	{
-		//$idwh=rawurldecode($idwh);
+		$idwh=rawurldecode($idwh);
 		$serialnum=rawurldecode($serialnum);
 
 		if (!Yii::app()->user->isGuest) {
