@@ -46,18 +46,20 @@ $supplierScript=<<<EOS
    		function(evt) {
    			var myserialnum = $('#Detailacquisitions_serialnum').val();
    			if (myserialnum !== 'Belum Diterima') {
-	   			$.getJSON('index.php?r=LookUp/checkItemSerial', { iditem: $('#Detailacquisitions_iditem').val(), 
-	   			serialnum: $('#Detailacquisitions_serialnum').val(), idwh:$('#idwh').val() }, 
-	   			function(data) {
-	   				if (data !== '0') {
-	            		$('#Detailacquisitions_serialnum_em_').html('Data sdh pernah terdaftar');
-						$('#Detailacquisitions_serialnum_em_').prop('style', 'display:block');
-					} else {
-						$('#Detailacquisitions_serialnum_em_').html('');
-						$('#Detailacquisitions_serialnum_em_').prop('style', 'display:none');
-	   					$('#detailacquisitions-form').submit();
-	   				};
-	   			});
+	   			$.getJSON('index.php?r=LookUp/checkSerial', { serialnum: $('#Detailacquisitions_serialnum').val(), 
+   				idwh: $('#idwh').val() },
+   				function(data) {
+   				if (data) {
+   					$('#avail').removeClass('money');
+   					$('#avail').addClass('error');
+   					$('#avail').html('Nomor seri sdh pernah terdaftar');
+   				} else {
+   					$('#avail').removeClass('error');
+   					$('#avail').addClass('money');
+   					$('#avail').html('Nomor seri bisa diakuisisi');
+   					$('#detailacquisitions-form').submit();	
+   				}
+   				});
    			} else {
    				$('#Detailacquisitions_serialnum_em_').html('');
 				$('#Detailacquisitions_serialnum_em_').prop('style', 'display:none');
