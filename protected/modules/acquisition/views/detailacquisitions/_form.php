@@ -87,8 +87,10 @@ EOS;
          echo $form->hiddenField($model,'userlog');
          echo $form->hiddenField($model,'datetimelog');
          $master = Yii::app()->session['Acquisitions'];
-         print_r($master);
-         //echo CHtml::hiddenField('idwh', $master['idwarehouse']);
+         if (isset($master['idwarehouse']))
+         	echo CHtml::hiddenField('idwh', $master['idwarehouse']);
+         else
+         	echo CHtml::hiddenField('idwh', 'NA');
         ?>
 
 	<div class="row">
