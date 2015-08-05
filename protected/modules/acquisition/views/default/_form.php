@@ -74,6 +74,7 @@ EOS;
         echo $form->hiddenField($model, 'datetimelog');
         echo $form->hiddenField($model, 'regnum');
         echo $form->hiddenField($model, 'iditem');
+        print_r($model);
       ?>
         
 	<div class="row">
