@@ -614,11 +614,12 @@ EOS;
         	->select('idsupplier')->from('purchasesorders')
         	->where('regnum = :p_regnum', array(':p_regnum'=>$stockEntryData[0]))
         	->queryScalar();
+        $tempponum = array();
         foreach($stockEntryData as $sed) {
-        	if (strlen($model->ponum))
-        		$model->ponum .= ', ';
-        	$model->ponum .= $sed;
+        	if (!in_array($sed, $tempponum))
+        		$tempponum[] = $sed;
         }
+        $model->ponum = implode('; ', $tempponum);
         $dataPO=Yii::app()->db->createCommand()
            ->select('count(*) as totalqty, b.iditem, a.idwarehouse, a.transid')
            ->from('detailstockentries b')
