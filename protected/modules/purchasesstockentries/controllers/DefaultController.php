@@ -606,22 +606,37 @@ EOS;
         $mycommand=Yii::app()->db->createCommand($sql);
         $mycommand->bindParam(':p_regnum', $ponum, PDO::PARAM_STR);
         	
+        $stockEntryData = Yii::app()->db->createCommand()
+        	->select('transid')->from('stockentries')
+        	->where('donum = :p_donum', array(':p_donum'=>$model->sjnum))
+        	->queryColumn();
+        $model->idsupplier = Yii::app()->db->createCommand()
+        	->select('idsupplier')->from('purchasesorders')
+        	->where('regnum = :p_regnum', array(':p_regnum'=>$stockEntryData[0]['transid']))
+        	->queryScalar();
+        foreach($stockEntryData as $sed) {
+        	if (strlen($model->ponum))
+        		$model->ponum .= ', ';
+        	$model->ponum .= $sed;
+        }
         $dataPO=Yii::app()->db->createCommand()
            ->select('count(*) as totalqty, b.iditem, a.idwarehouse, a.transid')
            ->from('detailstockentries b')
            ->join('stockentries a', 'a.id=b.id')
-           ->where('a.donum = :sjnum and b.serialnum <> :serialnum', 
-           		array(':sjnum'=>$model->sjnum, 'serialnum'=>'Belum Diterima') )
+           ->where('a.donum = :p_donum and b.serialnum <> :p_serialnum', 
+           		array(':p_donum'=>$model->sjnum, ':p_serialnum'=>'Belum Diterima') )
            ->group('b.iditem')
+           ->order('a.transid')
            ->queryAll();
+        $ponum = '';
         if (($dataPO !== false) && (count($dataPO) > 0)) {
-	        $model->ponum = $dataPO[0]['transid']; 
-	        $ponum = $model->ponum;
-	        $orderinfo = $mycommand->queryAll();
-	        $model->idsupplier = $orderinfo[0]['idsupplier'];
 	        Yii::app()->session->remove('Detailpurchasesstockentries');
 	         foreach($dataPO as $row) {
-				$detail['iddetail']=idmaker::getCurrentID2();
+	         	if ($ponum !== $row['transid']) {
+	         		$ponum = $row['transid'];
+	         		$orderinfo = $mycommand->queryAll();
+	         	}
+	         	$detail['iddetail']=idmaker::getCurrentID2();
 				$detail['id']=$model->id;
 				$detail['iditem']=$row['iditem'];
 				$detail['qty']=$row['totalqty'];
