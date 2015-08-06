@@ -612,7 +612,7 @@ EOS;
         	->queryColumn();
         $model->idsupplier = Yii::app()->db->createCommand()
         	->select('idsupplier')->from('purchasesorders')
-        	->where('regnum = :p_regnum', array(':p_regnum'=>$stockEntryData[0]['transid']))
+        	->where('regnum = :p_regnum', array(':p_regnum'=>$stockEntryData[0]))
         	->queryScalar();
         foreach($stockEntryData as $sed) {
         	if (strlen($model->ponum))
