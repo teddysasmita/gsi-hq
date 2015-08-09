@@ -23,7 +23,12 @@ $this->menu=array(
 
 <h1>Pengeluaran Barang</h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php 
+	$tmppath = Yii::app()->assetManager->basePath.'/pricetagprint'.$model->id;
+	$tmpfile = fopen($tmppath, 'w');
+	fwrite($tmpfile, $model->faceid);
+	fclose($tmpfile);
+	$this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		//'id',
@@ -38,6 +43,11 @@ $this->menu=array(
 		array(
 			'label'=>'Nama Gudang',
 			'value'=>lookup::WarehouseNameFromWarehouseID($model->idwarehouse)
+		),
+		array(
+				'name'=>'faceid',
+				'type'=>'image',
+				'value'=>Yii::app()->assetManager->baseUrl.'/pricetagprint'.$model->id,
 		),
 		array(
 			'label'=>'Userlog',

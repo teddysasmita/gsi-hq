@@ -74,9 +74,13 @@ class DefaultController extends Controller
 				
 				if (isset($_POST)){
 					
-					if(isset($_POST['yt0'])) {
+					if(isset($_POST['yt1'])) {
 						$model->attributes=$_POST['Stockentries'];
                       //The user pressed the button;
+						$model->faceid = str_replace('data:image/jpeg;base64','', $model->faceid);
+						$model->faceid = str_replace(' ', '+', $model->faceid);
+						$model->faceid = base64_decode($model->faceid);
+						
 						$this->beforePost($model);
 						$respond=$this->checkWarehouse($model->idwarehouse);
 						if (!$respond)

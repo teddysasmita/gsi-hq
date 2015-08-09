@@ -13,6 +13,7 @@
  * @property string $donum
  * @property string $transinfo
  * @property string $remark
+ * @property string $faceid
  * @property string $userlog
  * @property string $datetimelog
  */
@@ -42,7 +43,7 @@ class Stockentries extends CActiveRecord
 			array('transid', 'length', 'max'=>30),
 			array('donum', 'length', 'max'=>50),
 			array('idatetime, datetimelog', 'length', 'max'=>19),
-			array('remark', 'safe'),
+			array('remark, faceid', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('regnum, idatetime, transid, transname, idwarehouse, donum, transinfo, remark, userlog, datetimelog', 'safe', 'on'=>'search'),
@@ -75,6 +76,7 @@ class Stockentries extends CActiveRecord
 			'donum' => 'Nomor SJ',
 			'transinfo' => 'Info Transaksi',
 			'remark' => 'Catatan',
+			'faceid' => 'Photo ID',
 			'userlog' => 'Userlog',
 			'datetimelog' => 'Datetimelog',
 		);
