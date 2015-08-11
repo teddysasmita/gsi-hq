@@ -76,7 +76,7 @@ class Stockexits extends CActiveRecord
 			'donum' => 'Nomor Faktur',
 			'transinfo' => 'Info Transaksi',
 			'remark' => 'Catatan',
-			'faceid' => 'Foto ID',
+			'faceid' => 'Foto Penerima',
 			'userlog' => 'Userlog',
 			'datetimelog' => 'Datetimelog',
 		);

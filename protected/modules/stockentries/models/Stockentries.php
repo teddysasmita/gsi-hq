@@ -76,7 +76,7 @@ class Stockentries extends CActiveRecord
 			'donum' => 'Nomor SJ',
 			'transinfo' => 'Info Transaksi',
 			'remark' => 'Catatan',
-			'faceid' => 'Photo ID',
+			'faceid' => 'Foto Penerima',
 			'userlog' => 'Userlog',
 			'datetimelog' => 'Datetimelog',
 		);
