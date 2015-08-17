@@ -26,14 +26,13 @@ $supplierScript=<<<EOS
    		var myserialnum = $('#Detailacquisitions_serialnum').val();
    		if (myserialnum !== 'Belum Diterima') {
    			$('#isAccepted').prop('checked', false);
-   			$.getJSON('index.php?r=LookUp/checkSerial', { serialnum: $('#Detailacquisitions_serialnum').val(), 
-   				idwh: $('#idwh').val() },
+   			$.getJSON('index.php?r=LookUp/checkSerial', { serialnum: $('#Detailacquisitions_serialnum').val()},
    				function(data) {
-   				if (data) {
+   				if ((data == 4) || (data == 5)) {
    					$('#avail').removeClass('money');
    					$('#avail').addClass('error');
    					$('#avail').html('Nomor seri sdh pernah terdaftar');
-   				} else {
+   				} else if ((data == 1) || (data == 2) || (data == 3)){
    					$('#avail').removeClass('error');
    					$('#avail').addClass('money');
    					$('#avail').html('Nomor seri bisa diakuisisi');

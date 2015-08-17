@@ -681,28 +681,47 @@ EOS;
 	
 	}
 	
-	public function actionCheckSerial($serialnum, $idwh)
+	public function actionCheckSerial($serialnum)
 	{
 		$idwh=rawurldecode($idwh);
 		$serialnum=rawurldecode($serialnum);
-
+		$result = 1;
+		
 		if (!Yii::app()->user->isGuest) {
-			$data=Yii::app()->db->createCommand()
-				->select('iditem, avail, status')
-				->from('wh'.$idwh.' a')
-				->where('a.serialnum = :p_serialnum',
-						array(':p_serialnum'=>$serialnum))
-						/*->where('a.iditem = :p_iditem and a.serialnum = :p_serialnum',
-						 array(':p_iditem'=>$iditem, ':p_serialnum'=>$serialnum))*/
+			$idwarehouses = Yii::app()->db->createCommand()
+				->select('id')->from('warehouses')
+				->queryColumn();
+			foreach ($idwarehouses as $idwh) {
+				$data=Yii::app()->db->createCommand()
+					->select('iditem, avail, status')
+					->from('wh'.$idwh.' a')
+					->where('a.serialnum = :p_serialnum',
+							array(':p_serialnum'=>$serialnum))
 				->queryRow();
-			echo json_encode($data);
+				if ($data == false) 
+					$result = 1;
+				else if ($data['avail'] == '0'){
+					if ($data['status'] == '1')
+						$result = 2;
+					else if ($data['status'] == '0')
+						$result = 3;
+				} else if ($data['avail'] == '1'){
+					if ($data['status'] == '1')
+						$result = 4;
+					else if ($data['status'] == '0')
+						$result = 5;
+				}
+				if ($result > 1)
+					break;
+			}	
+			echo json_encode($result);
 		} else {
 			throw new CHttpException(404,'You have no authorization for this operation.');
 		};
 	
 	}
 	
-	public function actionCheckSerial2($serialnum, $iditem, $idwh)
+	public function actionCheckSerial2($serialnum, $iditem)
 	{
 		//$idwh=rawurldecode($idwh);
 		$serialnum=rawurldecode($serialnum);

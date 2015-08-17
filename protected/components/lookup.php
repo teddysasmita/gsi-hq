@@ -314,13 +314,13 @@ class lookup extends CComponent {
    public static function StockStatusName($type)
    {
    	switch ($type) {
-   		case 3:
+   		case '3':
    			return 'Retur';
-   		case 2:
+   		case '2':
    			return 'Servis';
-   		case 1:
+   		case '1':
    			return 'Bagus';
-   		case 0:
+   		case '0':
    			return 'Rusak';
    	}
    }
