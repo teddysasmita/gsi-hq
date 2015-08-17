@@ -53,19 +53,19 @@ $supplierScript=<<<EOS
    				$.getJSON('index.php?r=LookUp/checkSerial2', {'serialnum': escape(myserialnum), 
    						'iditem': escape(iditem), 'idwh' : $('#idwh').val()},
    				function(data) {
-   					if (data == false) {
+   					if ((data == 1) || (data == 2)) {
    						$('#statusinfo').addClass('money');
    						$('#statusinfo').removeClass('errorMessage');
    						$('#statusinfo').html('Item bisa diterima');
    						$('#Detailstockentries_status').val('1');
-   					} else if (data.avail == '0') {
+   					} else if (data == 3) {
    						$('#statusinfo').addClass('errorMEssage');
    						$('#statusinfo').removeClass('money');
-   						$('#statusinfo').html('Nomor seri telah terdaftar');
-   					} else if (data.avail == '1') {
+   						$('#statusinfo').html('Barang dgn nomor seri tsb masih di gudang');
+   					} else if ((data == 4) || (data == 5)) {
    						$('#statusinfo').addClass('errorMessage');
    						$('#statusinfo').removeClass('money');
-   						$('#statusinfo').html('Nomor seri telah terdaftar');
+   						$('#statusinfo').html('Barang berbeda telah terdaftar dgn nomor seri tsb');
    					} 
 				});
 			}
