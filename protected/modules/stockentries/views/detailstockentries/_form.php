@@ -32,26 +32,32 @@ $supplierScript=<<<EOS
 					{'serialnum': escape(myserialnum), 
    					'idwh' : $('#idwhsource').val()},
    					function(data) {
-   						if (data !== false) {
-   							var message;
-   							$('#Detailstockentries_status').val(data.status);	
-   							if (data.status == '1')
-								message = 'Bagus'
-   							else if (data.status == '0')
-								message = 'Rusak';
+   						var message;
+   						if (data == 2) {
+   							$('#Detailstockentries_status').val("1");	
+ 							$('#statusinfo').addClass('money');
+   							$('#statusinfo').removeClass('errorMessage');
+   							$('#statusinfo').html('Bagus');
+						} else if (data == 3) {
+   							$('#Detailstockentries_status').val("0");	
    							$('#statusinfo').addClass('money');
    							$('#statusinfo').removeClass('errorMessage');
-   							$('#statusinfo').html(message);
-   						} else {
-   							$('#Detailstockentries_status').val('');
-   							$('#statusinfo').addClass('errorMessage');
+   							$('#statusinfo').html('Rusak');
+   						} else if ((data == 4) || (data == 5)) {
+   							$('#Detailstockentries_status').val("0");	
    							$('#statusinfo').removeClass('money');
-   							$('#statusinfo').html('Barang tidak ditemukan');
-						}
+   							$('#statusinfo').addClass('errorMessage');
+   							$('#statusinfo').html('Barang belum dikeluarkan dari Gudang Asal');
+   						} else if (data == 1) {
+   							$('#Detailstockentries_status').val("");	
+   							$('#statusinfo').removeClass('money');
+   							$('#statusinfo').addClass('errorMessage');
+   							$('#statusinfo').html('Barang tidak ada di Gudang Asal');
+   						}
 					});
 			} else {
    				$.getJSON('index.php?r=LookUp/checkSerial2', {'serialnum': escape(myserialnum), 
-   						'iditem': escape(iditem), 'idwh' : $('#idwh').val()},
+   						'iditem': escape(iditem)},
    				function(data) {
    					if ((data == 1) || (data == 2)) {
    						$('#statusinfo').addClass('money');
