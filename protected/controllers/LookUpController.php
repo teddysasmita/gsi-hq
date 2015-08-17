@@ -683,7 +683,6 @@ EOS;
 	
 	public function actionCheckSerial($serialnum)
 	{
-		$idwh=rawurldecode($idwh);
 		$serialnum=rawurldecode($serialnum);
 		$result = 1;
 		
