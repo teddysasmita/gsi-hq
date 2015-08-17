@@ -688,7 +688,7 @@ EOS;
 		$result = 1;
 		
 		if (!Yii::app()->user->isGuest) {
-			if ($idwh !== '') {
+			if ($idwh == '') {
 				$idwarehouses = Yii::app()->db->createCommand()
 					->select('id')->from('warehouses')
 					->queryColumn();
