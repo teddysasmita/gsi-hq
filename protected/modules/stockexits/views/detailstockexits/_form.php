@@ -34,7 +34,7 @@ $supplierScript=<<<EOS
    					$('#status').addClass('error');
    					$('#status').html('Nomor seri belum terdaftar');
    					$('#Detailstockexits_status').val('');
-   				} if ((data.avail == 2) || (data.avail == 3)) {
+   				} if ((data == 2) || (data == 3)) {
    					$('#status').removeClass('money');
    					$('#status').addClass('error');
    					$('#status').html('Barang sudah keluar');
@@ -66,7 +66,7 @@ $supplierScript=<<<EOS
    					$('#status').addClass('error');
    					$('#status').html('Nomor seri belum terdaftar');
    					$('#Detailstockexits_status').val('');
-   				} if ((data.avail == 2) || (data.avail == 3)) {
+   				} if ((data == 2) || (data == 3)) {
    					$('#status').removeClass('money');
    					$('#status').addClass('error');
    					$('#status').html('Barang sudah keluar');
