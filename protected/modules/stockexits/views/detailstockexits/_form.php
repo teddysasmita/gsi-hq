@@ -76,18 +76,15 @@ $supplierScript=<<<EOS
    					$('#status').removeClass('error');
    					$('#status').addClass('money');
    					$('#status').html('Bagus');
-   				} else if (data == 5) {
+   					$('#detailstockexits-form').submit();
+				} else if (data == 5) {
    					$('#Detailstockexits_status').val("0");
    					$('#status').removeClass('error');
    					$('#status').addClass('money');
    					$('#status').html('Rusak');
+   					$('#detailstockexits-form').submit();
    				}				
    			});
-   			} else {
-   				$('#Detailstockexits_serialnum_em_').html('');
-				$('#Detailstockexits_serialnum_em_').prop('style', 'display:none');
-   				$('#detailstockexits-form').submit();
-   			}
    	});
    		
 EOS;
