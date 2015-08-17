@@ -85,8 +85,8 @@ $supplierScript=<<<EOS
    					$('#detailstockexits-form').submit();
    				}				
    			});
+   		}
    	});
-   		
 EOS;
    Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CClientscript::POS_READY);
    
