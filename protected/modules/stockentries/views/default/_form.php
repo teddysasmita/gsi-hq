@@ -151,14 +151,6 @@ EOS;
         ?>
         <?php echo $form->error($model,'donum');?> 
 	</div>
-	
-	<div class="row">
-		<?php echo $form->labelEx($model,'remark'); ?>
-        <?php 
-           echo $form->textArea($model, 'remark', array('COLS'=>40, 'ROWS'=>5)); 
-        ?>
-        <?php echo $form->error($model,'remark');?> 
-	</div>
       
     <div class="row">
 		<?php echo $form->labelEx($model,'transid'); ?>
@@ -166,6 +158,14 @@ EOS;
 			echo $form->textField($model,'transid', array('maxlength'=>30));
 		?>
 		<?php echo $form->error($model,'transid'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'remark'); ?>
+        <?php 
+           echo $form->textArea($model, 'remark', array('COLS'=>40, 'ROWS'=>5)); 
+        ?>
+        <?php echo $form->error($model,'remark');?> 
 	</div>
 	
     <div class="row">
