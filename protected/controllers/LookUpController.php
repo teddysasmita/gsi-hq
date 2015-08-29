@@ -651,8 +651,8 @@ EOS;
 	
 	public function actionCheckItemSerial($iditem, $serialnum, $idwh, $avail = '1')
 	{
-		//$iditem=rawurldecode($iditem);
-		//$serialnum=rawurldecode($serialnum);
+		$iditem=rawurldecode($iditem);
+		$serialnum=rawurldecode($serialnum);
 		
 		if (!Yii::app()->user->isGuest) {
 			/*$data=Yii::app()->db->createCommand()
@@ -665,6 +665,7 @@ EOS;
 			if ($data == FALSE) {
 			}
 			*/
+			
 				$data=Yii::app()->db->createCommand()
 					->select()
 					->from('wh'.$idwh.' a')
