@@ -202,6 +202,7 @@ EOS;
     ));
     $this->widget('zii.widgets.grid.CGridView', array(
             'dataProvider'=>$dataProvider,
+    		'enablePagination'=>'false',
             'columns'=>array(
                array(
                    'header'=>'Item Name',
