@@ -81,7 +81,6 @@ class DefaultController extends Controller
 						$model->faceid = str_replace(' ', '+', $model->faceid);
 						$model->faceid = base64_decode($model->faceid);
 						
-						$this->beforePost($model);
 						$respond=$this->checkWarehouse($model->idwarehouse);
 						if (!$respond)
 	                      	throw new CHttpException(5000,'Lokasi anda tidak terdaftar');
@@ -89,6 +88,7 @@ class DefaultController extends Controller
 	                    if (!$respond)
 	                      	throw new CHttpException(5001,'Nomor Seri yg anda daftarkan ada yg sdh terdaftar: '. $respond);
 	                      
+						$this->beforePost($model);
 						$respond=$model->insert();
 						if(!$respond) {
 							if (count($model->error) > 0 )
@@ -170,14 +170,15 @@ class DefaultController extends Controller
                       //The user pressed the button;
 					$model->attributes=$_POST['Stockentries'];
                        
-					$this->beforePost($model);
+					
 					$respond=$this->checkWarehouse($model->idwarehouse);
 					if (!$respond)
 						throw new CHttpException(5000,'Lokasi anda tidak terdaftar');
 					$respond = $this->checkSerialNum(Yii::app()->session['Detailstockentries'], $model->idwarehouse);
 					if (!$respond)
 						throw new CHttpException(5001,'Nomor Seri yg anda daftarkan ada yg sdh terdaftar: '. $respond);
-	                      
+					
+					$this->beforePost($model);
 					$respond=$model->save();
 					if(!$respond) {
 						if (count($model->error) > 0 )
@@ -1030,7 +1031,8 @@ EOS;
                $count=Yii::app()->db->createCommand()
                   ->select('count(*)')
                   ->from("wh$idwh")
-                  ->where("serialnum = :serialnum and avail = '1'", array(':serialnum'=>$detail['serialnum']))
+                  ->where("serialnum = :p_serialnum and avail = '1' and iditem <> :p_iditem", 
+                  		array(':p_serialnum'=>$detail['serialnum'], ':p_iditem'=>$detail['iditem']))
                   ->queryScalar();
                $respond = $count==0;
                if($respond === false) {
