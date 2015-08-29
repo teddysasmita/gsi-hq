@@ -76,9 +76,14 @@ $this->menu=array(
             ),
             array(
               'header'=>'Serial Number',
-              'name'=>'serialnum ',
+              'name'=>'serialnum',
               'value'=>"\$data['serialnum']"
             ),
+         	array(
+         		'header'=>'Kondisi',
+         		'name'=>'status',
+         		'value'=>"lookup::StockStatusName\$data['status'])"
+         	),	
             array(
                   'class'=>'CButtonColumn',
                   'buttons'=> array(
