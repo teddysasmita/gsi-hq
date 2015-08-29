@@ -71,10 +71,10 @@ $supplierScript=<<<EOS
 	   					$('#status').html('Barang rusak');
 	   					$('#Detailstockexits_status').val('0');
 	   				} else if (data.status == '1') {
-	   					$('#Detailstockexits_status').val("1");
 	   					$('#status').removeClass('error');
 	   					$('#status').addClass('money');
 	   					$('#status').html('Bagus');
+   						$('#Detailstockexits_status').val('1');
    						$('#detailstockexits-form').submit();
 	   				}			
    			});
