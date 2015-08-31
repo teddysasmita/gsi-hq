@@ -158,7 +158,7 @@ EOS;
 			if (Yii::app()->session['master'] == 'create') {
 				echo $form->textField($model,'transid', array('maxlength'=>30));
 			} else {
-				echo $form->hiddenField('transid');
+				echo $form->hiddenField($model, 'transid');
 				echo CHtml::tag('span', array('id'=>'transid', 'class'=>'money'),$model->transid );
 			}
 		?>
