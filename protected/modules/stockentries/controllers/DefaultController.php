@@ -188,12 +188,12 @@ class DefaultController extends Controller
 						throw new CHttpException(5002,'There is an error in master posting: '.$error);
 	                }
 	
-					if(isset(Yii::app()->session['Detailstockentries']) ) {
+					/*if(isset(Yii::app()->session['Detailstockentries']) ) {
 						$details=Yii::app()->session['Detailstockentries'];
 						$respond=$this->saveDetails($details, $model->idwarehouse);
 						if (!$respond)
 							throw new CHttpException(5002,'There is an error in detail posting');
-					} 
+					}*/ 
 	
 					$this->afterPost($model);
 					Yii::app()->session->remove('Stockentries');

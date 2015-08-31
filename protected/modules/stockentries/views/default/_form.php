@@ -154,8 +154,13 @@ EOS;
       
     <div class="row">
 		<?php echo $form->labelEx($model,'transid'); ?>
-		<?php 
-			echo $form->textField($model,'transid', array('maxlength'=>30));
+		<?php
+			if (Yii::app()->session['master'] == 'create') {
+				echo $form->textField($model,'transid', array('maxlength'=>30));
+			} else {
+				echo $form->hiddenField('transid');
+				echo CHtml::tag('span', array('id'=>'transid', 'class'=>'money'),$model->transid );
+			}
 		?>
 		<?php echo $form->error($model,'transid'); ?>
 	</div>
@@ -187,54 +192,56 @@ EOS;
         <?php echo $form->error($model,'faceid');?> 
 	</div>
 	
-<?php 
-    if (isset(Yii::app()->session['Detailstockentries'])) {
-       $rawdata=Yii::app()->session['Detailstockentries'];
-       $count=count($rawdata);
-    } else {
-       $count=Yii::app()->db->createCommand("select count(*) from detailstockentries where id='$model->id'")->queryScalar();
-       $sql="select * from detailstockentries where id='$model->id'";
-       $rawdata=Yii::app()->db->createCommand($sql)->queryAll ();
-    }
-    $dataProvider=new CArrayDataProvider($rawdata, array(
-          'totalItemCount'=>$count,
-		  'keyField'=>'iddetail',
-    ));
-    $this->widget('zii.widgets.grid.CGridView', array(
-            'dataProvider'=>$dataProvider,
-    		'enablePagination'=>'false',
-            'columns'=>array(
-               array(
-                   'header'=>'Item Name',
-                   'name'=>'iditem',
-                   'value'=>"lookup::ItemNameFromItemID(\$data['iditem'])"
-               ),
-              array(
-                  'header'=>'Nomor Seri',
-                  'name'=>'serialnum',
-              ),
-				array(
-					'header'=>'Tersedia',
-					'name'=>'status',
-					'value'=>"lookup::StockStatusName(\$data['status'])",
-				),
-              array(
-                  'class'=>'CButtonColumn',
-                  'buttons'=> array(
-                      'delete'=>array(
-                       'visible'=>'false'
-                      ),
-                     'view'=>array(
-                        'visible'=>'false'
-                     )
-                  ),
-				'updateButtonOptions'=>array("class"=>'updateButton'),
-				'updateButtonUrl'=>"Action::decodeUpdateDetailStockEntryUrl(\$data, '$model->idwarehouse', 
-					'$model->transname', '$model->transid')",
-              )
-          ),
-    ));
-    
+<?php
+	if (Yii::app()->session['master'] == 'create') {
+		
+	    if (isset(Yii::app()->session['Detailstockentries'])) {
+	       $rawdata=Yii::app()->session['Detailstockentries'];
+	       $count=count($rawdata);
+	    } else {
+	       $count=Yii::app()->db->createCommand("select count(*) from detailstockentries where id='$model->id'")->queryScalar();
+	       $sql="select * from detailstockentries where id='$model->id'";
+	       $rawdata=Yii::app()->db->createCommand($sql)->queryAll ();
+	    }
+	    $dataProvider=new CArrayDataProvider($rawdata, array(
+	          'totalItemCount'=>$count,
+			  'keyField'=>'iddetail',
+	    ));
+	    $this->widget('zii.widgets.grid.CGridView', array(
+	            'dataProvider'=>$dataProvider,
+	    		'enablePagination'=>'false',
+	            'columns'=>array(
+	               array(
+	                   'header'=>'Item Name',
+	                   'name'=>'iditem',
+	                   'value'=>"lookup::ItemNameFromItemID(\$data['iditem'])"
+	               ),
+	              array(
+	                  'header'=>'Nomor Seri',
+	                  'name'=>'serialnum',
+	              ),
+					array(
+						'header'=>'Tersedia',
+						'name'=>'status',
+						'value'=>"lookup::StockStatusName(\$data['status'])",
+					),
+	              array(
+	                  'class'=>'CButtonColumn',
+	                  'buttons'=> array(
+	                      'delete'=>array(
+	                       'visible'=>'false'
+	                      ),
+	                     'view'=>array(
+	                        'visible'=>'false'
+	                     )
+	                  ),
+					'updateButtonOptions'=>array("class"=>'updateButton'),
+					'updateButtonUrl'=>"Action::decodeUpdateDetailStockEntryUrl(\$data, '$model->idwarehouse', 
+						'$model->transname', '$model->transid')",
+	              )
+	          ),
+	    ));
+	};
 ?>
 
    <div class="row buttons">
