@@ -545,26 +545,28 @@ class DefaultController extends Controller
          $idmaker=new idmaker();
          if ($this->state == 'create') {
          	$idmaker->saveRegNum($this->formid, $model->regnum);
+         	
+         	$details = $this->loadDetails($model->id);
+         	foreach($details as $detail) {
+         		if ($detail['serialnum'] !==  'Belum Diterima') {
+         			$exist = Action::checkItemToWarehouse($model->idwarehouse, $detail['iditem'],
+         					$detail['serialnum'], '%') > 0;
+         			if (!$exist)
+         				Action::addItemToWarehouse($model->idwarehouse, $detail['iddetail'],
+         						$detail['iditem'], $detail['serialnum'], $detail['status']);
+         			else {
+         				Action::setItemAvailinWarehouse($model->idwarehouse, $detail['serialnum'], '1');
+         				Action::setItemStatusinWarehouse($model->idwarehouse, $detail['serialnum'], $detail['status']);
+         			}
+         			if ($model->transname == 'AC33')
+         				Action::receiveRepairOut($model->transid, $detail['serialnum']);
+         		}
+         	};
+         	
+         	$this->setStatusPO($model->transid,
+         			Yii::app()->session['Detailstockentries']);
          } 
-         $details = $this->loadDetails($model->id);
-         foreach($details as $detail) {
-         	if ($detail['serialnum'] !==  'Belum Diterima') {
-         		$exist = Action::checkItemToWarehouse($model->idwarehouse, $detail['iditem'], 
-	         		$detail['serialnum'], '%') > 0;
-	         	if (!$exist)	
-	         		Action::addItemToWarehouse($model->idwarehouse, $detail['iddetail'], 
-	         			$detail['iditem'], $detail['serialnum'], $detail['status']);
-	         	else {
-	         		Action::setItemAvailinWarehouse($model->idwarehouse, $detail['serialnum'], '1');
-	         		Action::setItemStatusinWarehouse($model->idwarehouse, $detail['serialnum'], $detail['status']);
-	         	}
-	         	if ($model->transname == 'AC33')
-	         		Action::receiveRepairOut($model->transid, $detail['serialnum']);
-	         }
-         };
-          
-         $this->setStatusPO($model->transid,
-            Yii::app()->session['Detailstockentries']);
+         
      }
 
      protected function beforePost(& $model)
