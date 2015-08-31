@@ -576,7 +576,7 @@ class DefaultController extends Controller
          if ($this->state == 'create')
          	$model->regnum=$idmaker->getRegNum($this->formid);
          else if ($this->state == 'update') {
-         	$details = $this->loadDetails($model->id);
+         	/*$details = $this->loadDetails($model->id);
          	foreach($details as $detail) {
          		if ($detail['serialnum'] !==  'Belum Diterima') {
          			if ($model->transname == 'AC12')
@@ -584,7 +584,7 @@ class DefaultController extends Controller
          			else
          				Action::setItemAvailinWarehouse($model->idwarehouse, $detail['serialnum'], '0');
          		}
-         	};
+         	};*/
          }
      }
 
