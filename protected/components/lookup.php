@@ -406,6 +406,9 @@ class lookup extends CComponent {
    			case 'AC28':
    				return Yii::app()->createUrl("displayentries/default/viewRegnum",
    					array('regnum'=>$data['transid']));
+   			case 'AC2':
+   				return Yii::app()->createUrl("purchasesorder/default/viewRegnum",
+   					array('regnum'=>$data['transid']));
    		};
    }
    
