@@ -31,7 +31,7 @@
 		<?php 
 			//echo $form->textField($model,'idsupplier',array('size'=>21,'maxlength'=>21)); 
 			$suppliersdata = Yii::app()->db
-				->createCommand("select id, concat(firstname, ' ', lastname) as sname from suppliers")
+				->createCommand("select id, concat(firstname, ' ', lastname) as sname from suppliers order by firstname, lastname")
 				->queryAll();
 			
 			$suppliersdata = CHtml::listData($suppliersdata, 'id', 'sname');
