@@ -31,7 +31,7 @@
 		<?php 
 			//echo $form->textField($model,'idsupplier',array('size'=>21,'maxlength'=>21)); 
 			$suppliersdata = Yii::app()->db->createCommand()
-				->select('id', 'name')->from('suppliers')->order('name');
+				->select('id', 'name')->from('suppliers')->order('name')->queryAll();
 			$suppliersdata = CHtml::listData($suppliersdata, 'id', 'name');
 			echo $form->dropDownList($model, 'idsupplier', $suppliersdata);	
 		?>
