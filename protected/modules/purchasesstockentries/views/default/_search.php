@@ -34,7 +34,7 @@
 				->createCommand("select id, concat(firstname, ' ', lastname) as sname from suppliers")
 				->queryAll();
 			
-			$suppliersdata = CHtml::listData($suppliersdata, 'id', 'name');
+			$suppliersdata = CHtml::listData($suppliersdata, 'id', 'sname');
 			echo $form->dropDownList($model, 'idsupplier', $suppliersdata);	
 		?>
 	</div>
