@@ -773,8 +773,7 @@ EOS;
 				}
 				if ($result > 1)
 					break;
-			} else
-				$result = 1;
+			} 
 			echo json_encode($result);
 		} else {
 			throw new CHttpException(404,'You have no authorization for this operation.');
