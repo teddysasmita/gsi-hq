@@ -30,8 +30,10 @@
 		<?php echo $form->label($model,'idsupplier'); ?>
 		<?php 
 			//echo $form->textField($model,'idsupplier',array('size'=>21,'maxlength'=>21)); 
-			$suppliersdata = Yii::app()->db->createCommand()
-				->select('id', "concat(firstname\, \' - \'\, lastname) as sname")->from('suppliers')->order('name')->queryAll();
+			$suppliersdata = Yii::app()->db
+				->createCommand("select id, concat(firstname, ' ', lastname) as sname from suppliers")
+				->queryAll();
+			
 			$suppliersdata = CHtml::listData($suppliersdata, 'id', 'name');
 			echo $form->dropDownList($model, 'idsupplier', $suppliersdata);	
 		?>
