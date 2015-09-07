@@ -748,7 +748,6 @@ EOS;
 		$result = 1;
 		
 		if (!Yii::app()->user->isGuest) {
-			if ($serialnum !== '1532100468') {
 			$idwarehouses = Yii::app()->db->createCommand()
 				->select('id')->from('warehouses')
 				->queryColumn();
@@ -774,7 +773,6 @@ EOS;
 				}
 				if ($result > 1)
 					break;
-			}
 			} else
 				$result = 1;
 			echo json_encode($result);
