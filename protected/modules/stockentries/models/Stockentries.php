@@ -39,7 +39,7 @@ class Stockentries extends CActiveRecord
 			array('id, idwarehouse, userlog', 'length', 'max'=>21),
 			array('transname', 'length', 'max'=>64),
 			array('transinfo', 'length', 'max'=>100),
-			array('regnum', 'length', 'max'=>12),
+			array('regnum', 'length', 'max'=>50),
 			array('transid', 'length', 'max'=>30),
 			array('donum', 'length', 'max'=>50),
 			array('idatetime, datetimelog', 'length', 'max'=>19),
