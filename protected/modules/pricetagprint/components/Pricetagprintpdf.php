@@ -96,7 +96,7 @@ class Pricetagprintpdf extends TCPDF {
  					$this->SetTextColor(hexdec($tempc[0]),hexdec($tempc[1]), hexdec($tempc[2]));
  					$this->MultiCell(
  							$this->masterdata['codew'], $this->masterdata['codeh'],
- 							"Kode: ${d['code']}", 'LRTB', 'L'
+ 							"Kode: ".lookup::ItemCodeFromItemID($d['iditem']), 'LRTB', 'L'
  					);
  				};
  				// - End ------------------
