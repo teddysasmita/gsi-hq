@@ -694,7 +694,7 @@ EOS;
 					$data=Yii::app()->db->createCommand()
 						->select('iditem, avail, status')
 						->from('wh'.$idwh.' a')
-						->where('a.serialnum = trim(:p_serialnum)',
+						->where('trim(a.serialnum) = :p_serialnum',
 								array(':p_serialnum'=>$serialnum))
 					->queryRow();
 					if ($data == false) 
@@ -717,7 +717,7 @@ EOS;
 				$data=Yii::app()->db->createCommand()
 					->select('iditem, avail, status')
 					->from('wh'.$idwh.' a')
-					->where('a.serialnum = trim(:p_serialnum)',
+					->where('trim(a.serialnum) = :p_serialnum',
 							array(':p_serialnum'=>$serialnum))
 					->queryRow();
 				if ($data == false)
@@ -755,7 +755,7 @@ EOS;
 				$data=Yii::app()->db->createCommand()
 					->select('iditem, avail, status')
 					->from('wh'.$idwh.' a')
-					->where('a.serialnum = trim(:p_serialnum)',
+					->where('trim(a.serialnum) = :p_serialnum',
 							array(':p_serialnum'=>$serialnum))
 					->queryRow();
 				if ($data == false)
@@ -828,7 +828,7 @@ EOS;
 			$data=Yii::app()->db->createCommand()
 				->select('count(*)')
 				->from('detailstockentries')
-				->where('serialnum = trim(:p_serialnum) and iditem <> :p_iditem',
+				->where('trim(serialnum) = :p_serialnum and iditem <> :p_iditem',
 					array(':p_serialnum'=>$serialnum, ':p_iditem'=>$iditem))
 					/*->where('a.iditem = :p_iditem and a.serialnum = :p_serialnum',
 					 array(':p_iditem'=>$iditem, ':p_serialnum'=>$serialnum))*/
