@@ -669,7 +669,7 @@ EOS;
 				$data=Yii::app()->db->createCommand()
 					->select()
 					->from('wh'.$idwh.' a')
-					->where('a.iditem = :p_iditem and a.serialnum = :p_serialnum and a.avail = :p_avail',
+					->where('a.iditem = :p_iditem and trim(a.serialnum) = :p_serialnum and a.avail = :p_avail',
 						array(':p_iditem'=>$iditem, ':p_serialnum'=>$serialnum, ':p_avail'=>$avail))
 					->queryRow();
 			echo json_encode($data);
