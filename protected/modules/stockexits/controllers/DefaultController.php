@@ -896,7 +896,7 @@ EOS;
                   ->queryScalar();*/
 				$count=Yii::app()->db->createCommand()
 					->select('count(*)')->from('wh'.$model->idwarehouse)
-					->where("serialnum = :p_serialnum and avail = :p_avail",
+					->where("trim(serialnum) = :p_serialnum and avail = :p_avail",
       					array(':p_serialnum'=>$detail['serialnum'], ':p_avail'=>'1'))
       				->queryScalar();
                $respond=$count > 0;
