@@ -20,7 +20,7 @@ $supplierScript=<<<EOS
 		
       $('#dialog-item-name').change(
          function(){
-            $.getJSON('index.php?r=LookUp/getItem',{ name: $('#dialog-item-name').val() },
+            $.getJSON('index.php?r=LookUp/getItem4',{ name: $('#dialog-item-name').val() },
                function(data) {
                   $('#dialog-item-select').html('');
                   var ct=0;
@@ -71,7 +71,7 @@ EOS;
                       'buttons'=>array(
                           array('text'=>'Ok', 'click'=>'js:function(){
                              $(\'#Detailpricetagprints_itemname\').val($(\'#dialog-item-name\').val());
-                             $.get(\'index.php?r=LookUp/getItemID\',{ name: encodeURI($(\'#dialog-item-name\').val()) },
+                             $.get(\'index.php?r=LookUp/getItemID2\',{ name: encodeURI($(\'#dialog-item-name\').val()) },
                                  function(data) {
                                     $(\'#Detailpricetagprints_iditem\').val(data);
                                  })

@@ -444,6 +444,11 @@ Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CCli
               		'value' => "lookup::ItemNameFromItemID(\$data['iditem'])",
               ),
             	array(
+            		'header'=>'Kode',
+            		'name'=>'iditem',
+            		'value' => "lookup::ItemCodeFromItemID(\$data['iditem'])",
+            	),
+            	array(
             		'name'=>'qty',
             		'type'=>'number',
     			),
