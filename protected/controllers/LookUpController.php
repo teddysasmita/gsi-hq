@@ -290,7 +290,7 @@ class LookUpController extends Controller {
    		$namecode=rawurldecode($namecode);
    		$temp=explode('->', $namecode);
    		$data=Yii::app()->db->createCommand()->select('id')->from('items')
-   		->where("name = :p_name", array(':p_name'=>$temp[0]))
+   		->where("trim(name) = :p_name", array(':p_name'=>trim($temp[0])))
    		->order('id')
    		->queryScalar();
    		echo $data;
