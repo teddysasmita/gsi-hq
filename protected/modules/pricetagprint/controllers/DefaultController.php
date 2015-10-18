@@ -505,8 +505,8 @@ class DefaultController extends Controller
          $model->userlog=Yii::app()->user->id;
          $model->datetimelog=$idmaker->getDateTime();
          $model->papersize = 'A4';
-         $model->paperwidth = 33;
-         $model->paperheight = 15;
+         $model->paperwidth = 21;
+         $model->paperheight = 29.7;
      }
 
      protected function afterPost(& $model)
@@ -594,7 +594,8 @@ class DefaultController extends Controller
 			
 			Yii::import('application.vendors.tcpdf.*');
 			require_once ('tcpdf.php');
-			$mypdf=new Pricetagprintpdf(PDF_PAGE_ORIENTATION, PDF_UNIT, array($master->paperwidth*10, $master->paperheight*10), true, 'UTF-8', false);
+			$mypdf=new Pricetagprintpdf(PDF_PAGE_ORIENTATION, PDF_UNIT, 
+					array($master->paperwidth*10, $master->paperheight*10), true, 'UTF-8', false);
 			$mypdf->init();
 			$mypdf->LoadData($master->attributes,  
 					$detail);
