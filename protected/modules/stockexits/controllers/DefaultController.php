@@ -789,7 +789,7 @@ EOS;
 			->where('a.regnum = :p_regnum and b.idwarehouse = :p_idwarehouse',
 					array(':p_regnum'=>$nolpb, ':p_idwarehouse'=> $idwh) )
 					->queryAll();
-		} else
+		} /*else
 		if ($prefix == 'SM' ) {
 			$dataLPB=Yii::app()->db->createCommand()
 			->select('a.id, b.*, c.id as iditem')
@@ -799,7 +799,7 @@ EOS;
 			->where('a.regnum = :p_regnum',
 					array(':p_regnum'=>$nolpb) )
 					->queryAll();
-		} else
+		} */ else
 		if ($prefix == 'KS' ) {
 			$dataLPB=Yii::app()->db->createCommand()
 			->select('a.id, b.iditem, (1) as qty')
