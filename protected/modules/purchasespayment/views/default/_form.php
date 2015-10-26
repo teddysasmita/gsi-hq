@@ -18,6 +18,8 @@
 	}
 	$supplierids=CJSON::encode($supplierids);
 	$suppliernames=CJSON::encode($suppliernames);
+	$returlist = CJSON::encode(Yii::app()->session['Detailpurchasespayments2']);
+	
 	$supplierScript=<<<EOS
       var supplierids=$supplierids;
       var suppliernames=$suppliernames;
@@ -35,6 +37,49 @@
             event.preventDefault();
          }
       );   
+			
+		$(".updateDetail").click(
+			function(event) {
+			$("#command").val("adddetail");
+            mainform=$('#purchasespayments-form');
+            mainform.submit();
+		});
+	
+		$(".updateDetail2").click(
+			function(event) {
+			$("#command").val("adddetail2");
+            mainform=$('#purchasespayments-form');
+            mainform.submit();
+		});
+	
+	$("#Purchasespayments_discount").change(function() {
+		var disc = $("#Purchasespayments_discount").val();
+		var labelcost = $("#Purchasespayments_labelcost").val();
+		var total = $("#total").val();
+		if ( disc < 0 ) {
+			
+			disc = - disc * total / 100;
+			$("#Purchasespayments_discount").val(disc);
+			$("#Purchasespayments_total").val(total - disc - labelcost);
+		}
+		$("#Purchasespayments_total").val(total - disc - labelcost);
+		$("#labeltotal").html(total - disc - labelcost);
+		$("#labeltotal").addClass("money");
+	});
+	
+	$("#Purchasespayments_labelcost").change(function() {
+		var disc = $("#Purchasespayments_discount").val();
+		var labelcost = $("#Purchasespayments_labelcost").val();
+		var total = $("#total").val();
+		if ( disc < 0 ) {
+			disc = - disc * total / 100;
+			$("#Purchasespayments_discount").val(disc);
+			$("#Purchasespayments_total").val(total - disc - labelcost);
+		}
+		$("#Purchasespayments_total").val(total - disc - labelcost);
+		$("#labeltotal").html(total - disc - labelcost);
+		$("#labeltotal").addClass("money");
+	});
 EOS;
    Yii::app()->clientScript->registerScript("supplierScript", $supplierScript, CClientscript::POS_READY);
 
@@ -58,6 +103,7 @@ EOS;
         
       <?php 
         echo CHtml::hiddenField('command', '', array('id'=>'command'));
+        echo CHtml::hiddenField('commandinfo', '', array('id'=>'commandinfo'));
         echo $form->hiddenField($model, 'id');
         echo $form->hiddenField($model, 'idsupplier');
         echo $form->hiddenField($model, 'userlog');
@@ -102,7 +148,7 @@ EOS;
              'source'=>$suppliername,
            'value'=>lookup::SupplierNameFromSupplierID($model->idsupplier)
          ));
-         echo CHtml::submitButton('Cari PO', array( 'id'=>'searchUnsettledPO'));   
+         echo CHtml::button('Cari Nota & Retur', array( 'id'=>'searchUnsettledPO'));   
       ?>
 		<?php echo $form->error($model,'idsupplier'); ?>
 	</div>
@@ -137,21 +183,21 @@ EOS;
     $this->widget('zii.widgets.grid.CGridView', array(
             'dataProvider'=>$dataProvider,
             'columns'=>array(
-               	array(
-					'header'=>'Nomor PO',
-					'name'=>'idpurchaseorder',
-					'value'=>"lookup::PurchasesOrderNumFromID(\$data['idpurchaseorder'])"
-				),
-				array(
-					'header'=>'Total',
-					'type'=>'number',
-					'name'=>'total',
+            	array(
+					'header'=>'Nomor Nota',
+					'name'=>'idpurchase',
+					'value'=>"lookup::PurchasesStockEntryNumFromID(\$data['idpurchase'])"
 				),
 				array(
 					'header'=>'Diskon',
 					'type'=>'number',
 					'name'=>'discount',
 				),
+				array(
+					'header'=>'Total',
+            		'type'=>'number',
+            		'name'=>'total',
+            	),
 				array(
 					'header'=>'Terbayar',
 					'type'=>'number',
@@ -173,32 +219,121 @@ EOS;
                      )
                   ),
                   'updateButtonUrl'=>"Action::decodeUpdateDetailPurchasesPaymentUrl(\$data)",
+               	'updateButtonOptions'=>array('class'=>"updateDetail"),
                )
           ),
     ));
     
 ?>
-	
+
+<?php 
+    if (isset(Yii::app()->session['Detailpurchasespayments2'])) {
+       $rawdata2=Yii::app()->session['Detailpurchasespayments2'];
+       $count=count($rawdata2);
+    } else {
+       $count=Yii::app()->db->createCommand("select count(*) from detailpurchasespayments2 where id='$model->id'")
+            ->queryScalar();
+       $sql="select * from detailpurchasespayments2 where id='$model->id'";
+       $rawdata2=Yii::app()->db->createCommand($sql)->queryAll ();
+    }
+    $dataProvider=new CArrayDataProvider($rawdata2, array(
+          'totalItemCount'=>$count,
+    	'pagination'=>false,
+    ));
+    $this->widget('zii.widgets.grid.CGridView', array(
+            'dataProvider'=>$dataProvider,
+            'columns'=>array(
+               	array(
+					'header'=>'No. Retur',
+					'name'=>'idpurchaseretur',
+					'value'=>"lookup::PurchasesReturInfoFromID(\$data['idpurchaseretur'])"
+				),
+				array(
+					'header'=>'Total',
+					'type'=>'number',
+					'name'=>'total',
+				),
+               array(
+                  	'class'=>'CCheckBoxColumn',
+					'header'=>'Pilih',
+					'selectableRows'=>2,
+					'headerTemplate'=>'<span> Pilih {item}</span>',
+					'value'=>"\$data['iddetail']",
+					'checked'=>"lookup::RepairCheck(\$data)",
+               		'htmlOptions'=>array('class'=>'updateDetail2'),
+				),
+          ),
+    ));
+    
+?>
+	<div class="row">
+      <?php echo CHtml::label('SubTotal', 'false'); ?>
+      <?php 
+         echo CHtml::label(number_format($model->total + $model->discount),'false', 
+            array('class'=>'money'));
+         echo CHtml::hiddenField('total', $model->total + $model->discount,
+         	array('id'=>'total')); 
+      ?>
+   </div>
+   
+   <div class="row">
+      <?php echo $form->labelEx($model,'discount'); ?>
+      <?php echo $form->textField($model, 'discount'); ?>
+      <?php echo $form->error($model,'discount'); ?>
+   </div>
+   	   
 	<div class="row">
       <?php echo $form->labelEx($model,'total'); ?>
       <?php 
          echo CHtml::label(number_format($model->total),'false', 
-            array('class'=>'money')); 
+            array('class'=>'money', 'id'=>'labeltotal')); 
          echo $form->hiddenfield($model, 'total');
       ?>
-      <?php echo $form->error($model,'total'); ?>
-   </div>
-
-   <div class="row">
-      <?php echo $form->labelEx($model,'discount'); ?>
-      <?php echo CHtml::label(number_format($model->discount),'false', 
-         array('class'=>'money')); 
-         echo $form->hiddenfield($model, 'discount');
-      ?>
-      <?php echo $form->error($model,'discount'); ?>
    </div>
 	
-
+   
+<?php 
+    if (isset(Yii::app()->session['Detailpurchasespayments3'])) {
+       $rawdata3=Yii::app()->session['Detailpurchasespayments3'];
+       $count=count($rawdata3);
+    } else {
+       $count=Yii::app()->db->createCommand("select count(*) from payments where idtransaction='$model->id'")
+            ->queryScalar();
+       $sql="select * from payments where idtransaction='$model->id'";
+       $rawdata3 = Yii::app()->db->createCommand($sql)->queryAll ();
+    }
+    $dataProvider=new CArrayDataProvider($rawdata3, array(
+          'totalItemCount'=>$count,
+    	'pagination'=>false,
+    ));
+    $this->widget('zii.widgets.grid.CGridView', array(
+            'dataProvider'=>$dataProvider,
+            'columns'=>array(
+               	array(
+					'header'=>'Metode',
+					'name'=>'method',
+               		'value'=>"lookup::getMethod(\$data['method'])"
+				),
+				array(
+					'header'=>'Jumlah',
+					'type'=>'number',
+					'name'=>'amount',
+				),
+            	array(
+            		'class'=>'CButtonColumn',
+            		'buttons'=> array(
+            			'view'=>array(
+            				'visible'=>'false'
+            			)
+            		),
+            		'updateButtonUrl'=>"Action::decodeUpdateDetailPurchasesPayment3Url(\$data)",
+            		'deleteButtonUrl'=>"Action::decodeDeleteDetailPurchasesPayment3Url(\$data)",
+            	)
+          ),
+    ));
+    
+?>
+   
    <div class="row buttons">
       <?php echo CHtml::submitButton(ucfirst($command)); ?>
    </div>

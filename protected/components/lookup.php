@@ -559,6 +559,12 @@ class lookup extends CComponent {
   				return '';
   		}
   	}
+  	
+  	public static function PurchasesStockEntryNumFromID($id)
+  	{
+  		$sql="select regnum from purchasesstockentries where id='$id'";
+  		return Yii::app()->db->createCommand($sql)->queryScalar();
+  	}
 }
 
 

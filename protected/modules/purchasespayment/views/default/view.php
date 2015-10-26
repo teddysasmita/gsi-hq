@@ -15,7 +15,7 @@ $this->menu=array(
 	array('label'=>'Pencarian Data', 'url'=>array('admin')),
       array('label'=>'Sejarah', 'url'=>array('history', 'id'=>$model->id)),
       array('label'=>'Data Detil yang dihapus', 
-         'url'=>array('/purchasesorder/detailpurchasespayments/deleted', 'id'=>$model->id)),
+         'url'=>array('/purchasespayment/detailpurchasespayments/deleted', 'id'=>$model->id)),
 );
 ?>
 
@@ -40,10 +40,6 @@ $this->menu=array(
 				'value'=>number_format($model->discount)
 		),
 		array(
-			'label'=>'Status',
-			'value'=>lookup::paymentStatus($model->status)
-		),
-		array(
             'label'=>'Userlog',
             'value'=>lookup::UserNameFromUserID($model->userlog),
         ),
@@ -63,9 +59,9 @@ $this->menu=array(
    'dataProvider'=>$dataProvider,
    'columns'=>array(
       array(
-             'header'=>'Nomor PO',
-             'name'=>'idpurchaseorder',
-             'value'=>"lookup::PurchasesOrderNumFromID(\$data['idpurchaseorder'])"
+             'header'=>'Nomor Nota',
+             'name'=>'idpurchasstockeentry',
+             'value'=>"lookup::PurchasesStockEntryNumFromID(\$data['idpurchasestockentry'])"
          ),
       array(
          'header'=>'Total',
@@ -101,3 +97,76 @@ $this->menu=array(
       )*/      
    )));
  ?>
+ 
+ <?php 
+   $count=Yii::app()->db->createCommand("select count(*) from detailpurchasespayments2 where id='$model->id'")
+      ->queryScalar();
+   $sql="select * from detailpurchasespayments2 where id='$model->id'";
+
+   $dataProvider=new CSqlDataProvider($sql,array(
+      'totalItemCount'=>$count,
+   ));
+   $this->widget('zii.widgets.grid.CGridView', array(
+   'dataProvider'=>$dataProvider,
+   'columns'=>array(
+      array(
+             'header'=>'Nomor Retur',
+             'name'=>'idpurchaseretur',
+             'value'=>"lookup::PurchasesReturInfoFromID(\$data['idpurchaseretur'])"
+         ),
+      array(
+         'header'=>'Total',
+         'type'=>'number',
+         'name'=>'total',
+      ),
+      /*array(
+         'class'=>'CButtonColumn',
+         'buttons'=> array(
+            'delete'=>array(
+               'visible'=>'false'
+             ),
+            'update'=>array(
+               'visible'=>'false'
+            )
+         ),
+         'viewButtonUrl'=>"Action::decodeViewDetailPurchaseMemoUrl(\$data)",
+      )*/      
+   )));
+ ?>
+ 
+ <?php 
+   $count=Yii::app()->db->createCommand("select count(*) from payments where idtransaction='$model->id'")
+      ->queryScalar();
+   $sql="select * from payments where idtransaction='$model->id'";
+
+   $dataProvider=new CSqlDataProvider($sql,array(
+      'totalItemCount'=>$count,
+   ));
+   $this->widget('zii.widgets.grid.CGridView', array(
+   'dataProvider'=>$dataProvider,
+   'columns'=>array(
+      array(
+             'header'=>'Metode',
+             'name'=>'method',
+             'value'=>"lookup::getMethod(\$data['method'])"
+         ),
+      array(
+         'header'=>'Jumlah',
+         'type'=>'number',
+         'name'=>'amount',
+      ),
+      /*array(
+         'class'=>'CButtonColumn',
+         'buttons'=> array(
+            'delete'=>array(
+               'visible'=>'false'
+             ),
+            'update'=>array(
+               'visible'=>'false'
+            )
+         ),
+         'viewButtonUrl'=>"Action::decodeViewDetailPurchaseMemoUrl(\$data)",
+      )*/      
+   )));
+ ?>
+ 

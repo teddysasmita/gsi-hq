@@ -23,16 +23,17 @@
          echo $form->hiddenField($model,'id');
          echo $form->hiddenField($model,'userlog');
          echo $form->hiddenField($model,'datetimelog');
-         echo $form->hiddenField($model,'idpurchaseorder');
+         echo $form->hiddenField($model,'idpurchase');
          echo $form->hiddenField($model,'total');
          echo $form->hiddenField($model,'discount');
          echo $form->hiddenField($model,'paid');
+         echo $form->hiddenField($model,'labelcost');
         ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'idpurchaseorder'); ?>
-		<?php echo CHtml::label(lookup::PurchasesOrderNumFromID($model->idpurchaseorder), false); ?>
-		<?php echo $form->error($model,'idpurchaseorder'); ?>
+		<?php echo $form->labelEx($model,'idpurchase'); ?>
+		<?php echo CHtml::label(lookup::PurchasesNumFromID($model->idpurchase), false); ?>
+		<?php echo $form->error($model,'idpurchas'); ?>
 	</div>
 	
 	<div class="row">
@@ -48,8 +49,14 @@
 	</div>
 	
 	<div class="row">
+		<?php echo $form->labelEx($model,'labelcost'); ?>
+		<?php echo CHtml::label(number_format($model->labelcost), false); ?>
+		<?php echo $form->error($model,'labelcost'); ?>
+	</div>
+	
+	<div class="row">
 		<?php echo $form->labelEx($model,'paid'); ?>
-		<?php echo CHtml::label(number_format($model->paid), false); ?>
+		<?php echo CHtml::label($model->paid, false); ?>
 		<?php echo $form->error($model,'paid'); ?>
 	</div>
 	

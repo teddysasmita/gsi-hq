@@ -44,7 +44,7 @@ $this->menu=array(
 <?php 
    $count=Yii::app()->authdb->createCommand("select count(*) from AuthAssignment a join AuthItem b on b.name=a.itemname where userid='$model->id' and b.type=0")->queryScalar();
    $sql='select a.id, a.userid, a.itemname, b.type, b.description from AuthAssignment a join AuthItem b on b.name=a.itemname '.
-           "where a.userid='$model->id' and b.type=0";
+           "where a.userid='$model->id' and b.type=0 order by a.id";
    $dataProvider=new CSqlDataProvider($sql,array(
        'totalItemCount'=>$count,
        'db'=>Yii::app()->authdb, 
@@ -83,7 +83,7 @@ $this->menu=array(
 <?php 
    $count=Yii::app()->authdb->createCommand("select count(*) from AuthAssignment a join AuthItem b on b.name=a.itemname where userid='$model->id' and b.type=1")->queryScalar();
    $sql='select a.id, a.userid, a.itemname, b.type, b.description from AuthAssignment a join AuthItem b on b.name=a.itemname '.
-           "where a.userid='$model->id' and b.type=1";
+           "where a.userid='$model->id' and b.type=1 order by a.id";
    $dataProvider=new CSqlDataProvider($sql,array(
        'totalItemCount'=>$count,
       'db'=>Yii::app()->authdb, 
@@ -122,7 +122,7 @@ $this->menu=array(
 <?php 
    $count=Yii::app()->authdb->createCommand("select count(*) from AuthAssignment a join AuthItem b on b.name=a.itemname where userid='$model->id' and b.type=2")->queryScalar();
    $sql='select a.id, a.userid, a.itemname, b.type, b.description from AuthAssignment a join AuthItem b on b.name=a.itemname '.
-           "where a.userid='$model->id' and b.type=2";
+           "where a.userid='$model->id' and b.type=2 order by a.id";
    $dataProvider=new CSqlDataProvider($sql,array(
        'totalItemCount'=>$count,
       'db'=>Yii::app()->authdb, 

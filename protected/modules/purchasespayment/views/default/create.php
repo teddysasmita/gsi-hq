@@ -11,20 +11,20 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	/*array('label'=>'Daftar', 'url'=>array('index')),
 	array('label'=>'Pengaturan', 'url'=>array('admin')),
-   array('label'=>'Tambah Detil', 'url'=>array('detailstockentries/create', 
-      'id'=>$model->id),
-      'linkOptions'=>array('id'=>'adddetail')),  
-    */
+   */
+	array('label'=>'Tambah Metode Bayar', 'url'=>array('detailpurchasespayments3/create', 
+      'idtransaction'=>$model->id),
+      'linkOptions'=>array('id'=>'addpayment')),  
 );
 
 $jq=<<<EOH
-   $('#adddetail').click(function(event){
+   $('#addpayment').click(function(event){
      var mainform;
      var hiddenvar;
-     mainform=$('#stockentries-form');
-     $('#command').val('adddetail');
+     mainform=$('#purchasespayments-form');
+     $('#command').val('addpayment');
      mainform.submit();
-     event.preventDefault();
+	event.preventDefault();
    });
 EOH;
 Yii::app()->clientScript->registerScript('myscript', $jq, CClientScript::POS_READY);

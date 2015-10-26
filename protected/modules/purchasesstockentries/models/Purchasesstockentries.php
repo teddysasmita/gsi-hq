@@ -10,6 +10,7 @@
  * @property string $ponum
  * @property string $sjnum
  * @property string $idsupplier
+ * @property string $paystatus
  * @property string $remark
  * @property string $userlog
  * @property string $datetimelog
@@ -32,10 +33,11 @@ class Purchasesstockentries extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, idatetime, regnum,ponum, sjnum, idsupplier, userlog, datetimelog', 'required'),
+			array('id, idatetime, regnum, ponum, paystatus, sjnum, idsupplier, userlog, datetimelog', 'required'),
 			array('id, idsupplier, userlog', 'length', 'max'=>21),
 			array('idatetime, datetimelog', 'length', 'max'=>19),
 			array('regnum', 'length', 'max'=>30),
+			array('paystatus', 'length', 'max'=>1),
 			array('ponum, sjnum', 'length', 'max'=>30),
 			array('remark', 'safe'),
 			// The following rule is used by search().
@@ -67,6 +69,7 @@ class Purchasesstockentries extends CActiveRecord
 			'ponum' => 'Nomor PO',
 			'sjnum' => 'Nomor SJ',
 			'idsupplier' => 'Pemasok',
+			'paystatys' => 'Status',
 			'remark' => 'Catatan',
 			'userlog' => 'Userlog',
 			'datetimelog' => 'Datetimelog',
@@ -97,6 +100,7 @@ class Purchasesstockentries extends CActiveRecord
 		$criteria->compare('sjnum',$this->sjnum,true);
 		$criteria->compare('regnum',$this->regnum,true);
 		$criteria->compare('idsupplier',$this->idsupplier,true);
+		$criteria->compare('paystatus',$this->paystatus,true);
 		$criteria->compare('userlog',$this->userlog,true);
 		$criteria->compare('datetimelog',$this->datetimelog,true);
 
