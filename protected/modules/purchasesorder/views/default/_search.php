@@ -28,7 +28,13 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'rdatetime'); ?>
-		<?php echo $form->textField($model,'rdatetime',array('size'=>19,'maxlength'=>19)); ?>
+		<?php //echo $form->textField($model,'idsupplier',array('size'=>21,'maxlength'=>21)); 
+			$suppliersdata = Yii::app()->db
+				->createCommand("select id, concat(firstname, ' ', lastname) as sname from suppliers order by firstname, lastname")
+				->queryAll();
+			
+			$suppliersdata = CHtml::listData($suppliersdata, 'id', 'sname');
+			echo $form->dropDownList($model, 'idsupplier', $suppliersdata);	 ?>
 	</div>
 
 	<div class="row">
