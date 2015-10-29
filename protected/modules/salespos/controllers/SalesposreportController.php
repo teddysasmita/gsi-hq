@@ -423,7 +423,7 @@ EOS;
 				->setCategory("Laporan");
 			$enddate=$enddate.' 23:59:59';
 			$selectfields = <<<EOS
-	a.*, concat(b.firstname,' ', b.lastname) as companyname, sum(b.qty * b.buyprice) as total
+	a.*, concat(c.firstname,' ', c.lastname) as companyname, sum(b.qty * b.buyprice) as total
 EOS;
 			$selectwhere = <<<EOS
 			a.idatetime >= :p_startidatetime and a.idatetime <= :p_endidatetime
