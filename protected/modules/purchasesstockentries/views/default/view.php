@@ -32,7 +32,10 @@ $this->menu=array(
 		'sjnum',
 		'ponum',
 		'remark',
-		'ppn',
+		array(
+			'name'=>'ppn',
+			'value'=>lookup::get_yesno($model->ppn),
+		),
       	array(
         	'label'=>'Nama Pemasok',
          	'value'=>lookup::SupplierNameFromSupplierID($model->idsupplier)
