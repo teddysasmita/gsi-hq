@@ -33,6 +33,18 @@ class SalesposreportController extends Controller
          };
 	}
 	
+	public function actionCreate2()
+	{
+		if(Yii::app()->authManager->checkAccess($this->formid.'-Append',
+				Yii::app()->user->id))  {
+			$this->trackActivity('v');
+	
+			$this->render('create2');
+		} else {
+			throw new CHttpException(404,'You have no authorization for this operation.');
+		};
+	}
+	
 	public function actionGetexcel($startdate, $enddate, $brand, $objects)
 	{
 		$datacancels = array();
@@ -311,6 +323,73 @@ EOS;
 		} else {
             throw new CHttpException(404,'You have no authorization for this operation.');
          };
+	}
+	
+	public function actionGetexcel2($startdate, $enddate)
+	{
+		$data = array();
+	
+		if(Yii::app()->authManager->checkAccess($this->formid.'-Append',
+				Yii::app()->user->id))  {
+					$this->trackActivity('v');
+						
+			$xl = new PHPExcel();
+			$xl->getProperties()->setCreator("Program GSI Malang")
+				->setLastModifiedBy("Program GSI Malang")
+				->setTitle("Laporan Penjualan")
+				->setSubject("Laporan Penjualan")
+				->setDescription("Laporan Penjualan Bulanan")
+				->setKeywords("Laporan Penjualan")
+				->setCategory("Laporan");
+			$enddate=$enddate.' 23:59:59';
+			$selectfields = <<<EOS
+			a.*
+EOS;
+			$selectwhere = <<<EOS
+			a.idatetime >= :p_startidatetime and a.idatetime <= :p_endidatetime
+			and a.status = '1' and a.receivable > 0
+EOS;
+						
+			unset($selectparam);
+			$selectparam['p_startidatetime'] = $startdate;
+			$selectparam['p_endidatetime'] = $enddate;
+				
+			// Get ALL Sales data
+			$data=Yii::app()->db->createCommand()
+			->select($selectfields)
+			->from('salespos a')
+			->where($selectwhere, $selectparam)
+			->order('a.idatetime, a.regnum')
+			->queryAll();
+			
+			$headersfield = array(
+				'regnum', 'idatetime', 'total', 'discount', 'receivable', 'payer_name'
+			);
+			$headersname = array(
+					'No Nota', 'Tanggal', 'Total', 'Potongan', 'Piutang', 'Nama Pelanggan' );
+			for( $i=0;$i<count($headersname); $i++ ) {
+				$xl->setActiveSheetIndex(0)
+				->setCellValueByColumnAndRow($i,1, $headersname[$i]);
+			}
+				
+			for( $i=0; $i<count($data); $i++){
+				for( $j=0; $j<count($headersfield); $j++ ) {
+					$cellvalue = $data[$i][$headersfield[$j]];
+					$xl->setActiveSheetindex(0)
+					->setCellValueByColumnAndRow($j,$i+2, $cellvalue);
+				}
+			}
+				
+			$xl->getActiveSheet()->setTitle('Laporan Piutang');
+			$xl->setActiveSheetIndex(0);
+			header('Content-Type: application/pdf');
+			header('Content-Disposition: attachment;filename="sales-report-'.idmaker::getDateTime().'.xlsx"');
+			header('Cache-Control: max-age=0');
+			$xlWriter = PHPExcel_IOFactory::createWriter($xl, 'Excel2007');
+			$xlWriter->save('php://output');
+		} else {
+			throw new CHttpException(404,'You have no authorization for this operation.');
+		};
 	}
 	
 	/**
