@@ -44,11 +44,19 @@
 		<?php echo $form->textField($model,'ponum',array('size'=>12,'maxlength'=>12)); ?>
 	</div>
    
-      <div class="row">
+     <div class="row">
 		<?php echo $form->label($model,'sjnum'); ?>
 		<?php echo $form->textField($model,'sjnum',array('size'=>12,'maxlength'=>12)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'ppn'); ?>
+		<?php 
+		echo $form->dropDownList($model, 'ppn', array('0'=>'Tidak', '1'=>'Ya'),
+         	array('empty'=>'Harap Pilih'));
+		?>
+	</div>
+	
 	<div class="row">
 		<?php echo $form->label($model,'userlog'); ?>
 		<?php echo $form->textField($model,'userlog',array('size'=>21,'maxlength'=>21)); ?>
