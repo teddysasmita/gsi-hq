@@ -134,7 +134,7 @@ EOS;
 	<div class="row">
 		<?php echo $form->labelEx($model,'ppn'); ?>
 		<?php 
-         	echo $form->dropDownList($model, 'ppn', array('Tidak'=>'0', 'Ya'=>'1'),
+         	echo $form->dropDownList($model, 'ppn', array('0'=>'Tidak', '1'=>'Ya'),
          		array('empty'=>'Harap Pilih'));
       	?>
 		<?php echo $form->error($model,'ppn'); ?>
