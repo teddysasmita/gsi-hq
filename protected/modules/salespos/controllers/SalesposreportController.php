@@ -45,6 +45,18 @@ class SalesposreportController extends Controller
 		};
 	}
 	
+	public function actionCreate3()
+	{
+		if(Yii::app()->authManager->checkAccess($this->formid.'-Append',
+				Yii::app()->user->id))  {
+					$this->trackActivity('v');
+	
+					$this->render('create3');
+				} else {
+					throw new CHttpException(404,'You have no authorization for this operation.');
+				};
+	}
+	
 	public function actionGetexcel($startdate, $enddate, $brand, $objects)
 	{
 		$datacancels = array();
@@ -334,12 +346,12 @@ EOS;
 					$this->trackActivity('v');
 						
 			$xl = new PHPExcel();
-			$xl->getProperties()->setCreator("Program GSI Malang")
-				->setLastModifiedBy("Program GSI Malang")
-				->setTitle("Laporan Penjualan")
-				->setSubject("Laporan Penjualan")
-				->setDescription("Laporan Penjualan Bulanan")
-				->setKeywords("Laporan Penjualan")
+			$xl->getProperties()->setCreator("Program GSI Kertajaya")
+				->setLastModifiedBy("Program GSI Kertajaya")
+				->setTitle("Laporan Piutang")
+				->setSubject("Laporan Piutang")
+				->setDescription("Laporan Piutang")
+				->setKeywords("Laporan Piutang")
 				->setCategory("Laporan");
 			$enddate=$enddate.' 23:59:59';
 			$selectfields = <<<EOS
@@ -392,6 +404,74 @@ EOS;
 		};
 	}
 	
+	
+	public function actionGetexcel3($startdate, $enddate)
+	{
+		$data = array();
+	
+		if(Yii::app()->authManager->checkAccess($this->formid.'-Append',
+				Yii::app()->user->id))  {
+					$this->trackActivity('v');
+	
+			$xl = new PHPExcel();
+			$xl->getProperties()->setCreator("Program GSI Kertajaya")
+				->setLastModifiedBy("Program GSI Kertajaya")
+				->setTitle("Laporan Hutang")
+				->setSubject("Laporan Hutang")
+				->setDescription("Laporan Hutang")
+				->setKeywords("Laporan Hutang")
+				->setCategory("Laporan");
+			$enddate=$enddate.' 23:59:59';
+			$selectfields = <<<EOS
+	a.*, concat(b.firstname,' ', b.lastname) as companyname, sum(b.qty * b.buyprice) as total
+EOS;
+			$selectwhere = <<<EOS
+			a.idatetime >= :p_startidatetime and a.idatetime <= :p_endidatetime
+EOS;
+
+			unset($selectparam);
+			$selectparam['p_startidatetime'] = $startdate;
+			$selectparam['p_endidatetime'] = $enddate;
+
+			// Get ALL Sales data
+			$data=Yii::app()->db->createCommand()
+				->select($selectfields)
+				->from('purchasesstockentries a')
+				->join('detailpurchasesstockentries b', 'b.id = a.id')
+				->where($selectwhere, $selectparam)
+				->group('a.id')
+				->order('a.idatetime, a.regnum')
+				->queryAll();
+						
+					$headersfield = array(
+							'regnum', 'idatetime', 'companyname', 'total'
+					);
+					$headersname = array(
+							'No Nota', 'Tanggal', 'Nama Pemasok' , 'Total' );
+					for( $i=0;$i<count($headersname); $i++ ) {
+						$xl->setActiveSheetIndex(0)
+						->setCellValueByColumnAndRow($i,1, $headersname[$i]);
+					}
+	
+					for( $i=0; $i<count($data); $i++){
+						for( $j=0; $j<count($headersfield); $j++ ) {
+							$cellvalue = $data[$i][$headersfield[$j]];
+							$xl->setActiveSheetindex(0)
+							->setCellValueByColumnAndRow($j,$i+2, $cellvalue);
+						}
+					}
+	
+					$xl->getActiveSheet()->setTitle('Laporan Hutang');
+					$xl->setActiveSheetIndex(0);
+					header('Content-Type: application/pdf');
+					header('Content-Disposition: attachment;filename="payable-report-'.idmaker::getDateTime().'.xlsx"');
+					header('Cache-Control: max-age=0');
+					$xlWriter = PHPExcel_IOFactory::createWriter($xl, 'Excel2007');
+					$xlWriter->save('php://output');
+				} else {
+					throw new CHttpException(404,'You have no authorization for this operation.');
+				};
+	}
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
