@@ -31,15 +31,16 @@ $this->menu=array(
 		'idatetime',
 		'sjnum',
 		'ponum',
-		'remark',		
-      array(
-         'label'=>'Nama Pemasok',
-         'value'=>lookup::SupplierNameFromSupplierID($model->idsupplier)
-      ),
+		'remark',
+		'ppn',
+      	array(
+        	'label'=>'Nama Pemasok',
+         	'value'=>lookup::SupplierNameFromSupplierID($model->idsupplier)
+      	),
 		array(
-               'label'=>'Userlog',
-               'value'=>lookup::UserNameFromUserID($model->userlog),
-            ),
+             'label'=>'Userlog',
+             'value'=>lookup::UserNameFromUserID($model->userlog),
+        ),
 		'datetimelog',
 	),
 )); ?>

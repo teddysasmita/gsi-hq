@@ -36,6 +36,16 @@ class lookup extends CComponent {
       }
    }
    
+   public static function get_yesno($data)
+   {
+   	switch ($data) {
+   		case '0':
+   			return 'Tidak';
+   		case '1':
+   			return 'Ya';
+   	}
+   }
+   
    public static function invoiceStatus($stat)
    {
       switch ($stat) {

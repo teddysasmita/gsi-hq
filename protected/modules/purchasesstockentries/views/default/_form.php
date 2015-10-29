@@ -132,6 +132,15 @@ EOS;
 	</div>
 	
 	<div class="row">
+		<?php echo $form->labelEx($model,'ppn'); ?>
+		<?php 
+         	echo $form->dropDownList($model, 'ppn', array('Tidak'=>'0', 'Ya'=>'1'),
+         		array('empty'=>'Harap Pilih'));
+      	?>
+		<?php echo $form->error($model,'ppn'); ?>
+	</div>
+	
+	<div class="row">
 		<?php echo $form->labelEx($model,'remark'); ?>
         <?php 
            echo $form->textArea($model, 'remark', array('COLS'=>40, 'ROWS'=>5)); 
