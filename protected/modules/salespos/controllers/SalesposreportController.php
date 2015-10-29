@@ -347,7 +347,7 @@ EOS;
 EOS;
 			$selectwhere = <<<EOS
 			a.idatetime >= :p_startidatetime and a.idatetime <= :p_endidatetime
-			and a.status = '1' and a.receivable > 0
+			and a.status = '1' and a.receiveable > 0
 EOS;
 						
 			unset($selectparam);
@@ -363,7 +363,7 @@ EOS;
 			->queryAll();
 			
 			$headersfield = array(
-				'regnum', 'idatetime', 'total', 'discount', 'receivable', 'payer_name'
+				'regnum', 'idatetime', 'total', 'discount', 'receiveable', 'payer_name'
 			);
 			$headersname = array(
 					'No Nota', 'Tanggal', 'Total', 'Potongan', 'Piutang', 'Nama Pelanggan' );
