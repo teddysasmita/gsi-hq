@@ -438,6 +438,7 @@ EOS;
 				->select($selectfields)
 				->from('purchasesstockentries a')
 				->join('detailpurchasesstockentries b', 'b.id = a.id')
+				->join('suppliers c', 'c.id = a.idsupplier')
 				->where($selectwhere, $selectparam)
 				->group('a.id')
 				->order('a.idatetime, a.regnum')
