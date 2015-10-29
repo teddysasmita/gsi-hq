@@ -15,4 +15,4 @@ $this->menu=array(
 
 <h1>Laporan Piutang</h1>
 
-<?php $this->renderPartial('_form'); ?>
+<?php $this->renderPartial('_form2'); ?>
