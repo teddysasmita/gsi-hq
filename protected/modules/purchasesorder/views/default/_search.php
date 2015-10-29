@@ -39,7 +39,8 @@
 				->queryAll();
 			
 			$suppliersdata = CHtml::listData($suppliersdata, 'id', 'sname');
-			echo $form->dropDownList($model, 'idsupplier', $suppliersdata);	?>
+			echo $form->dropDownList($model, 'idsupplier', $suppliersdata,
+				array('empty'=>'Harap Pilih'));	?>
 	</div>
 
 	<div class="row">
