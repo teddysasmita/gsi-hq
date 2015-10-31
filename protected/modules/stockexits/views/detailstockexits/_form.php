@@ -70,6 +70,8 @@ $supplierScript=<<<EOS
 	   					$('#status').addClass('error');
 	   					$('#status').html('Barang rusak');
 	   					$('#Detailstockexits_status').val('0');
+   						if ($('#transname') == 'AC25' ) 
+   							$('#detailstockexits-form').submit();
 	   				} else if (data.status == '1') {
 	   					$('#status').removeClass('error');
 	   					$('#status').addClass('money');
