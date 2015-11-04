@@ -380,6 +380,7 @@ EOS;
 				->where('idatetime >= :startdate', 
 					array(':startdate'=>$startdate))
 				->order('invnum')
+				->group('invnum')
 				->queryAll();
 			
 			$found = false;
