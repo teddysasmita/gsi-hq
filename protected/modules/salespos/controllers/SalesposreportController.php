@@ -368,17 +368,35 @@ EOS;
 				
 			// Get ALL Sales data
 			$data=Yii::app()->db->createCommand()
-			->select($selectfields)
-			->from('salespos a')
-			->where($selectwhere, $selectparam)
-			->order('a.idatetime, a.regnum')
-			->queryAll();
+				->select($selectfields)
+				->from('salespos a')
+				->where($selectwhere, $selectparam)
+				->order('a.idatetime, a.regnum')
+				->queryAll();
 			
+			$datareceipts = Yii::app()->db->createCommand()
+				->select('invnum, sum(total) as totalreceipt')
+				->from('receivablepos')
+				->where('idatetime >= :startdate', 
+					array(':startdate'=>$startdate))
+				->order('invnum')
+				->queryAll();
+			
+			$found = false;
+			foreach($data as & $d) {
+				foreach($datareceipts as $dr) {
+					if ($dr['invnum'] == $d['regnum']) {
+						$d['totalreceipt'] = $dr['totalreceipt'];
+						break;
+					}
+				}
+			}
+				
 			$headersfield = array(
-				'regnum', 'idatetime', 'total', 'discount', 'receiveable', 'payer_name'
+				'regnum', 'idatetime', 'total', 'discount', 'receiveable', 'payer_name', 'totalreceipt'
 			);
 			$headersname = array(
-					'No Nota', 'Tanggal', 'Total', 'Potongan', 'Piutang', 'Nama Pelanggan' );
+					'No Nota', 'Tanggal', 'Total', 'Potongan', 'Piutang', 'Nama Pelanggan', 'Telah Terima' );
 			for( $i=0;$i<count($headersname); $i++ ) {
 				$xl->setActiveSheetIndex(0)
 				->setCellValueByColumnAndRow($i,1, $headersname[$i]);
