@@ -376,7 +376,7 @@ EOS;
 			
 			$datareceipts = Yii::app()->db->createCommand()
 				->select('invnum, sum(total) as totalreceipt')
-				->from('receivablepos')
+				->from('receivablespos')
 				->where('idatetime >= :startdate', 
 					array(':startdate'=>$startdate))
 				->order('invnum')
