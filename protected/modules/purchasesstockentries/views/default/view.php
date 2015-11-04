@@ -31,7 +31,10 @@ $this->menu=array(
 		'idatetime',
 		'sjnum',
 		'ponum',
-		'remark',
+		array(
+			'name'=>'remark',
+			'type'=>'ntext',
+		),
 		array(
 			'name'=>'ppn',
 			'value'=>lookup::get_yesno($model->ppn),
