@@ -141,6 +141,15 @@ EOS;
 	</div>
 	
 	<div class="row">
+		<?php echo $form->labelEx($model,'consign'); ?>
+		<?php 
+         	echo $form->dropDownList($model, 'consign', array('0'=>'Tidak', '1'=>'Ya'),
+         		array('empty'=>'Harap Pilih'));
+      	?>
+		<?php echo $form->error($model,'consign'); ?>
+	</div>
+	
+	<div class="row">
 		<?php echo $form->labelEx($model,'remark'); ?>
         <?php 
            echo $form->textArea($model, 'remark', array('COLS'=>40, 'ROWS'=>5)); 

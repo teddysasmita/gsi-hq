@@ -446,7 +446,8 @@ EOS;
 	a.*, concat(c.firstname,' ', c.lastname) as companyname, sum(b.qty * b.buyprice) as total
 EOS;
 			$selectwhere = <<<EOS
-			a.idatetime >= :p_startidatetime and a.idatetime <= :p_endidatetime
+			a.idatetime >= :p_startidatetime and a.idatetime <= :p_endidatetime and
+			a.consign = '0'
 EOS;
 
 			unset($selectparam);

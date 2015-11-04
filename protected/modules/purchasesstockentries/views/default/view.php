@@ -36,6 +36,10 @@ $this->menu=array(
 			'name'=>'ppn',
 			'value'=>lookup::get_yesno($model->ppn),
 		),
+		array(
+				'name'=>'consign',
+				'value'=>lookup::get_yesno($model->consign),
+		),
       	array(
         	'label'=>'Nama Pemasok',
          	'value'=>lookup::SupplierNameFromSupplierID($model->idsupplier)

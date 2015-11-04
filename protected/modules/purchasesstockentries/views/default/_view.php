@@ -25,6 +25,10 @@
 	<?php echo CHtml::encode($data->sjnum); ?>
 	<br />
 	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('consign')); ?>:</b>
+	<?php echo CHtml::encode(lookup::get_yesno($data->consign)); ?>
+	<br />
+	
 	<b><?php echo CHtml::encode($data->getAttributeLabel('remark')); ?>:</b>
 	<?php echo CHtml::encode($data->remark); ?>
 	<br />
