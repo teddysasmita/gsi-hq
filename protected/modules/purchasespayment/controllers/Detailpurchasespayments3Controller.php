@@ -7,7 +7,7 @@ class Detailpurchasespayments3Controller extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
-	public $formid='AC4b';
+	public $formid='AC7b';
 	public $tracker;
 	public $state;
 
