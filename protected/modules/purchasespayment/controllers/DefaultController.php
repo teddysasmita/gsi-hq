@@ -947,7 +947,8 @@ class DefaultController extends Controller
         	$detail['userlog']=Yii::app()->user->id;
         	$detail['datetimelog']=idmaker::getDateTime();
         	$detail['idpurchase']=$rowPO['id'];
-        	$detail['discount']=$rowPO['discount'];
+        	//$detail['discount']=$rowPO['discount'];
+        	$detail['discount']=0;
         	$detail['paid']=$paid;
         	$detail['amount']=0;
         	
