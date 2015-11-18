@@ -32,6 +32,19 @@
            $('#dialog-item-name').val(unescape($('#dialog-item-select').val()));
          }
       );
+    
+	$("#Detailpurchasesorders_discount").change(function() {
+    	var price = $("#Detailpurchasesorders_price").val();
+		var qty = $("#Detailpurchasesorders_qty").val();
+		
+		if ((price > 0) && (qty > 0) ) {
+			var disc = $("#Detailpurchasesorders_discount").val();
+			if (disc < 0) {
+				disc = -(disc * price / 100);
+			}
+			$("#Detailpurchasesorders_discount").val(disc);
+		}
+ 	});
 EOS;
    Yii::app()->clientScript->registerScript('itemscript', $itemScript, CClientScript::POS_READY);
    
@@ -103,17 +116,17 @@ EOS;
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'discount'); ?>
-		<?php echo $form->textField($model,'discount'); ?>
-		<?php echo $form->error($model,'discount'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'price'); ?>
 		<?php echo $form->textField($model,'price'); ?>
 		<?php echo $form->error($model,'price'); ?>
 	</div>
-   
+ 
+ 	<div class="row">
+		<?php echo $form->labelEx($model,'discount'); ?>
+		<?php echo $form->textField($model,'discount'); ?>
+		<?php echo $form->error($model,'discount'); ?>
+	</div>
+ 	  
    <div class="row">
 		<?php echo $form->labelEx($model,'cost1'); ?>
 		<?php echo $form->textField($model,'cost1'); ?>
