@@ -186,7 +186,7 @@ EOS;
             	array(
 					'header'=>'Nomor Nota',
 					'name'=>'idpurchase',
-					'value'=>"lookup::PurchasesStockEntryNumFromID(\$data['idpurchase'])"
+					'value'=>"lookup::PurchasesStockEntryNumFromID(\$data['idpurchasestockentry'])"
 				),
 				array(
 					'header'=>'Diskon',
