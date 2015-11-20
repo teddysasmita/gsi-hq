@@ -913,7 +913,7 @@ class DefaultController extends Controller
            ->from('detailpurchasesstockentries a')
            ->join('purchasesstockentries b', 'b.id = a.id')
            ->where('b.idsupplier= :p_idsupplier and b.paystatus <> :p_paid', 
-           		array(':p_idsupplier'=>$idsupplier, ':p_paid'=>'2'))
+           		array(':p_idsupplier'=>$model->idsupplier, ':p_paid'=>'2'))
            ->queryAll();
         
         $dataPO=Yii::app()->db->createCommand()
