@@ -960,7 +960,7 @@ class DefaultController extends Controller
         	$detail['paid']=$paid;
         	$detail['amount']=0;
         	$detail['remark']=$poremark;
-        	$detail['total']=$dl['qty'] * $dl['price'];
+        	$detail['total']=$dl['qty'] * $dl['buyprice'];
         	
         	$details[]=$detail;
         }
