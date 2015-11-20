@@ -12,6 +12,7 @@
  * @property double $total
  * @property double $paid
  * @property double $amount
+ * @property string $remark
  * @property string $userlog
  * @property string $datetimelog
  */
@@ -37,6 +38,7 @@ class Detailpurchasespayments extends CActiveRecord
 			array('discount, total, paid, amount, labelcost', 'numerical'),
 			array('iddetail, id, idpurchasestockentry, userlog', 'length', 'max'=>21),
 			array('datetimelog', 'length', 'max'=>19),
+			array('remark','safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('iddetail, id, idpurchasestockentry, discount, total, labelcost, paid, amount, userlog, datetimelog', 'safe', 'on'=>'search'),
@@ -68,6 +70,7 @@ class Detailpurchasespayments extends CActiveRecord
 			'total' => 'Total',
 			'paid' => 'Terbayar',
 			'amount' => 'Dibayar',
+			'remark' => 'Catatan',
 			'userlog' => 'Userlog',
 			'datetimelog' => 'Datetimelog',
 		);

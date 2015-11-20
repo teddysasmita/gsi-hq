@@ -116,12 +116,12 @@ class DefaultController extends Controller
                          Yii::app()->session['Purchasespayments']=$_POST['Purchasespayments'];
                          //$this->redirect(array('detailpurchasespayments/create',
                             //'id'=>$model->id));
-                      } else if ($_POST['command']=='setSupplier') {
-                         $model->attributes=$_POST['Purchasespayments'];
-                         $details = $this->loadPurchases($model->idsupplier, $model->id);
-                         Yii::app()->session['Detailpurchasespayments'] = $details;
-                        $details2 = $this->loadReturs($model->idsupplier, $model->id); 
-						Yii::app()->session['Detailpurchasespayments2'] = $details2;
+					} else if ($_POST['command']=='setSupplier') {
+						$model->attributes=$_POST['Purchasespayments'];
+                        $details = $this->loadPurchases($model);
+                        Yii::app()->session['Detailpurchasespayments'] = $details;
+                        /*$details2 = $this->loadReturs($model->idsupplier, $model->id); 
+						Yii::app()->session['Detailpurchasespayments2'] = $details2;*/
                         Yii::app()->session['Purchasespayments']=$model->attributes;	 
                       } else if($_POST['command']=='adddetail2') {
                          $model->attributes=$_POST['Purchasespayments'];
@@ -904,41 +904,49 @@ class DefaultController extends Controller
          $this->tracker->logActivity($this->formid, $action);
      }
      
-	private function loadPurchases($idsupplier, $id)
+	private function loadPurchases(& $model)
     {
 		$details=array();
 
-        $dataPO=Yii::app()->db->createCommand()
-           ->select()
-           ->from('purchasesstockentries')
-           ->where('idsupplier=:idsupplier and paystatus <> :paystatus', 
-           		array(':idsupplier'=>$idsupplier, ':paystatus'=>'2'))
+        $dataLPB=Yii::app()->db->createCommand()
+           ->select('b.id, b.sjnum, a.iditem, a.qty, a.buyprice')
+           ->from('detailpurchasesstockentries a')
+           ->join('purchasesstockentries b', 'b.id = a.id')
+           ->where('b.idsupplier= :p_idsupplier and b.paystatus <> :p_paid', 
+           		array(':p_idsupplier'=>$idsupplier, ':p_paid'=>'2'))
            ->queryAll();
-        $dataPO2=Yii::app()->db->createCommand()
-        	->select('a.id, sum(b.qty) as totalqty')
-        	->from('purchasesstockentries a')
-        	->join('detailpurchasesstockentries b', 'b.id = a.id')
-        	->group('a.id')
-        	->where('a.idsupplier = :p_idsupplier and a.paystatus <> :p_paystatus',
-        		array(':p_idsupplier'=>$idsupplier, ':p_paystatus'=>'2'))
-        	->queryAll();
         
+        $dataPO=Yii::app()->db->createCommand()
+        	->select('a.remark')
+        	->from('stockentries b')
+        	->join('purchasesorders a', 'a.regnum = b.transid')
+        	->where('b.donum = :p_sjnum');
+        
+        $dataPaid=Yii::app()->db->createCommand()
+        	->select('sum(b.amount) as totalpaid')
+        	->from('purchasespayments a')
+        	->join('detailpurchasespayments b', 'b.id = a.id')
+        	->where('b.idpurchasestockentry = :p_idlpb');
+        			 
         Yii::app()->session->remove('Detailpurchasespayments');
-        foreach($dataPO as $rowPO) {
+        
+        foreach($dataLPB as $dl) {
         	//----------------------------
         	//finding payments
-        	$dataPaid=Yii::app()->db->createCommand()
-	        	->select('sum(b.amount) as totalpaid, b.idpurchasestockentry')
-	        	->from('purchasespayments a')
-	        	->join('detailpurchasespayments b', 'b.id = a.id')
-	        	->where('b.idpurchasestockentry=:idpo',
-	        			array(':idpo'=>$rowPO['id']))
-	        	->queryRow();
-        	
+        	$dataPaid->bindValue(':p_idlpb', $dl['id'], PDO::PARAM_STR);
+        	$temppaid = $dataPaid->queryScalar();
         	if(is_null($dataPaid['totalpaid'])){
         		$paid=0;
         	} else {
         		$paid=$dataPaid['totalpaid'];
+        	}
+        	
+        	$dataPO->bindValue(':p_sjnum', $dl['sjnum']);
+        	$tempremark = $dataPO->queryColumn();
+        	if(is_null($tempremark)){
+        		$poremark = '';
+            } else {
+        		$poremark=implode('. ', $tempremark);
         	}
         	//----------------------------
         	
@@ -946,12 +954,12 @@ class DefaultController extends Controller
         	$detail['id']=$id;
         	$detail['userlog']=Yii::app()->user->id;
         	$detail['datetimelog']=idmaker::getDateTime();
-        	$detail['idpurchase']=$rowPO['id'];
+        	$detail['idpurchasestockentry']=$dl['id'];
         	//$detail['discount']=$rowPO['discount'];
         	$detail['discount']=0;
         	$detail['paid']=$paid;
         	$detail['amount']=0;
-        	
+        	$detail['remark']=$poremark;
         	$detail['total']=$rowPO['total'];
         	
         	$details[]=$detail;
