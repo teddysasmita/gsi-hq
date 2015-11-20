@@ -951,7 +951,7 @@ class DefaultController extends Controller
         	//----------------------------
         	
         	$detail['iddetail']=idmaker::getCurrentID2();
-        	$detail['id']=$id;
+        	$detail['id']=$model->id;
         	$detail['userlog']=Yii::app()->user->id;
         	$detail['datetimelog']=idmaker::getDateTime();
         	$detail['idpurchasestockentry']=$dl['id'];
