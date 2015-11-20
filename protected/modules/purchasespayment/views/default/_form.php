@@ -184,8 +184,8 @@ EOS;
             'dataProvider'=>$dataProvider,
             'columns'=>array(
             	array(
-					'header'=>'Nomor Nota',
-					'name'=>'idpurchase',
+					'header'=>'Nomor LPB',
+					'name'=>'idpurchasestockentry',
 					'value'=>"lookup::PurchasesStockEntryNumFromID(\$data['idpurchasestockentry'])"
 				),
 				array(

@@ -909,11 +909,12 @@ class DefaultController extends Controller
 		$details=array();
 
         $dataLPB=Yii::app()->db->createCommand()
-           ->select('b.id, b.sjnum, a.iditem, a.qty, a.buyprice')
+           ->select('b.id, b.sjnum, sum(a.qty * a.buyprice) as total')
            ->from('detailpurchasesstockentries a')
            ->join('purchasesstockentries b', 'b.id = a.id')
            ->where('b.idsupplier= :p_idsupplier and b.paystatus <> :p_paid', 
            		array(':p_idsupplier'=>$model->idsupplier, ':p_paid'=>'2'))
+           ->group('b.id')
            ->queryAll();
         
         $dataPO=Yii::app()->db->createCommand()
@@ -960,7 +961,7 @@ class DefaultController extends Controller
         	$detail['paid']=$paid;
         	$detail['amount']=0;
         	$detail['remark']=$poremark;
-        	$detail['total']=$dl['qty'] * $dl['buyprice'];
+        	$detail['total']=$dl['total'];
         	
         	$details[]=$detail;
         }
