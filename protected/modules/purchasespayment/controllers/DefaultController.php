@@ -935,10 +935,10 @@ class DefaultController extends Controller
         	//finding payments
         	$dataPaid->bindValue(':p_idlpb', $dl['id'], PDO::PARAM_STR);
         	$temppaid = $dataPaid->queryScalar();
-        	if(is_null($dataPaid['totalpaid'])){
+        	if(is_null($temppaid)){
         		$paid=0;
         	} else {
-        		$paid=$dataPaid['totalpaid'];
+        		$paid=$temppaid;
         	}
         	
         	$dataPO->bindValue(':p_sjnum', $dl['sjnum']);
