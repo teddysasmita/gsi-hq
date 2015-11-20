@@ -189,9 +189,9 @@ EOS;
 					'value'=>"lookup::PurchasesStockEntryNumFromID(\$data['idpurchasestockentry'])"
 				),
 				array(
-					'header'=>'Diskon',
-					'type'=>'number',
-					'name'=>'discount',
+					'header'=>'Catatan',
+					'type'=>'ntext',
+					'name'=>'remark',
 				),
 				array(
 					'header'=>'Total',
