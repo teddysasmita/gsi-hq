@@ -122,7 +122,8 @@ class DefaultController extends Controller
 						Yii::app ()->session ['Returstocks'] = $_POST ['Returstocks'];
 						$this->redirect ( array (
 								'detailreturstocks/create',
-								'id' => $model->id 
+								'id' => $model->id,
+								'idsupplier' => $model->idsupplier
 						) );
 					} else if ($_POST ['command'] == 'setDO') {
 						
