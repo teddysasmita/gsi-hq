@@ -51,6 +51,7 @@ EOS;
          echo $form->hiddenField($model,'userlog');
          echo $form->hiddenField($model,'datetimelog');
          echo $form->hiddenField($model,'iditem');
+         echo CHtml::hiddenField('idsupplier', $idsupplier);
         ?>
 
 	<div class="row">
