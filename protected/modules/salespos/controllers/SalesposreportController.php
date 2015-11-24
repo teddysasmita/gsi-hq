@@ -355,7 +355,7 @@ EOS;
 				->setCategory("Laporan");
 			$enddate=$enddate.' 23:59:59';
 			$selectfields = <<<EOS
-			a.*
+			a.*, sum(b.discount) as totaldetaildisc
 EOS;
 			$selectwhere = <<<EOS
 			a.idatetime >= :p_startidatetime and a.idatetime <= :p_endidatetime
@@ -370,7 +370,9 @@ EOS;
 			$data=Yii::app()->db->createCommand()
 				->select($selectfields)
 				->from('salespos a')
+				->join('detailsalespos b', 'b.id = a.id')
 				->where($selectwhere, $selectparam)
+				->group('a.regnum')
 				->order('a.idatetime, a.regnum')
 				->queryAll();
 			
@@ -392,6 +394,7 @@ EOS;
 						break;
 					}
 				}
+				$d['discount'] += $d['totaldetaildisc'];
 			}
 				
 			$headersfield = array(
