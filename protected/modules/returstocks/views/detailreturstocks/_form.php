@@ -95,7 +95,7 @@ EOS;
             ?>
 		<?php 
 			echo $form->error($model,'iditem');
-			echo CHtml::tag('span', array('id'=>'errormsg'), $errormsg);
+			echo CHtml::tag('div', array('id'=>'errormsg', 'class'=>'errorMessage'), $errormsg);
 		?>
 	</div>
 
