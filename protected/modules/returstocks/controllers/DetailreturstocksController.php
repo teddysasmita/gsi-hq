@@ -69,7 +69,7 @@ class DetailreturstocksController extends Controller
 				$model->attributes=$_POST['Detailreturstocks'];
 				//posting into session
                     
-				if ($this->checkItemforSupplier($model->iditem, $model->idsupplier) > 0) {
+				if ($this->checkItemforSupplier($model->iditem, $_POST['idsupplier']) > 0) {
 					$temp[]=$_POST['Detailreturstocks'];
                     if ($model->validate()) {
 						Yii::app()->session['Detailreturstocks']=$temp;
