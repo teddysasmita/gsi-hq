@@ -331,7 +331,7 @@ class DetailreturstocksController extends Controller
         		->where('b.idsupplier = :p_idsupplier and a.iditem = :p_iditem',
         			array('p_idsupplier'=>$idsupplier, 'p_iditem'=>$iditem))
         		->queryScalar();
-        	echo $found;
+        	echo $iditem.' - '. $idsupplier. ' - '.$found;
         	if ($found == FALSE)
         		return 0;
         	else
