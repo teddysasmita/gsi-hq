@@ -22,4 +22,4 @@ else if ($master=='update')
 <h1>Detil Pengembalian Barang ke Pemasok</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model, 'mode'=>'Create', 
-	'idsupplier'=>$idsupplier)); ?>
+	'idsupplier'=>$idsupplier, 'errormsg'=>$errormsg)); ?>

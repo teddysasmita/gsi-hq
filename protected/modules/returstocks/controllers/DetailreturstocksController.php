@@ -50,42 +50,46 @@ class DetailreturstocksController extends Controller
 	 */
 	public function actionCreate($id, $idsupplier)
 	{
-             if(Yii::app()->authManager->checkAccess($this->formid.'-Append', 
-                    Yii::app()->user->id))  {   
-                $this->state='c';
-                $this->trackActivity('c');    
+		if(Yii::app()->authManager->checkAccess($this->formid.'-Append', 
+			Yii::app()->user->id))  {   
+			$errormsg = '';
+			$this->state='c';
+			$this->trackActivity('c');    
                     
-                $model=new Detailreturstocks;
-                $this->afterInsert($id, $model);
+			$model=new Detailreturstocks;
+			$this->afterInsert($id, $model);
                 
-                $master=Yii::app()->session['master'];
+			$master=Yii::app()->session['master'];
                                 
 		// Uncomment the following line if AJAX validation is needed
-		$this->performAjaxValidation($model);
+			$this->performAjaxValidation($model);
                 
-                if(isset($_POST['yt0'])) {
-                    $temp=Yii::app()->session['Detailreturstocks'];
-                    $model->attributes=$_POST['Detailreturstocks'];
-                    //posting into session
-                    $temp[]=$_POST['Detailreturstocks'];
+			if(isset($_POST['yt0'])) {
+				$temp=Yii::app()->session['Detailreturstocks'];
+				$model->attributes=$_POST['Detailreturstocks'];
+				//posting into session
                     
-                    
+				if ($this->checkItemforSupplier($model->iditem, $model->idsupplier) > 0) {
+					$temp[]=$_POST['Detailreturstocks'];
                     if ($model->validate()) {
-                        Yii::app()->session['Detailreturstocks']=$temp;
-                        if ($master=='create')
-                            $this->redirect(array('default/createdetail'));
-                        else if($master=='update')
-                            $this->redirect(array('default/updatedetail'));
-                    }    
-                }                
+						Yii::app()->session['Detailreturstocks']=$temp;
+					if ($master=='create')
+						$this->redirect(array('default/createdetail'));
+					else if($master=='update')
+						$this->redirect(array('default/updatedetail'));
+					}
+				} else 	
+					$errormsg = 'Tidak pernah pesan barang tersebut di pemasok';
+			}                
 
-                $this->render('create',array(
-                    'model'=>$model, 'master'=>$master, 'idsupplier'=>$idsupplier
-                ));
+			$this->render('create',array(
+				'model'=>$model, 'master'=>$master, 'idsupplier'=>$idsupplier, 
+				'errormsg'=>$errormsg
+			));
                 
-             } else {
-                throw new CHttpException(404,'You have no authorization for this operation.');
-             }
+		} else {
+			throw new CHttpException(404,'You have no authorization for this operation.');
+		}
 	}
 
 	/**
@@ -316,5 +320,21 @@ class DetailreturstocksController extends Controller
             $this->tracker=new Tracker();
             $this->tracker->init();
             $this->tracker->logActivity($this->formid, $action);
+        }
+        
+        private function checkItemforSupplier($iditem, $idsupplier)
+        {
+        	$found = Yii::app()->db->createCommand()
+        		->select('count(*) as totalfound')
+        		->from('detailpurchasesorders a')
+        		->join('purchasesorders b', 'b.id = a.id')
+        		->where('b.idsupplier = :p_idsupplier and a.iditem = :p_iditem',
+        			array('p_idsupplier'=>$idsupplier, 'p_iditem'=>$iditem))
+        		->queryScalar();
+        	
+        	if ($found == FALSE)
+        		return 0;
+        	else
+        		return $found;
         }
 }

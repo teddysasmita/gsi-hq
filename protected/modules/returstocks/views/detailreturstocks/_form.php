@@ -93,7 +93,10 @@ EOS;
                echo $myd;
                $this->endWidget('zii.widgets.jui.CJuiDialog');
             ?>
-		<?php echo $form->error($model,'iditem'); ?>
+		<?php 
+			echo $form->error($model,'iditem');
+			echo CHtml::tag('span', array('id'=>'errormsg'), $errormsg);
+		?>
 	</div>
 
 	<div class="row">
