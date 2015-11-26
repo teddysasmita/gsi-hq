@@ -103,14 +103,7 @@ EOS;
 		<?php echo $form->labelEx($model,'qty'); ?>
 		<?php echo $form->textField($model,'qty'); ?>
 		<?php echo $form->error($model,'qty'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'buyprice'); ?>
-		<?php echo $form->textField($model,'buyprice'); ?>
-		<?php echo $form->error($model,'buyprice'); ?>
-	</div>
-	
+	</div>	
 	
 	<div class="row">
 		<?php echo $form->labelEx($model,'idwarehouse'); ?>

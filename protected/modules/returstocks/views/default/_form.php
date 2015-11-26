@@ -132,11 +132,6 @@ EOS;
                    'type'=>'number'               
 				),
 				array(
-                   'header'=>'Harga Beli',
-                   'name'=>'buyprice',
-                   'type'=>'number'               
-				),
-				array(
 					'header'=>'Gudang',
 					'name'=>'idwarehouse',
 					'value'=>"lookup::WarehouseNameFromWarehouseID(\$data['idwarehouse'])"
@@ -187,6 +182,11 @@ if (($rawdata !== FALSE) && count($rawdata) > 0) {
 					array (
 							'header' => 'Nomor Seri',
 							'name' => 'serialnum' 
+					),
+					array(
+							'header'=>'Harga Beli',
+							'name'=>'buyprice',
+							'type'=>'number'
 					),
 					array (
 							'header' => 'Catatan',

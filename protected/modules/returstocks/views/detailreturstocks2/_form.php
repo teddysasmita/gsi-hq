@@ -52,6 +52,12 @@ EOS;
 	</div>
 	
 	<div class="row">
+		<?php echo $form->labelEx($model,'buyprice'); ?>
+		<?php echo $form->textField($model,'buyprice'); ?>
+		<?php echo $form->error($model,'buyprice'); ?>
+	</div>
+	
+	<div class="row">
 		<?php echo $form->labelEx($model,'remark'); ?>
         <?php 
            echo $form->textArea($model, 'remark', array('COLS'=>40, 'ROWS'=>5)); 

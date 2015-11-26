@@ -8,7 +8,6 @@
  * @property string $id
  * @property string $iditem
  * @property double $qty
- * @property double $buyprice
  * @property string $idwarehouse
  * @property string $userlog
  * @property string $datetimelog
@@ -31,13 +30,13 @@ class Detailreturstocks extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('iddetail, id, iditem, qty, buyprice, idwarehouse, userlog, datetimelog', 'required'),
-			array('qty, buyprice', 'numerical'),
+			array('iddetail, id, iditem, qty, idwarehouse, userlog, datetimelog', 'required'),
+			array('qty', 'numerical'),
 			array('iddetail, id, iditem, idwarehouse, userlog', 'length', 'max'=>21),
 			array('datetimelog', 'length', 'max'=>19),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('iddetail, id, iditem, qty, buyprice, idwarehouse, userlog, datetimelog', 'safe', 'on'=>'search'),
+			array('iddetail, id, iditem, qty, idwarehouse, userlog, datetimelog', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,7 +61,6 @@ class Detailreturstocks extends CActiveRecord
 			'id' => 'ID',
 			'iditem' => 'Nama Barang',
 			'qty' => 'Qty',
-			'buyprice' => 'Harga Beli',
 			'idwarehouse' => 'Gudang',
 			'userlog' => 'Userlog',
 			'datetimelog' => 'Datetimelog',
@@ -91,7 +89,6 @@ class Detailreturstocks extends CActiveRecord
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('iditem',$this->iditem,true);
 		$criteria->compare('qty',$this->qty);
-		$criteria->compare('buyprice',$this->buyprice);
 		$criteria->compare('idwarehouse',$this->idwarehouse);
 		$criteria->compare('userlog',$this->userlog,true);
 		$criteria->compare('datetimelog',$this->datetimelog,true);

@@ -8,6 +8,7 @@
  * @property string $id
  * @property string $iditem
  * @property string $serialnum
+ * @property double $buyprice
  * @property string $remark
  * @property string $userlog
  * @property string $datetimelog
@@ -30,7 +31,8 @@ class Detailreturstocks2 extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('iddetail, id, iditem, serialnum, userlog, datetimelog', 'required'),
+			array('iddetail, id, iditem, serialnum, buyprice, userlog, datetimelog', 'required'),
+			array('buyprice', 'numerical'),
 			array('iddetail, id, iditem, userlog', 'length', 'max'=>21),
 			array('serialnum', 'length', 'max'=>40),
 			array('datetimelog', 'length', 'max'=>19),
@@ -63,6 +65,7 @@ class Detailreturstocks2 extends CActiveRecord
 			'iditem' => 'Nama Barang',
 			'serialnum' => 'Nomor Serial',
 			'remark' => 'Catatan',
+			'buyprice' => 'Harga Beli',
 			'userlog' => 'Userlog',
 			'datetimelog' => 'Datetimelog',
 		);
@@ -90,6 +93,7 @@ class Detailreturstocks2 extends CActiveRecord
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('iditem',$this->iditem,true);
 		$criteria->compare('serialnum',$this->serialnum,true);
+		$criteria->compare('buyprice',$this->buyprice,true);
 		$criteria->compare('userlog',$this->userlog,true);
 		$criteria->compare('datetimelog',$this->datetimelog,true);
 

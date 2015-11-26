@@ -780,6 +780,11 @@ EOS;
 			$detail['iddetail'] = $retur['iddetail'];
 			$detail['iditem'] = $retur['iditem'];
 			$detail['serialnum'] = $retur['serialnum'];
+			$buyprice = $this->getBuyPrice($detail['iditem'], $detail['serialnum']);
+			if ( $buyprice == FALSE )	
+				$detail['buyprice'] = 0;
+			else 
+				$detail['buyprice'] = $buyprice;
 			$detail['userlog'] = Yii::app()->user->id;
          	$detail['datetimelog']=idmaker::getDateTime();
 			
@@ -852,9 +857,20 @@ EOS;
 		} else {
 			throw new CHttpException(404,'You have no authorization for this operation.');
 		}
-		 
-		 
-		 
 	}
-      
+	
+	private function getBuyPrice($iditem, $serialnum)
+	{
+		$ponum = Yii::app()->db->createCommand()
+			->select('a.transid')
+			->from('stockentries a')
+			->join('detailstockentries b', 'b.id = a.id')
+			->where('b.iditem = :p_iditem and b.serialnum = :p_serialnum and a.transname like :p_transname',
+				array(':p_iditem'=>$iditem, ':p_serialnum'=>$serialnum, 
+					':p_transname'=>'AC2'
+				))
+			->queryScalar();
+		
+		return $ponum;
+	}
 }
