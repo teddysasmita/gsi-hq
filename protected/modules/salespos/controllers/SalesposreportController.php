@@ -478,7 +478,7 @@ EOS;
 			$detailreceiptsql = Yii::app()->db->createCommand()
 				->select("concat_ws(' - ', a.idatetime, b.amount, b.method) as receiptinfo")
 				->from('receivablespos a')
-				->join('posreceipts b', 'b.id = a.id')
+				->join('posreceipts b', 'b.idpos = a.id')
 				->where('a.idatetime >= :p_startdate and a.invnum = :p_invnum')
 				->order('a.idatetime');
 						
