@@ -475,10 +475,21 @@ EOS;
 				->group('invnum')
 				->queryAll();
 			
+				$selectsql1 = <<<EOS
+	case b.method
+	when 'T' then concat_ws(' - ', a.idatetime, b.amount, 'Transfer') as receiptinfo
+	when 'KK' then concat_ws(' - ', a.idatetime, b.amount, 'Kartu Kredit', c.name, b.card_number, b.card_holdername, b.card_number) as receiptinfo
+	when 'KD' then concat_ws(' - ', a.idatetime, b.amount, 'Kartu Debit', c.name, b.card_number, b.card_holdername, b.card_number) as receiptinfo
+	when 'BG' then concat_ws(' - ', a.idatetime, b.amount, 'Cheque/BG', b.bankname, b.duedate, b.writer) as receiptinfo
+	when 'KC' then concat_ws(' - ', a.idatetime, b.amount, 'Cicilan') as receiptinfo,
+	when isnull then concat_ws( ' - ', a.idatetime, b.cash-b.cashreturn, 'Tunai') as receiptinfo
+	end
+EOS;
+				
 			$detailreceiptsql = Yii::app()->db->createCommand()
-				->select("concat_ws(' - ', a.idatetime, b.amount, b.method) as receiptinfo")
+				->select($selectsql1)
 				->from('receivablespos a')
-				->join('posreceipts b', 'b.idpos = a.id')
+				->leftjoin('posreceipts b', 'b.idpos = a.id')
 				->where('a.idatetime >= :p_startdate and a.invnum = :p_invnum')
 				->order('a.idatetime');
 						
