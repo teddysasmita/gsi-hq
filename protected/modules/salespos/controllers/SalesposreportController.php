@@ -485,6 +485,7 @@ EOS;
 			$found = false;
 			foreach($data as & $d) {
 				$d['totalreceipt'] = 0;
+				$d['receiptinfo'] = '';
 				foreach($datareceipts as $dr) {
 					if ($dr['invnum'] == $d['regnum']) {
 						$d['totalreceipt'] = $dr['totalreceipt'];
