@@ -482,7 +482,7 @@ EOS;
 	when 'KD' then concat_ws(' - ', a.idatetime, b.amount, 'Kartu Debit', c.name, b.card_number, b.card_holdername, b.card_number) 
 	when 'BG' then concat_ws(' - ', a.idatetime, b.amount, 'Cheque/BG', b.bg_bankname, b.bg_duedate, b.bg_writer) 
 	when 'KC' then concat_ws(' - ', a.idatetime, b.amount, 'Cicilan')
-	when null then concat_ws( ' - ', a.idatetime, b.cash-b.cashreturn, 'Tunai')
+	when null then concat_ws( ' - ', a.idatetime, a.cash-a.cashreturn, 'Tunai')
 	end as receiptinfo
 EOS;
 				
