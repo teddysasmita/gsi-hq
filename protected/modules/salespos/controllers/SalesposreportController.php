@@ -491,7 +491,7 @@ EOS;
 						$d['totalreceipt'] = $dr['totalreceipt'];
 						$detailreceiptsql->bindValue(':p_startdate', $startdate, PDO::PARAM_STR);
 						$detailreceiptsql->bindValue(':p_invnum', $dr['invnum'], PDO::PARAM_STR);
-						$receiptdatas = $detailreceiptsql->queryAll();
+						$receiptdatas = $detailreceiptsql->queryCol();
 						if ($receiptdatas == FALSE)
 							$d['receiptinfo'] = '';
 						else
