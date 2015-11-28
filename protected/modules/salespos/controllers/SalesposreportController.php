@@ -477,13 +477,13 @@ EOS;
 			
 				$selectsql1 = <<<EOS
 	case b.method
-	when 'T' then concat_ws(' - ', a.idatetime, b.amount, 'Transfer') as receiptinfo
-	when 'KK' then concat_ws(' - ', a.idatetime, b.amount, 'Kartu Kredit', c.name, b.card_number, b.card_holdername, b.card_number) as receiptinfo
-	when 'KD' then concat_ws(' - ', a.idatetime, b.amount, 'Kartu Debit', c.name, b.card_number, b.card_holdername, b.card_number) as receiptinfo
-	when 'BG' then concat_ws(' - ', a.idatetime, b.amount, 'Cheque/BG', b.bankname, b.duedate, b.writer) as receiptinfo
-	when 'KC' then concat_ws(' - ', a.idatetime, b.amount, 'Cicilan') as receiptinfo,
-	when isnull then concat_ws( ' - ', a.idatetime, b.cash-b.cashreturn, 'Tunai') as receiptinfo
-	end
+	when 'T' then concat_ws(' - ', a.idatetime, b.amount, 'Transfer') 
+	when 'KK' then concat_ws(' - ', a.idatetime, b.amount, 'Kartu Kredit', c.name, b.card_number, b.card_holdername, b.card_number) 
+	when 'KD' then concat_ws(' - ', a.idatetime, b.amount, 'Kartu Debit', c.name, b.card_number, b.card_holdername, b.card_number) 
+	when 'BG' then concat_ws(' - ', a.idatetime, b.amount, 'Cheque/BG', b.bankname, b.duedate, b.writer) 
+	when 'KC' then concat_ws(' - ', a.idatetime, b.amount, 'Cicilan')
+	when isnull then concat_ws( ' - ', a.idatetime, b.cash-b.cashreturn, 'Tunai')
+	end as receiptinfo
 EOS;
 				
 			$detailreceiptsql = Yii::app()->db->createCommand()
