@@ -476,21 +476,26 @@ EOS;
 				->queryAll();
 			
 				$selectsql1 = <<<EOS
-	case b.method
-	when 'T' then concat_ws(' - ', a.idatetime, b.amount, 'Transfer') 
-	when 'KK' then concat_ws(' - ', a.idatetime, b.amount, 'Kartu Kredit', c.name, b.card_number, b.card_holdername, b.card_number) 
-	when 'KD' then concat_ws(' - ', a.idatetime, b.amount, 'Kartu Debit', c.name, b.card_number, b.card_holdername, b.card_number) 
-	when 'BG' then concat_ws(' - ', a.idatetime, b.amount, 'Cheque/BG', b.bg_bankname, b.bg_duedate, b.bg_writer) 
-	when 'KC' then concat_ws(' - ', a.idatetime, b.amount, 'Cicilan')
-	when null then concat_ws( ' - ', a.idatetime, a.cash-a.cashreturn, 'Tunai')
-	end as receiptinfo
+if(not(b.method is null), CASE b.method
+WHEN 'T'
+THEN concat_ws( ' - ', a.idatetime, b.amount, 'Transfer' )
+WHEN 'KK'
+THEN concat_ws( ' - ', a.idatetime, b.amount, 'Kartu Kredit', c.name, b.card_number, b.card_holdername, b.card_number )
+WHEN 'KD'
+THEN concat_ws( ' - ', a.idatetime, b.amount, 'Kartu Debit', c.name, b.card_number, b.card_holdername, b.card_number )
+WHEN 'BG'
+THEN concat_ws( ' - ', a.idatetime, b.amount, 'Cheque/BG', b.bg_bankname, b.bg_duedate, b.bg_writer )
+WHEN 'KC'
+THEN concat_ws( ' - ', a.idatetime, b.amount, 'Cicilan' )
+END, concat_ws( ' - ', a.idatetime, a.cash - a.cashreturn, 'Tunai' ))
+as receiptinfo
 EOS;
 				
 			$detailreceiptsql = Yii::app()->db->createCommand()
 				->select($selectsql1)
 				->from('receivablespos a')
 				->leftjoin('posreceipts b', 'b.idpos = a.id')
-				->join('salesposbanks c', 'c.id = b.card_id')
+				->leftjoin('salesposbanks c', 'c.id = b.card_id')
 				->where('a.idatetime >= :p_startdate and a.invnum = :p_invnum')
 				->order('a.idatetime');
 						
