@@ -85,10 +85,12 @@ EOS;
 				$data = CHtml::listData($warehouses, 'id', 'code');
 				echo CHtml::dropDownList('Retrievalreplaces[idwarehouse]', 
 					'', $data, array('empty'=>'Harap Pilih'));
-			} else {
+			} else if (count($warehouses) == 1) {
            		echo CHtml::hiddenField('Retrievalreplaces[idwarehouse]', $warehouses[0]['id']);
 				echo CHtml::tag('span',array('class'=>'money'), $warehouses[0]['code']); 
-        	}
+        	} else {
+				echo CHtml::tag('span', array('class'=>'error'), 'Tidak Terdaftar');
+			}
 		?>
         <?php echo $form->error($model,'idwarehouse');?> 
 	</div>
