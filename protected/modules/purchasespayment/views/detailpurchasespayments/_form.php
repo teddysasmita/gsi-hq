@@ -25,7 +25,7 @@
          echo $form->hiddenField($model,'datetimelog');
          echo $form->hiddenField($model,'idpurchasestockentry');
          echo $form->hiddenField($model,'total');
-         echo $form->hiddenField($model,'discount');
+         //echo $form->hiddenField($model,'discount');
          echo $form->hiddenField($model,'paid');
         ?>
 
@@ -39,12 +39,6 @@
 		<?php echo $form->labelEx($model,'total'); ?>
 		<?php echo CHtml::label(number_format($model->total), false); ?>
 		<?php echo $form->error($model,'total'); ?>
-	</div>
-	
-	<div class="row">
-		<?php echo $form->labelEx($model,'discount'); ?>
-		<?php echo CHtml::label(number_format($model->discount), false); ?>
-		<?php echo $form->error($model,'discount'); ?>
 	</div>
 	
 	<div class="row">
