@@ -12,6 +12,7 @@
  * @property double $total
  * @property double $discount
  * @property string $remark
+ * @property string $status
  * @property string $userlog
  * @property string $datetimelog
  */
@@ -33,10 +34,11 @@ class Purchasesreturs extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, regnum, idatetime, idsupplier, idpurchaseorder, total, discount, userlog, datetimelog', 'required'),
+			array('id, regnum, idatetime, idsupplier, idpurchaseorder, total, discount, status, userlog, datetimelog', 'required'),
 			array('total, discount', 'numerical'),
 			array('id, idsupplier, idpurchaseorder, userlog', 'length', 'max'=>21),
 			array('regnum', 'length', 'max'=>12),
+			array('status', 'length', 'max'=>1),
 			array('idatetime, datetimelog', 'length', 'max'=>19),
 			array('remark', 'safe'),
 			// The following rule is used by search().
@@ -70,6 +72,7 @@ class Purchasesreturs extends CActiveRecord
 			'total' => 'Total',
 			'discount' => 'Diskon',
 			'remark' => 'Catatan',
+			'status' => 'Status',
 			'userlog' => 'Userlog',
 			'datetimelog' => 'Datetimelog',
 		);
@@ -100,6 +103,7 @@ class Purchasesreturs extends CActiveRecord
 		$criteria->compare('idpurchaseorder',$this->idpurchaseorder,true);
 		$criteria->compare('total',$this->total);
 		$criteria->compare('discount',$this->discount);
+		$criteria->compare('status',$this->status);
 		$criteria->compare('remark',$this->remark,true);
 		$criteria->compare('userlog',$this->userlog,true);
 		$criteria->compare('datetimelog',$this->datetimelog,true);

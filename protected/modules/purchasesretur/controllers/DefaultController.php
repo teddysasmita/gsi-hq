@@ -494,6 +494,7 @@ class DefaultController extends Controller
          $model->datetimelog=$idmaker->getDateTime();
          $model->total=0;
          $model->discount=0;
+         $model->status = '0';
      }
 
      protected function afterPost(& $model)
