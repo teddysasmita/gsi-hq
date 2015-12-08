@@ -27,7 +27,6 @@
          echo $form->hiddenField($model,'total');
          echo $form->hiddenField($model,'discount');
          echo $form->hiddenField($model,'paid');
-         echo $form->hiddenField($model,'labelcost');
         ?>
 
 	<div class="row">
@@ -46,12 +45,6 @@
 		<?php echo $form->labelEx($model,'discount'); ?>
 		<?php echo CHtml::label(number_format($model->discount), false); ?>
 		<?php echo $form->error($model,'discount'); ?>
-	</div>
-	
-	<div class="row">
-		<?php echo $form->labelEx($model,'labelcost'); ?>
-		<?php echo CHtml::label(number_format($model->labelcost), false); ?>
-		<?php echo $form->error($model,'labelcost'); ?>
 	</div>
 	
 	<div class="row">
