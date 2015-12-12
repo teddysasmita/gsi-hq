@@ -102,8 +102,6 @@ class MYPDF extends TCPDF {
 				//$this->Cell(array_sum($this->headerwidths), 0, '', 'T', 1);
 		}
 		//$this->Cell(array_sum($this->headerwidths), 1, '', 'T', 1);
-		$this->Cell(165, 6, 'Total Harga Beli', 'LRTB', 0, 'R');
-		$this->Cell(30, 6, number_format($total), 'LRTB', 1, 'R');
 		if ($this->data['remark'] <> '')
 			$this->MultiCell(195, 0, $this->data['remark'], 'LRBT', 'L', false, 0);
 		
@@ -160,6 +158,7 @@ class MYPDF extends TCPDF {
 			// 0, 0, true, 0, false, true, 0, 'T', false);
 			$this->Cell($this->headerwidths2[2], $ih, $row['serialnum'], 'LR', 0, 'L', $fill);
 			$this->Cell($this->headerwidths2[3], $ih, number_format($row['buyprice']), 'LR', 0, 'R', $fill);
+			$total=$total + $row['buyprice'];
 			$this->SetFontSize(8);
 			$this->Cell($this->headerwidths2[4], $ih, $row['remark'], 'LR', 0, 'L', $fill);
 			$this->SetFontSize(10);
@@ -180,6 +179,8 @@ class MYPDF extends TCPDF {
 			//$this->Cell(array_sum($this->headerwidths), 0, '', 'T', 1);
 		}
 		$this->Cell(array_sum($this->headerwidths2), 1, '', 'T', 1);
+		$this->Cell(165, 6, 'Total Harga Beli', 'LRTB', 0, 'R');
+		$this->Cell(30, 6, number_format($total), 'LRTB', 1, 'R');
 		//$this->Cell(array_sum($this->headerwidths), 0, '', 'T');
 	}
 	
