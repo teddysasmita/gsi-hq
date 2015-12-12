@@ -879,6 +879,7 @@ EOS;
 				array(':p_regnum'=>$ponum, ':p_iditem'=>$iditem))
 			->queryRow();
 		
+		print_r($buyprice);
 		if ($buyprice == FALSE)
 			return 0;
 		else 
