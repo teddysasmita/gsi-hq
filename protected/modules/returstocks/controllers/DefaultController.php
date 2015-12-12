@@ -791,8 +791,6 @@ EOS;
 			
          	$details[] = $detail;
 		}	
-		print_r($details);
-		die;
       	Yii::app()->session['Detailreturstocks2'] = $details;
       }
       

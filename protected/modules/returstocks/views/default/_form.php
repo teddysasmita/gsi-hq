@@ -186,7 +186,7 @@ if (($rawdata !== FALSE) && count($rawdata) > 0) {
 					array(
 							'header'=>'Harga Beli',
 							'name'=>'buyprice',
-							//'type'=>'number'
+							'type'=>'number'
 					),
 					array (
 							'header' => 'Catatan',
