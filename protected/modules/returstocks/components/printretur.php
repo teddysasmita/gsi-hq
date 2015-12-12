@@ -102,6 +102,7 @@ class MYPDF extends TCPDF {
 				//$this->Cell(array_sum($this->headerwidths), 0, '', 'T', 1);
 		}
 		//$this->Cell(array_sum($this->headerwidths), 1, '', 'T', 1);
+		$this->Cell(array_sum($this->headerwidths2), 1, '', 'T', 1);
 		if ($this->data['remark'] <> '')
 			$this->MultiCell(195, 0, $this->data['remark'], 'LRBT', 'L', false, 0);
 		
@@ -178,7 +179,6 @@ class MYPDF extends TCPDF {
 			//$this->checkPageBreak(6, '');
 			//$this->Cell(array_sum($this->headerwidths), 0, '', 'T', 1);
 		}
-		$this->Cell(array_sum($this->headerwidths2), 1, '', 'T', 1);
 		$this->Cell(165, 6, 'Total Harga Beli', 'LRTB', 0, 'R');
 		$this->Cell(30, 6, number_format($total), 'LRTB', 1, 'R');
 		//$this->Cell(array_sum($this->headerwidths), 0, '', 'T');
