@@ -36,7 +36,7 @@ class MYPDF extends TCPDF {
 		/*$this->headernames2 = array('No', 'Nama Barang', 'Nomor Seri','Alasan');
 		$this->headerwidths2 = array(10, 90, 30, 65);*/
 		$this->headernames2 = array('No', 'Nama Barang', 'Nomor Seri','H Beli', 'Alasan');
-		$this->headerwidths2 = array(10, 60, 30, 30, 65);
+		$this->headerwidths2 = array(10, 60, 35, 30, 60);
 	}
 
 	// Colored table
@@ -159,7 +159,7 @@ class MYPDF extends TCPDF {
 					false, 0);
 			// 0, 0, true, 0, false, true, 0, 'T', false);
 			$this->Cell($this->headerwidths2[2], $ih, $row['serialnum'], 'LR', 0, 'L', $fill);
-			$this->Cell($this->headerwidths2[3], $ih, $row['buyprice'], 'LR', 0, 'R', $fill);
+			$this->Cell($this->headerwidths2[3], $ih, number_format($row['buyprice']), 'LR', 0, 'R', $fill);
 			$this->SetFontSize(8);
 			$this->Cell($this->headerwidths2[4], $ih, $row['remark'], 'LR', 0, 'L', $fill);
 			$this->SetFontSize(10);
