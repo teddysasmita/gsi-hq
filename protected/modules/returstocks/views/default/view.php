@@ -68,11 +68,6 @@ $this->menu=array(
 			'type'=>'number'
 		),
 		array(
-			'header'=>'Harga Beli',
-			'name'=>'buyprice',
-			'type'=>'number'
-		),
-		array(
 			'header'=>'Gudang',
 			'name'=>'idwarehouse',
 			'value'=>"lookup::WarehouseNameFromWarehouseID(\$data['idwarehouse'])"
@@ -120,6 +115,11 @@ $this->menu=array(
 			'header'=>'Nomor Serial',
 			'name'=>'serialnum',
 		),
+        array(
+         	'header'=>'Harga Beli',
+         	'name'=>'buyprice',
+         	'type'=>'number'
+        ),
 		array(
 			'header'=>'Catatan',
 			'name'=>'remark',
