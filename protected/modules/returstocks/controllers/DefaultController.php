@@ -871,6 +871,17 @@ EOS;
 				))
 			->queryScalar();
 		
-		return $ponum;
+		$buyprice = Yii::app()->db->createCommand()
+			->select('b.price, b.discount, b.cost1, b.cost2')
+			->from('detailpurchasesorders b')
+			->join('purchasesorders a', 'a.id = b.id')
+			->where('a.regnum = :p_regnum and b.iditem = :p_iditem',
+				array(':p_regnum'=>$ponum, ':p_iditem'=>$iditem))
+			->queryRow();
+		
+		if ($buyprice == FALSE)
+			return 0;
+		else 
+			return $buyprice['price'] + $buyprice['cost1'] + $buyprice['cost2'] - $buyprice['discount'];
 	}
 }
