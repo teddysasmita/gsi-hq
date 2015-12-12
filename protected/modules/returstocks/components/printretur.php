@@ -24,15 +24,19 @@ class MYPDF extends TCPDF {
 		// Read file lines
 		$this->data = $data;
 		$this->detaildata = $detaildata;
-		$this->headernames = array('No', 'Nama Barang', 'Jmlh','H Beli', 'Total HB');
-		$this->headerwidths = array(10, 93, 12, 35, 45);
+		/*$this->headernames = array('No', 'Nama Barang', 'Jmlh','H Beli', 'Total HB');
+		$this->headerwidths = array(10, 93, 12, 35, 45);*/
+		$this->headernames = array('No', 'Nama Barang', 'Jmlh');
+		$this->headerwidths = array(10, 150, 35);
 	}
 	
 	public function LoadData2(array $detaildata2) {
 		// Read file lines
 		$this->detaildata2 = $detaildata2;
-		$this->headernames2 = array('No', 'Nama Barang', 'Nomor Seri','Alasan');
-		$this->headerwidths2 = array(10, 90, 30, 65);
+		/*$this->headernames2 = array('No', 'Nama Barang', 'Nomor Seri','Alasan');
+		$this->headerwidths2 = array(10, 90, 30, 65);*/
+		$this->headernames2 = array('No', 'Nama Barang', 'Nomor Seri','H Beli', 'Alasan');
+		$this->headerwidths2 = array(10, 60, 30, 30, 65);
 	}
 
 	// Colored table
@@ -77,9 +81,10 @@ class MYPDF extends TCPDF {
 						false, 0);
 				// 0, 0, true, 0, false, true, 0, 'T', false);
 				$this->Cell($this->headerwidths[2], $ih, $row['qty'], 'LR', 0, 'R', $fill);
-				$this->Cell($this->headerwidths[3], $ih, number_format($row['buyprice']), 'LR', 0, 'R', $fill);
+				/*$this->Cell($this->headerwidths[3], $ih, number_format($row['buyprice']), 'LR', 0, 'R', $fill);
 				$total=$total + $row['buyprice']*$row['qty'];
 				$this->Cell($this->headerwidths[4], $ih, number_format($row['buyprice']*$row['qty']), 'LR', 0, 'R', $fill);
+				*/
 				//$this->MultiCell($this->headerwidths[5], 0, $row['remark'], 'LR', 'L', false, 0);
 				//$this->Cell($this->headerwidths[5], $ih, $row['remark'], 'LR', 0, 'L', $fill);
 				$this->ln($ih);
@@ -154,8 +159,9 @@ class MYPDF extends TCPDF {
 					false, 0);
 			// 0, 0, true, 0, false, true, 0, 'T', false);
 			$this->Cell($this->headerwidths2[2], $ih, $row['serialnum'], 'LR', 0, 'L', $fill);
+			$this->Cell($this->headerwidths2[3], $ih, $row['buyprice'], 'LR', 0, 'R', $fill);
 			$this->SetFontSize(8);
-			$this->Cell($this->headerwidths2[3], $ih, $row['remark'], 'LR', 0, 'L', $fill);
+			$this->Cell($this->headerwidths2[4], $ih, $row['remark'], 'LR', 0, 'L', $fill);
 			$this->SetFontSize(10);
 			//$this->MultiCell($this->headerwidths[5], 0, $row['remark'], 'LR', 'L', false, 0);
 			//$this->Cell($this->headerwidths[5], $ih, $row['remark'], 'LR', 0, 'L', $fill);
