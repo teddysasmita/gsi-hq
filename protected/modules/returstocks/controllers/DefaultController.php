@@ -780,8 +780,8 @@ EOS;
 			$detail['iddetail'] = $retur['iddetail'];
 			$detail['iditem'] = $retur['iditem'];
 			$detail['serialnum'] = $retur['serialnum'];
-			//$buyprice = $this->getBuyPrice($detail['iditem'], $detail['serialnum']);
-			$buyprice = 'boom';
+			$buyprice = $this->getBuyPrice($detail['iditem'], $detail['serialnum']);
+			//$buyprice = 'boom';
 			if ( $buyprice == FALSE )	
 				$detail['buyprice'] = 0;
 			else 
@@ -791,6 +791,7 @@ EOS;
 			
          	$details[] = $detail;
 		}	
+		print_r($details);
       	Yii::app()->session['Detailreturstocks2'] = $details;
       }
       
