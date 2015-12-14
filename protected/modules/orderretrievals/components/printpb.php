@@ -79,7 +79,7 @@ class MYPDF extends TCPDF {
 	
 	public function footer()
 	{
-		$this->SetFillColor(224, 235, 255);
+		/*$this->SetFillColor(224, 235, 255);
 		$this->SetTextColor(0);
 		$this->SetDrawColor(0, 0, 0);
 		$this->SetLineWidth(0.3);
@@ -95,6 +95,29 @@ class MYPDF extends TCPDF {
 		$this->Cell(23, 5, $this->PageNo().' dari ', 'LR', 1, 'C', false,'', 0, false, 'T', 'T');
 		$this->setX(173);
 		$this->Cell(23, 5, 'total '.trim($this->getAliasNbPages()), 'LRB', 1, 'C', false,'', 0, false, 'T', 'T');
+		*/
+		$this->SetFillColor(224, 235, 255);
+		$this->SetTextColor(0);
+		$this->SetDrawColor(0, 0, 0);
+		$this->SetLineWidth(0.3);
+		$this->SetFont('helvetica');
+		$this->SetFontSize(10);
+		$this->setXY(1, 110);
+		$this->Cell(30, 15, 'Mengetahui', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(30, 15, 'Dibuat Oleh', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(30, 15, 'Yg Menyerahkan', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->Cell(30, 15, 'Yg Menerima', 'LTRB', 0, 'C', false,'', 0, false, 'T', 'T');
+		$this->setFontSize(8);
+		$this->MultiCell(30, 15, '(Gudang) Yg Menyerahkan', 'LTRB', 'C', false, 0);
+		$this->MultiCell(30, 15, '(Gudang) Yg Menerima', 'LTRB', 'C', false, 0);
+		$this->Cell(15, 5, 'Halaman', 'LTR', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->setX(181);
+		$this->Cell(15, 5, $this->PageNo().' dari ', 'LR', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->setX(181);
+		$this->Cell(15, 5, 'total '.trim($this->getAliasNbPages()), 'LRB', 1, 'C', false,'', 0, false, 'T', 'T');
+		$this->setX(1);
+		$this->setFontSize(10);
+		$this->Cell(195, 4, 'TANDA TANGAN, NAMA TERANG, TANGGAL dan JAM MOHON DITULISKAN', 'LTRB', 0, 'C');
 	}
 	
 	public function master()
@@ -113,6 +136,7 @@ class MYPDF extends TCPDF {
 		$this->SetFont('Courier', 'B');
 		$this->setXY(91, 20);
 		$this->Cell(20, 5, 'Tgl', 'LT', 0, 'C');
+		
 		$this->Cell(45, 5, $this->data->idatetime, 'LTR', 0, 'C');
 		$this->Cell(15, 5, 'No SJ', 'LTR', 0, 'C');
 		$this->Cell(25, 5, $this->data->regnum, 'LTR', 1, 'C');
