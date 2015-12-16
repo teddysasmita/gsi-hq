@@ -39,7 +39,7 @@ class MYPDF extends TCPDF {
 		$fill = 0;
 		$counter=0;
 		$iditem='';
-		$this->SetXY(1, 62);
+		$this->SetXY(1, 42);
 		if (count($this->detaildata) <= 8)
 			$maxrows = 8;
 		else
