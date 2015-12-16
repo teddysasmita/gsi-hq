@@ -136,7 +136,8 @@ class MYPDF extends TCPDF {
 		$this->SetFont('Courier', 'B');
 		$this->setXY(91, 20);
 		$this->Cell(20, 5, 'Tgl', 'LT', 0, 'C');
-		
+		$tempdate = explode('/', $this->data->idatetime);
+		$this->data->idatetime = $tempdate[2].'/'.$tempdate[1].'/'.$tempdate[0];
 		$this->Cell(45, 5, $this->data->idatetime, 'LTR', 0, 'C');
 		$this->Cell(15, 5, 'No SJ', 'LTR', 0, 'C');
 		$this->Cell(25, 5, $this->data->regnum, 'LTR', 1, 'C');
