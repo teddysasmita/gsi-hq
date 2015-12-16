@@ -21,8 +21,8 @@ class MYPDF extends TCPDF {
 		// Read file lines
 		$this->data = $data;
 		$this->detaildata = $detaildata;
-		$this->headernames = array('No', 'Nama Barang', 'Nomor Seri', 'Gudang', 'Keterangan');
-		$this->headerwidths = array(10, 80, 40, 10, 50);
+		$this->headernames = array('No', 'Nama Barang', 'Nomor Seri', 'Gdg', 'Keterangan');
+		$this->headerwidths = array(10, 70, 40, 10, 50);
 	}
 
 	// Colored table
@@ -50,7 +50,7 @@ class MYPDF extends TCPDF {
 				$counter+=1;
 				$ih = $this->getStringHeight($this->headerwidths[4],$row['remark'],
 						false, true, 2);
-				
+				if ($ih < 6) $ih = 6;
 				$this->Cell($this->headerwidths[0], $ih, $counter, 'LR', 0, 'C', $fill);
 				$this->Cell($this->headerwidths[1], $ih, lookup::ItemNameFromItemID($row['iditem']), 
 						'LR', 0, 'L', $fill);
