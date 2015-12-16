@@ -22,7 +22,7 @@ class MYPDF extends TCPDF {
 		$this->data = $data;
 		$this->detaildata = $detaildata;
 		$this->headernames = array('No', 'Nama Barang', 'Nomor Seri', 'Gudang', 'Keterangan');
-		$this->headerwidths = array(10, 90, 40, 20, 30);
+		$this->headerwidths = array(10, 80, 40, 10, 50);
 	}
 
 	// Colored table
@@ -48,13 +48,18 @@ class MYPDF extends TCPDF {
 			if ($i<count($this->detaildata)) {
 				$row=$this->detaildata[$i];
 				$counter+=1;
-				$this->Cell($this->headerwidths[0], 6, $counter, 'LR', 0, 'C', $fill);
-				$this->Cell($this->headerwidths[1], 6, lookup::ItemNameFromItemID($row['iditem']), 
+				$ih = $this->getStringHeight($this->headerwidths[4],$row['remark'],
+						false, true, 2);
+				
+				$this->Cell($this->headerwidths[0], $ih, $counter, 'LR', 0, 'C', $fill);
+				$this->Cell($this->headerwidths[1], $ih, lookup::ItemNameFromItemID($row['iditem']), 
 						'LR', 0, 'L', $fill);
-				$this->Cell($this->headerwidths[2], 6, $row['serialnum'], 'LR', 0, 'R', $fill);
-				$this->Cell($this->headerwidths[3], 6, lookup::WarehouseNameFromWarehouseID($this->data['idwarehouse']), 
+				$this->Cell($this->headerwidths[2], $ih, $row['serialnum'], 'LR', 0, 'R', $fill);
+				$this->Cell($this->headerwidths[3], $ih, lookup::WarehouseNameFromWarehouseID($this->data['idwarehouse']), 
 						'LR', 0, 'R', $fill);
-				$this->Cell($this->headerwidths[4], 6, '', 'LR', 1, 'R', $fill);
+				$this->MultiCell($this->headerwidths[4], 0, $row['remark'], 'LR', 'L',
+						false, 0);
+				//$this->Cell($this->headerwidths[4], 6, '', 'LR', 1, 'R', $fill);
 			} else {
 				$this->Cell($this->headerwidths[0], 6, ' ', 'LR', 0, 'C', $fill);
 				$this->Cell($this->headerwidths[1], 6, ' ', 'LR', 0, 'L', $fill);
