@@ -63,7 +63,7 @@ class MYPDF extends TCPDF {
 				$this->Cell($this->headerwidths[4], 6, ' ', 'LR', 1, 'R', $fill);
 				//$this->ln();
 			}
-			if (($i > 0) && ($i % 7 == 0))
+			if (($i > 0) && ($i % 9 == 0))
 				//$this->checkPageBreak(6, '');
 				$this->Cell(array_sum($this->headerwidths), 0, '', 'T', 1);
 		}
@@ -122,6 +122,7 @@ class MYPDF extends TCPDF {
 		$this->Cell(45, 5, $this->data->idatetime, 'LTR', 0, 'C');
 		$this->Cell(20, 5, 'No Urut', 'LTR', 0, 'C');
 		$this->Cell(25, 5, $this->data->regnum, 'LTR', 1, 'C');
+		$this->Cell(105, 5, '', 'T',1);
 		//$this->setXY(100, 27);
 		
 		$this->ln(5);
