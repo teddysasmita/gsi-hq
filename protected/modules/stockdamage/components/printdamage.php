@@ -122,7 +122,7 @@ class MYPDF extends TCPDF {
 		$this->Cell(45, 5, $this->data->idatetime, 'LTR', 0, 'C');
 		$this->Cell(20, 5, 'No Urut', 'LTR', 0, 'C');
 		$this->Cell(25, 5, $this->data->regnum, 'LTR', 1, 'C');
-		$this->Cell(105, 5, '', 'T',1);
+		$this->Cell(105, 5, '', 'T',0);
 		//$this->setXY(100, 27);
 		
 		$this->ln(5);
