@@ -120,12 +120,8 @@ class MYPDF extends TCPDF {
 		$tempdate = explode('/', $this->data->idatetime);
 		$this->data->idatetime = $tempdate[2].'/'.$tempdate[1].'/'.$tempdate[0];
 		$this->Cell(45, 5, $this->data->idatetime, 'LTR', 0, 'C');
-		$this->Cell(15, 5, 'No SJ', 'LTR', 0, 'C');
+		$this->Cell(15, 5, 'No Urut', 'LTR', 0, 'C');
 		$this->Cell(25, 5, $this->data->regnum, 'LTR', 1, 'C');
-		
-		$this->setXY(91, 26);
-		$this->Cell(20, 5, 'No Urut', 'LT', 0, 'C');
-		$this->Cell(85, 5, $this->data->invnum, 'LTR', 0, 'C');
 		//$this->setXY(100, 27);
 		
 		$this->ln(5);
