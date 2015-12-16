@@ -143,7 +143,7 @@ class MYPDF extends TCPDF {
 	} 	
 }
 
-function execute($model, $detailmodel, $receivable) {
+function execute($model, $detailmodel) {
 
 	// create new PDF document
 	
