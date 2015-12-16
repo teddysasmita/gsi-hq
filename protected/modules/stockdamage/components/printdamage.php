@@ -22,7 +22,7 @@ class MYPDF extends TCPDF {
 		$this->data = $data;
 		$this->detaildata = $detaildata;
 		$this->headernames = array('No', 'Nama Barang', 'Nomor Seri', 'Gudang', 'Keterangan');
-		$this->headerwidths = array(10, 100, 30, 20, 30);
+		$this->headerwidths = array(10, 90, 40, 20, 30);
 	}
 
 	// Colored table
@@ -116,11 +116,11 @@ class MYPDF extends TCPDF {
 		$this->SetFontSize(10);
 		$this->SetFont('Courier', 'B');
 		$this->setXY(91, 20);
-		$this->Cell(20, 5, 'Tgl', 'LT', 0, 'C');
+		$this->Cell(15, 5, 'Tgl', 'LT', 0, 'C');
 		$tempdate = explode('/', $this->data->idatetime);
 		$this->data->idatetime = $tempdate[2].'/'.$tempdate[1].'/'.$tempdate[0];
 		$this->Cell(45, 5, $this->data->idatetime, 'LTR', 0, 'C');
-		$this->Cell(15, 5, 'No Urut', 'LTR', 0, 'C');
+		$this->Cell(20, 5, 'No Urut', 'LTR', 0, 'C');
 		$this->Cell(25, 5, $this->data->regnum, 'LTR', 1, 'C');
 		//$this->setXY(100, 27);
 		
@@ -165,7 +165,7 @@ function execute($model, $detailmodel) {
 	$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 	
 	//set margins
-	$pdf->SetMargins(1, 62, PDF_MARGIN_RIGHT);
+	$pdf->SetMargins(1, 42, PDF_MARGIN_RIGHT);
 	$pdf->SetHeaderMargin(0);
 	$pdf->SetFooterMargin(0);
 	
