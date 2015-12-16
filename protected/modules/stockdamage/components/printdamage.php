@@ -52,7 +52,7 @@ class MYPDF extends TCPDF {
 				$this->Cell($this->headerwidths[1], 6, lookup::ItemNameFromItemID($row['iditem']), 
 						'LR', 0, 'L', $fill);
 				$this->Cell($this->headerwidths[2], 6, $row['serialnum'], 'LR', 0, 'R', $fill);
-				$this->Cell($this->headerwidths[3], 6, lookup::WarehouseNameFromWarehouseID($data['idwarehouse']), 
+				$this->Cell($this->headerwidths[3], 6, lookup::WarehouseNameFromWarehouseID($this->data['idwarehouse']), 
 						'LR', 0, 'R', $fill);
 				$this->Cell($this->headerwidths[4], 6, '', 'LR', 1, 'R', $fill);
 			} else {
