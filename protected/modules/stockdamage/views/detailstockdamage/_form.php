@@ -29,7 +29,7 @@ $supplierScript=<<<EOS
    			$.getJSON('index.php?r=LookUp/CheckSerial', { serialnum: $('#Detailstockdamage_serialnum').val(),
    				idwh: $('#idwh').val() },
    				function(data) {
-   					if (data == false) {
+   					if (data == 1) {
    						$('#Detailstockdamage_serialnum_em_').html('Data tidak ditemukan');
 						$('#Detailstockdamage_serialnum_em_').prop('style', 'display:block');
    					} else {
