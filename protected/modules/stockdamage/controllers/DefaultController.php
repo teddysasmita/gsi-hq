@@ -84,7 +84,7 @@ class DefaultController extends Controller
 					$respond=$model->save();
 					if (!$respond)
 						throw new CHttpException(404,'There is an error in detail posting: '. 
-							print_r($model->errors));
+							serialize($model->errors));
 						
 					if(isset(Yii::app()->session['Detailstockdamage']) ) {
 						$details=Yii::app()->session['Detailstockdamage'];

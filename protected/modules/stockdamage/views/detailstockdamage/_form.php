@@ -47,7 +47,7 @@ $supplierScript=<<<EOS
 	   			$.getJSON('index.php?r=LookUp/checkItemSerial', { iditem: $('#Detailstockdamage_iditem').val(), 
 	   			serialnum: $('#Detailstockdamage_serialnum').val(), idwh:$('#idwh').val() }, 
 	   			function(data) {
-	   				if (data=='0') {
+	   				if (data == false) {
 	            		$('#Detailstockdamage_serialnum_em_').html('Data tidak ditemukan');
 						$('#Detailstockdamage_serialnum_em_').prop('style', 'display:block');
 					} else {

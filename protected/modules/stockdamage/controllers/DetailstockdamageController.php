@@ -75,8 +75,7 @@ class DetailstockdamageController extends Controller
                             $this->redirect(array('default/createdetail'));
                         else if($master=='update')
                             $this->redirect(array('default/updatedetail'));
-                    }
-                    die('here');    
+                    }   
                 }                
                 $this->render('create',array(
                     'model'=>$model, 'master'=>$master, 'idwh'=>$idwh
