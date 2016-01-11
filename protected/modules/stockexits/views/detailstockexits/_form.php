@@ -100,6 +100,8 @@ EOS;
          echo $form->hiddenField($model,'iditem');
          echo $form->hiddenField($model,'status');
          echo CHtml::hiddenField('idwh',$idwh);
+         echo CHtml::hiddenField('transname',$transname, ['id'=>'transname']);
+          
         ?>
 
 	<div class="row">
