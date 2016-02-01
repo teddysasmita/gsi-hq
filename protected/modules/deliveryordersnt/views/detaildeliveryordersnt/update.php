@@ -7,7 +7,7 @@ if($master=='create') {
    $this->breadcrumbs=array(
       'Proses'=>array('/site/proses'),
       'Daftar'=>array('default/index'),
-      'Tambah Data'=>array('default/create','id'=>$model->id),
+      'Tambah Data'=>array('default/create'),
       'Ubah Detil'); 
 } else if ($master=='update') {
    $this->breadcrumbs=array(
