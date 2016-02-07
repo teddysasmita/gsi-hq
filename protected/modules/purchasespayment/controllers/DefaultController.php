@@ -834,11 +834,11 @@ class DefaultController extends Controller
          foreach($details as $d) {
 			$left = $d['total'] - ($d['discount'] + $d['paid'] + $d['amount']);
          	if ($d['total'] - $d['discount'] == $left)
-         		Action::setPaymentStatusPurchase($d['idpurchase'], '0');
+         		Action::setPaymentStatusLPB($d['idpurchasesstockentries'], '0');
          	else if ($left > 0)
-         		Action::setPaymentStatusPurchase($d['idpurchase'], '1');
+         		Action::setPaymentStatusLPB($d['idpurchasesstockentries'], '1');
          	else if ($left == 0)
-         		Action::setPaymentStatusPurchase($d['idpurchase'], '2');         	
+         		Action::setPaymentStatusLPB($d['idpurchasesstockentries'], '2');         	
          }
          
          $details2 = $this->loadDetails2($model->id);
@@ -960,8 +960,8 @@ class DefaultController extends Controller
         	$detail['discount']=0;
         	$detail['paid']=$paid;
         	$detail['amount']=0;
-        	$detail['remark']=$poremark;
         	$detail['total']=$dl['total'];
+        	$detail['remark']=$poremark;
         	
         	$details[]=$detail;
         }

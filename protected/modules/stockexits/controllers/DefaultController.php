@@ -92,7 +92,7 @@ class DefaultController extends Controller
                       if ($respond !== true)
                       	throw new CHttpException(5001,'Nomor Seri ada yang salah '.$respond);
                     
-                      $respond = $this->checkDuplicateSerialnum(Yii::app()->session['Detailstockentries']);
+                      $respond = $this->checkDuplicateSerialnum(Yii::app()->session['Detailstockexits']);
                       if (!$respond)
                       	throw new CHttpException(5003,'Nomor Seri yg anda daftarkan ada yg terulang: '. $respond);
                       
@@ -1172,7 +1172,7 @@ EOS;
 	
 		if ($count > 1)
 			return false;
-			else
-				return true;
+		else
+			return true;
 	}
 }
