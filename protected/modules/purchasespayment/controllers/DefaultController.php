@@ -1037,20 +1037,21 @@ class DefaultController extends Controller
  		foreach ($details as $row) {
  			if ($row['amount'] > 0 ) {
  				$total=$total+$row['amount'];
- 				$labelcost += $row['labelcost'];
+ 				//$labelcost += $row['labelcost'];
  			};
  		}
  		foreach ($details2 as $row) {
  			if ($row['checked'] == 1) {
  				$total=$total - $row['total'];
- 				$labelcost -= $row['qty'] * idmaker::getInformation('labelcost');
+ 				//$labelcost -= $row['qty'] * idmaker::getInformation('labelcost');
  			};
  		}
  		$model->attributes=Yii::app()->session['Purchasespayments'];
- 		if ($model->labelcost < 0) 
+ 		/*if ($model->labelcost < 0) 
  			$model->labelcost = 0;
  		$model->labelcost = $labelcost;
- 		$model->total=$total - $labelcost;
+ 		$model->total=$total - $labelcost;*/
+ 		$model->total = $total;
  	}
  	
  	private function matchRetur(& $main, $post)
