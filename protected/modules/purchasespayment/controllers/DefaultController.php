@@ -973,9 +973,9 @@ class DefaultController extends Controller
 		$details=array();
 		
 		$dataPO=Yii::app()->db->createCommand()
-			->select("a.*, sum(b.qty) as itemqty, sum(c.buyprice) as total")
+			->select("a.*, sum(c.buyprice) as total")
 			->from('returstocks a')
-			->join('detailreturstocks b', 'b.id = a.id')
+			//->join('detailreturstocks b', 'b.id = a.id')
 			->join('detailreturstocks2 c', 'c.id = a.id')
 			->where('a.idsupplier=:p_idsupplier and a.status=:p_status',
 				array(':p_idsupplier'=>$idsupplier, ':p_status'=>'0'))
@@ -990,7 +990,6 @@ class DefaultController extends Controller
 			$detail['datetimelog']=idmaker::getDateTime();
 			$detail['idpurchaseretur']=$rowPO['id'];
 			$detail['total']=$rowPO['total'];
-			$detail['qty']=$rowPO['itemqty'];
 			$detail['checked']=0;
 			$details[]=$detail;
 		}
