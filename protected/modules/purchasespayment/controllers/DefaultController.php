@@ -973,9 +973,10 @@ class DefaultController extends Controller
 		$details=array();
 		
 		$dataPO=Yii::app()->db->createCommand()
-			->select("a.*, sum(b.qty) as itemqty")
+			->select("a.*, sum(b.qty) as itemqty, sum(c.buyprice) as total")
 			->from('returstocks a')
 			->join('detailreturstocks b', 'b.id = a.id')
+			->join('detailreturstocks2 c', 'c.id = a.id')
 			->where('a.idsupplier=:p_idsupplier and a.status=:p_status',
 				array(':p_idsupplier'=>$idsupplier, ':p_status'=>'0'))
 			->group('a.id')
