@@ -843,7 +843,7 @@ class DefaultController extends Controller
          
          $details2 = $this->loadDetails2($model->id);
          foreach($details2 as $d) {
-         	Action::setStatusRetur($d['idpurchaseretur'], '1');
+         	Action::setStatusPurchaseRetur($d['idpurchaseretur'], '1');
          }
      }
 
@@ -974,8 +974,8 @@ class DefaultController extends Controller
 		
 		$dataPO=Yii::app()->db->createCommand()
 			->select("a.*, sum(b.qty) as itemqty")
-			->from('purchasesreturs a')
-			->join('detailpurchasesreturs b', 'b.id = a.id')
+			->from('returstocks a')
+			->join('detailreturstocks b', 'b.id = a.id')
 			->where('a.idsupplier=:p_idsupplier and a.status=:p_status',
 				array(':p_idsupplier'=>$idsupplier, ':p_status'=>'0'))
 			->group('a.id')

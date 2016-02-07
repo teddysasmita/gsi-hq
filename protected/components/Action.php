@@ -554,11 +554,11 @@ class Action extends CComponent {
    				array('paystatus'=>$status), 'id=:id', array(':id'=>$idpurchasesstockentries));
    }
    
-   public static function setStatusPurchaseRetur($idpurchaseretur, $status)
+   public static function setStatusPurchaseRetur($idreturstock, $status)
    {
    		Yii::app()->db->createCommand()
-   			->update('purchasesstockentries',
-   				array('paystatus'=>$status), 'id=:id', array(':id'=>$idpurchasesstockentries));
+   			->update('returstocks',
+   				array('status'=>$status), 'id=:id', array(':id'=>$idreturstocks));
    	
    }
     
