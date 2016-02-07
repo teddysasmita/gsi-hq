@@ -87,7 +87,10 @@ class DefaultController extends Controller
 						$respond = $this->checkSerialNum(Yii::app()->session['Detailstockentries'], $model->idwarehouse);
 	                    if (!$respond)
 	                      	throw new CHttpException(5001,'Nomor Seri yg anda daftarkan ada yg sdh terdaftar: '. $respond);
-	                      
+	                    $respond = $this->checkDuplicateSerialnum(Yii::app()->session['Detailstockentries']);
+	                    if (!$respond)
+							throw new CHttpException(5002,'Nomor Seri yg anda daftarkan ada yg terulang: '. $respond);
+	                      		 
 						$this->beforePost($model);
 						$respond=$model->insert();
 						if(!$respond) {
@@ -1164,5 +1167,26 @@ EOS;
 		} else {
 	      	throw new CHttpException(404,'You have no authorization for this operation.');
 		};
+	}
+	
+	private function checkDuplicateSerialnum(array $details)
+	{
+		$cdetails = $details;
+		foreach($details as $d) {
+			$count = 0;
+			foreach($cdetails as $c) {
+				if ($c['serialnum'] == $d['serialnum'])
+					$count++;
+				if ($count > 1) 
+					break;
+			}
+			if ($count > 1)
+				break;
+		}
+		
+		if ($count > 1)
+			return false;
+		else
+			return true;
 	}
 }
