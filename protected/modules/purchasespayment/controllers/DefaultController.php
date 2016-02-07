@@ -1040,6 +1040,7 @@ class DefaultController extends Controller
  				//$labelcost += $row['labelcost'];
  			};
  		}
+ 		//this
  		foreach ($details2 as $row) {
  			if ($row['checked'] == 1) {
  				$total=$total - $row['total'];
