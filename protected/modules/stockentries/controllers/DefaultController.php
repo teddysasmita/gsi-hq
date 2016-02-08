@@ -1171,8 +1171,6 @@ EOS;
 	
 	private function checkDuplicateSerialnum(array $details)
 	{
-	private function checkDuplicateSerialnum(array $details)
-	{
 		$cdetails = $details;
 		foreach($details as $d) {
 			if ($d['serialnum'] !== 'Belum Diterima') {
@@ -1194,6 +1192,5 @@ EOS;
 			return false;
 		else
 			return true;
-	}
 	}
 }
